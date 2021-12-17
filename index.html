@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LC 存储库</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link href="https://unpkg.com/prismjs@1.20.0/themes/prism.css" rel="stylesheet"><link rel="stylesheet" href="/css/home.css"></head>
+<style>
+    body{
+        margin: 0px;
+    }
+    #main, footer{
+        padding: 0px 35px;
+    }
+    #main{
+        margin-bottom: 30px;
+    }
+
+    a{
+        text-decoration: none;
+    }
+    a:hover{
+        text-decoration: underline;
+    }
+
+    #navigation{
+        background-color: black;
+        margin: 0px;
+        padding: 0px;
+    }
+    #navigation img{
+        display: inline-block;
+        vertical-align: middle;
+    }
+    #navigation ul{
+        margin: 0px;
+        display: inline-block;
+        padding: 0px;
+        vertical-align: middle;
+    }
+    #navigation ul li{
+        display: inline-block;
+        margin: 0px 10px;
+    }
+    #navigation a{
+        color: white
+    }
+
+    h1, h2{
+        text-align: center;
+    }
+    h2{
+        font-weight: normal;
+        font-size: medium;
+        font-style: italic;
+        padding-bottom: 10px;
+    }
+    p{
+        margin: 5px 0px;
+    }
+
+    footer{
+        font-size: small;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        margin: 0px;
+        background-color: #E6E6E9;
+        color: #777;
+    }
+    footer a{
+        color: #555;
+    }
+
+    /* indent */
+    #main > p::before{
+        content: "　　";
+    }
+</style>
+<body>
+    <div id="navigation">
+        <a href="/"><img src="/assets/images/LC.gif" height="64px"></a>
+        <ul><li>
+                    <a href="/">主页</a>
+                </li><li>
+                    <a href="/archive">存储库</a>
+                </li><li>
+                    <a href="/about">关于</a>
+                </li></ul>
+    </div>
+
+    <div id="titlegraphic">
+    <h1>10</h1>
+    <h2>Log Creative 10th Anniversary<br><br>2012-2022</h2>
+</div>
+<div id="counter">
+  <div id="counter-inner">
+    log <div class="mask" id="mask1">
+      <span data-show>0000</span>
+      <span>creative</span>
+      <span>0222</span>
+      <span>infinity</span>
+    </div> = <div class="mask" id="mask2">
+      <span data-show> -∞</span>
+      <span>creative</span>
+      <span>2.35</span>
+      <span>∞</span>
+    </div>
+  </div>
+</div>
+<div id="intro">
+  <div class="innercontent">
+    Log Creative (LC) 是一项个人计划项目。自 2012 年以来，已收录 222 个项目，旨在以无限追求，不惧外部压力，自由创造创新作品。
+  </div>
+  <a href="/archive"><button class="innerbutton">
+    进入存储库
+  </button></a>
+</div>
+<div id="about">
+  <div class="innercontent">
+    Log 是对数函数：寓意计划开始时期困难重重，面对无限压力也可以无限之力面对；Log 当然也是我的个人代号：寓意发挥科学的力量。
+  </div>
+  <a href="/about"><button class="innerbutton">
+    关于我本人
+  </button></a>
+</div>
+<script>
+  setInterval(function(){
+    ["mask1", "mask2"].forEach(mask => {
+      maskobj = document.querySelector("#"+mask);
+      const show = maskobj.querySelector('span[data-show]');
+      const next = show.nextElementSibling || maskobj.querySelector('span:first-child');
+      const up = maskobj.querySelector('span[data-up]');
+      
+      if (up){
+        up.removeAttribute('data-up');
+      }
+
+      show.removeAttribute('data-show');
+      show.setAttribute('data-up', '');
+      next.setAttribute('data-show', '');
+    });
+  },2000);
+</script>
+
+    <footer>
+        <p>版权所有 © Log Creative 2012-2021，保留所有权利。</p>
+        <p>除有开源协议声明的，未经许可，不可用于商业用途。</p>
+        <p>Powered by <a href="https://www.11ty.dev/" target="_blank">Eleventy</a> | <a href="https://beian.miit.gov.cn" target="_blank">沪ICP备 2021032524 号</a></p>
+    </footer>
+</body>
+</html>

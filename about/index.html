@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log Creative</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link href="https://unpkg.com/prismjs@1.20.0/themes/prism.css" rel="stylesheet"><link rel="stylesheet" href="/css/lcard.css"><link rel="stylesheet" href="/css/aboutlist.css"></head>
+<style>
+    body{
+        margin: 0px;
+    }
+    #main, footer{
+        padding: 0px 35px;
+    }
+    #main{
+        margin-bottom: 30px;
+    }
+
+    a{
+        text-decoration: none;
+    }
+    a:hover{
+        text-decoration: underline;
+    }
+
+    #navigation{
+        background-color: black;
+        margin: 0px;
+        padding: 0px;
+    }
+    #navigation img{
+        display: inline-block;
+        vertical-align: middle;
+    }
+    #navigation ul{
+        margin: 0px;
+        display: inline-block;
+        padding: 0px;
+        vertical-align: middle;
+    }
+    #navigation ul li{
+        display: inline-block;
+        margin: 0px 10px;
+    }
+    #navigation a{
+        color: white
+    }
+
+    h1, h2{
+        text-align: center;
+    }
+    h2{
+        font-weight: normal;
+        font-size: medium;
+        font-style: italic;
+        padding-bottom: 10px;
+    }
+    p{
+        margin: 5px 0px;
+    }
+
+    footer{
+        font-size: small;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        margin: 0px;
+        background-color: #E6E6E9;
+        color: #777;
+    }
+    footer a{
+        color: #555;
+    }
+
+    /* indent */
+    #main > p::before{
+        content: "　　";
+    }
+</style>
+<body>
+    <div id="navigation">
+        <a href="/"><img src="/assets/images/LC.gif" height="64px"></a>
+        <ul><li>
+                    <a href="/">主页</a>
+                </li><li>
+                    <a href="/archive">存储库</a>
+                </li><li>
+                    <a href="/about">关于</a>
+                </li></ul>
+    </div>
+
+    
+<h1>Log Creative</h1>
+
+<h2>Log Creative. Log Infinity.</h2>
+
+<div id="main">
+    <h2><div style="font-style: normal;"><a href="/assets/LogCreative/resume/resume_cn.pdf">查看我的简历</a> | <a href="/assets/LogCreative/resume/resume_en.pdf">View My CV</a></div></h2>
+<!-- [![GitHub](/assets/images/github.svg)](https://github.com/LogCreative) [![bilibili](/assets/images/bilibili.ico)](https://space.bilibili.com/31271993) -->
+<ul id="aboutlist"><a class="card" href="/about/parts/educator/">
+        <li>
+            <h3>助力教育<h3>
+            <p class="description">助力教育欠发达。</p>
+        </li>
+    </a><a class="card" href="/about/parts/videomaking/">
+        <li>
+            <h3>视频制作<h3>
+            <p class="description">用自己的经历理解后期制作逻辑。</p>
+        </li>
+    </a><a class="card" href="/about/parts/frontend/">
+        <li>
+            <h3>前端排版<h3>
+            <p class="description">前端网页与排版。</p>
+        </li>
+    </a><a class="card" href="/about/parts/opensource/">
+        <li>
+            <h3>开源参与<h3>
+            <p class="description">我参加相关的开源项目。</p>
+        </li>
+    </a></ul>
+</div>
+
+    <footer>
+        <p>版权所有 © Log Creative 2012-2021，保留所有权利。</p>
+        <p>除有开源协议声明的，未经许可，不可用于商业用途。</p>
+        <p>Powered by <a href="https://www.11ty.dev/" target="_blank">Eleventy</a> | <a href="https://beian.miit.gov.cn" target="_blank">沪ICP备 2021032524 号</a></p>
+    </footer>
+</body>
+</html>

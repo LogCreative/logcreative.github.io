@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>视频制作</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link href="https://unpkg.com/prismjs@1.20.0/themes/prism.css" rel="stylesheet"><link rel="stylesheet" href="/css/lcard.css"></head>
+<style>
+    body{
+        margin: 0px;
+    }
+    #main, footer{
+        padding: 0px 35px;
+    }
+    #main{
+        margin-bottom: 30px;
+    }
+
+    a{
+        text-decoration: none;
+    }
+    a:hover{
+        text-decoration: underline;
+    }
+
+    #navigation{
+        background-color: black;
+        margin: 0px;
+        padding: 0px;
+    }
+    #navigation img{
+        display: inline-block;
+        vertical-align: middle;
+    }
+    #navigation ul{
+        margin: 0px;
+        display: inline-block;
+        padding: 0px;
+        vertical-align: middle;
+    }
+    #navigation ul li{
+        display: inline-block;
+        margin: 0px 10px;
+    }
+    #navigation a{
+        color: white
+    }
+
+    h1, h2{
+        text-align: center;
+    }
+    h2{
+        font-weight: normal;
+        font-size: medium;
+        font-style: italic;
+        padding-bottom: 10px;
+    }
+    p{
+        margin: 5px 0px;
+    }
+
+    footer{
+        font-size: small;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        margin: 0px;
+        background-color: #E6E6E9;
+        color: #777;
+    }
+    footer a{
+        color: #555;
+    }
+
+    /* indent */
+    #main > p::before{
+        content: "　　";
+    }
+</style>
+<body>
+    <div id="navigation">
+        <a href="/"><img src="/assets/images/LC.gif" height="64px"></a>
+        <ul><li>
+                    <a href="/">主页</a>
+                </li><li>
+                    <a href="/archive">存储库</a>
+                </li><li>
+                    <a href="/about">关于</a>
+                </li></ul>
+    </div>
+
+    
+<h1>视频制作</h1>
+
+<h2>用自己的经历理解后期制作逻辑。</h2>
+
+<div id="main">
+    <h3>基本流程</h3>
+<p>制作视频的基本流程大致为：框架（Framework）、素材（Footage）、剪辑（Editing）。</p>
+<p>视频需要一个框架才能开工。框架是视频之魂。为了做出一个令人印象深刻的视频，你需要一些灵感让视频拥有灵魂。当你能想象出你的视频里的一幕幕场景时，你就可以开工了。当然，和许多人一起做视频时，将想法落实到分镜上能便于更好地交流。</p>
+<p>视频需要素材才能将想法变为现实。一方面，可以通过摄像获得素材，构图、环境、人物，前期素材的美是做好的视频的第一步。另一方面，也可以通过计算机绘图（CG）从零开始制作素材，可以使用 Cinema 4D 等三维动画软件来模拟真实世界，亦可使用 After Effects 等特效制作软件创作生动动画。</p>
+<p>视频需要剪辑来配合音乐。剪辑讲求时机，以同时产生视听上的冲击。剪辑讲求转场，让两段素材之间的过渡变得自然。剪辑可以通过特效来辅助表现一些内容，有些时候，为了一个效果多花一些时间也是很值的。</p>
+<p>而后期制作的范畴主要指素材到剪辑这两部分。</p>
+<h3>后期制作</h3>
+<p>如果一点一点地讲后期制作的话，讲几本书也讲不完。还是从本人的经历讲起，透过时代的变迁逐步理解后期制作的一些关键想法。</p>
+<h4>逐帧动画与简易型剪辑软件</h4>
+<div class="lcard"><a href="/archive/works/0000">0000</a></div>
+<p>我的故事是从 2010 年逐帧动画制作开始的。那时候我了解到视觉暂留原理：人看到东西到大脑中产生视觉需要一定的时间，对于快速移动的物体，原来位置的物体消失后，人眼仍能保留原位置 \(\frac{1}{10} \sim \frac{2}{5} \textrm{s}\) 的图像，在这个反应时间之内物体到达了另一位置，人眼就会认为该物体朝着这样的方向移动。而产生这种现象的临界刷新时间间隔 \(\Delta t = \frac{1}{24} \textrm{s}\)，在电影中称为 1 秒 24 画幅（帧），每秒的画幅数越高，电影看起来就越流畅。</p>
+<!-- 视觉暂留原理就是电影、动画产生的依据。 -->
+<p>去过物理实验演示厅的人大概都见过一台名为“梦幻点阵”的机器。“梦幻点阵”（又名旋转字幕球）主体由玻璃球壳、转轴、控制电路、LED 点阵组成，启动电源后，向马达供电使转轴旋转，并向控制电路供电，使 LED 点阵以一定的程序点亮。只要让 LED 点阵在下一个 \(\Delta t\) 时移动一个微小的距离，就能骗过人眼，产生连续的图像。</p>
+<p>将 LED 点阵按照隔行扫描显示，并展开球面，原理上就成了现代电视。现代电视标准分为 PAL 和 NTSC 两种制式。中国采用 PAL 制式，而美国采用 NTSC 制式。它们在电影放映的时候都是每秒 24 个胶片帧，而在使用隔行扫描的电视上，PAL 制式为每秒 50 场（屏幕），每秒就是 25 个完整视频帧；NTSC 制式为每秒 60 场，每秒就是 29.97（\(\approx\)30） 个完整关键帧。在网络多媒体发达的今天，这些标准因为分辨率低、屏幕比例问题已经比较落后，多数使用 HDTV 标准。但从帧数来看，我们只要每秒有 24 个左右的变化帧，就能制作一段视频了！</p>
+<p>那就开始画画呗！打开画图，使用铅笔、直线、基本图形、油漆桶工具，就可以通过鼠标绘制出一幅拙劣的儿童画。保存文件后，复制一份，在副本上稍作修改，如此进行下去。然后送入 ACDSee 软件，设置幻灯片放映间隔\(\Delta t = 0.04 \textrm{s}\)、无转场、循环播放，预览画面。</p>
+<p>觉得差不多了之后，就送入 Windows Movie Maker 视频制作软件，在时间轴上排列图像，正序排列完后再倒序排列一遍以制作循环动画，在这款软件里，你还可以叠加一个字幕层，并进行配乐。由于软件本身的限制，没有办法让每幅图像的显示时间降到 \(\Delta t\) 以下，所以还是卡顿动画。尽管如此，还是有许多对图像变换操作的拙劣预设可以使用。但是简易型剪辑软件的单轴线性处理已经能够渲染出标准的视频文件了，可以用来整理素材，然后发到网络上去。</p>
+<p>当然现在制作逐帧动画的普遍方法是手绘然后通过扫描机扫描，或者是板绘。但是在那个内存只有 512 MB 的年代，用 Windows XP 自带的画图画画已经是一件非常有趣的事情，虽然有一些枯燥，但是总还能几个小时几个小时地做下来，然后一遍又一遍地看。当然，由于是按像素存储的位图（或是按 JPEG 标准压缩的图像），修改起来不是那么的方便，所以一般来说完工以后只会看而不会改（实在看不过去了就复刻），这个坏习惯我到现在都还有一点儿。</p>
+<h4>补间动画与综合型剪辑软件</h4>
+<p>奇怪的是，我们那边的信息课不教 Flash（后改名为 Animate），所以在 2012 年，我接触到的第一个补间动画软件是 PowerPoint。其自定义动画的高级范儿直接碾压我的拙劣儿童画，但是一直苦于没有导出视频的方法，它做出的东西只能在软件内部转圈圈。</p>
+<p>但是，PowerPoint 所在的 Office 套件共用的矢量图形系统让绘制出的图形变得异常清晰，并且为后来制作高级动画提供了一定的便利。虽然说 PowerPoint 不能像 Flash 一样可以调整补间动画速率曲线，所有的曲线都是钟形的，只能调整动画时间，但是我们还是能够用微元法积分拟合出想要的曲线，对不对？</p>
+<p>可不要小瞧 PowerPoint。最新版本的 PowerPoint 联动制作 3D 模型；笔触动画——和 OneNote 笔触一样还原绘制过程；导出视频——设置好计时就能按照对应的时长切换导出4K视频。所以对那些只用 PowerPoint 就做出 Motion Graphics 的大神不要奇怪！</p>
+<p>在 2014 年初，我接触到了传统意义上的视频剪辑软件——Corel VideoStudio：Live Screen Capture，这可是一个宝贝！有了录屏，我们可以录 PowerPoint，可以录其他的软件，甚至是自己做的软件。早年接触最多的是 Windows 批处理文件（类似于 DOS），在黑色的底上显示出一行行白色的字符，通过简单的几行代码就能实现乱码花屏效果：</p>
+<pre class="language-batch"><code class="language-batch"><span class="token operator">@</span><span class="token command"><span class="token keyword">echo</span> off</span><br><span class="token label property">:luanma</span><br><span class="token command"><span class="token keyword">set</span><span class="token parameter attr-name">/a</span> b=<span class="token variable">%b%</span>+<span class="token number">1</span></span><br><span class="token command"><span class="token keyword">echo</span> <span class="token variable">%random%</span> <span class="token variable">%random%</span> <span class="token variable">%random%</span> <span class="token variable">%random%</span> <span class="token variable">%random%</span> <span class="token variable">%random%</span> <span class="token variable">%random%</span></span><br><span class="token command"><span class="token keyword">if</span> <span class="token variable">%b%</span><span class="token operator">==</span><span class="token number">75</span></span> <span class="token punctuation">(</span><span class="token command"><span class="token keyword">set</span><span class="token parameter attr-name">/a</span> b=<span class="token number">0</span></span><br><span class="token command"><span class="token keyword">cls</span></span><span class="token punctuation">)</span><br><span class="token command"><span class="token keyword">goto</span> luanma</span></code></pre>
+<p>或者是一行 Visual Basic 代码实现对话框弹出：</p>
+<pre class="language-vb"><code class="language-vb">Msgbox<span class="token punctuation">(</span><span class="token string">"内容"</span><span class="token punctuation">,</span><span class="token number">16</span><span class="token operator">+</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token string">"标题"</span><span class="token punctuation">)</span></code></pre>
+<p>那么这款剪辑软件比之前高级在哪儿呢？首先，它可以嵌套工程了，之前的正序排列一遍画面、再倒序排列一遍的工作流程就可以变成把正序排列的部分嵌套为一个工程，然后再放置同样的工程，勾选倒放即可。其次，画面和音乐可以不只有一个轨道了，画面最多可以有 15 轨，音乐最多可以有 3 轨，这样一来你就可以对画面做更多的操作。接着，原来能做的功能有了很大的扩展：时间轴可以打标记了；画面可以进行运动追踪、多机位剪辑，甚至可以添加遮罩；字幕有专门的字幕编辑器，并且可以制作 3D 文字动画；音乐可以使用简易的混音器打电平关键帧、相位关键帧，可以添加音频滤镜粗略降噪。</p>
+<p>最重要的是：它能对画面加特效了！可以在向画面添加一些基本效果的同时，还可以添加一些插件提供的效果：Graffiti 制作高级动画，Adorage 套用一些复杂的效果模板，BCC 制作高级字幕动画，Heroglyph 套用 Roto 笔刷，Mercalli 对画面进行消抖处理，Vitascene 提供一些高级的转场……</p>
+<p>但是为什么不能说 Corel VideoStudio 是一款专业的剪辑软件呢？首先，它还是有一些功能上的缺失，后面会看到。其次，也是最致命的是，单线程序，长期将临时数据存在内存里而不释放，导致它经常崩溃。虽然它自带自动保存功能，但是这只对底层程序有效，而它所有的效果窗口都是建立在内存上的，有时候，花费时间最长的是在这些效果窗口上，也就意味着一旦出现意外（比如蓝屏、断电、内存溢出），这些特效设置就将永远不可恢复。而且，许多东西不能同时调，需要一个一个来，这不仅带来了不便利，也间接导致了文件格式的不流通。</p>
+<p>十年前风靡业余层面的 Corel VideoStudio，曾是许多小公司的制作主力、DVD 发行主力，如今也大势已去，这款软件也认识到了这一点，开始主打轻量化剪辑，并且从 X8 版本开始推出 FastFlick，便于初学者按照引导套用模板。</p>
+<h4>三维动画与高级型特效软件</h4>
+<p>终于，在2018年，我抛弃了原来的剪辑软件，转而使用专业级的 Adobe Premiere Pro。当然入手了 Adobe 的一款软件，那必然要入坑 Adobe 全家桶了：Adobe Illustrator 制作矢量图形，Adobe Photoshop 更好地对图像进行处理，Adobe Animate 制作逐帧动画，Adobe After Effects 制作更强的特殊效果，Adobe Audition 对音频进行更好的处理。</p>
+<p>虽然说了这么多软件，但是由于上手时间不够长，所以也就只是会一些基本操作。Adobe 的软件是专工型的，并且在 Creative Cloud 之后，软件之间实现了很好的连通，动态链接让一些事情变得方便（虽然有时会惹麻烦）。Premiere 基本上作为视频制作流程的最后一关，自然也强大了不少。比如，可以添加调整图层，进行 Lumetri 专业调色；效果窗口与其余的部分同级显示……</p>
+<p>而就视觉而言，Adobe After Effects 可以说是后期特效的老大了。从《我知道你很想学AE》可以看到，它增加了许许多多的概念，打破了原来的线性式编辑思想，也是一种类节点的做法，让整个的扩展性得到了很大的增强，你甚至可以用一些很普通的工具就可以做出很好的效果：比如 Re:set 的动态 logo，其粉状扩散就参照了数学上分形的想法、第二数学归纳法的思想，对原本的一个素材进行了六层复用迭代，做出了很好的生长模型。Adobe Max 2019 创意者大会上发布了一款名为 Adobe Fresco 的软件，就像主持人所说的一样，程序员花了几年的时间去研究流体的扩散，让艺术家能够在平板上绘制真正的油彩画、水彩画，我认为其中的思想应该与上述的生长模型是类似的。</p>
+<p>说到 Fresco 这款软件，我们回想到第 9 节《拓展性与创新性》，其中提到 After Effects 不仅可以实现输入上的新——影像、二维动画、三维动画，还可以做到输出上的拓展——使用 Lottie 插件可以导出为 HTML5，JavaScript 以及其他编程语言。作为中级三维动画软件的 Cinema 4D 在拓展性上也做的不错，可以导入诸如 Autodesk Maya, SolidWorks 等软件所生成的模型，可以使用许许多多的插件完成更加高端的操作：使用 TurbulenceFD 插件就可以实现流体模拟，制作戎光动态 Logo 中的云层与火焰。</p>
+<p>近年来火起来的虚拟现实技术，After Effects 也可以制作相关内容，当然支持更好的还是 Unity 这种编程型软件，支持 Steam VR 插件连通更多的头戴式虚拟现实设备。人工智能的兴起，可以通过识别技术做出实时人物动画，增强现实打通了虚拟与现实的通道。可以说，制作三维虚拟世界所需要的技术门槛发展到今天已经变得非常亲民，时代真的在很快的变化着。</p>
+<h3>尾声</h3>
+<p>我们看到了万物互联的当下，可以使用太多太多的软件，组合起来用后期做出很多非常牛逼的东西。当然，我们也看到了一些老物的衰落。虽然这些软件已经成为了历史，但是在我看来，它们的易用性会让人们创作的时候更加在意内容的创作与情感的表达，而清晰、直观、简易的方法，不必做过多的准备工作就能思路清晰地开工。当下，界面的繁杂让很多人迷失了自己创作作品的初心，而事实上，再高超的技术也不能代替人自己的思考。不论使用什么软件去做后期，对于做出的视频来说，它的内容和所要表达的情感永远是第一位的，视频一旦失去了灵魂，就失去了观众的共鸣，也就变得不这么能让人记住了。</p>
+<p>在视频中，你可以创造一个属于你自己的世界，看到现实生活中看不到的风景。一载已过，有时候会问自己，我探索完后期的全部技术了吗？有时候我会自大地认为是这样的，直到后来接触到了一个又一个新软件，才知道自己远远没有。做后期的创作者，永远保持谦卑，因为我们深知：</p>
+<p>后期技术永无止境。</p>
+
+</div>
+
+    <footer>
+        <p>版权所有 © Log Creative 2012-2021，保留所有权利。</p>
+        <p>除有开源协议声明的，未经许可，不可用于商业用途。</p>
+        <p>Powered by <a href="https://www.11ty.dev/" target="_blank">Eleventy</a> | <a href="https://beian.miit.gov.cn" target="_blank">沪ICP备 2021032524 号</a></p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,135 @@
+\documentclass[a4paper]{article}
+\usepackage[UTF8]{ctex}
+\usepackage{enumitem}
+\usepackage{ragged2e}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{fontawesome}
+\usepackage[colorlinks,urlcolor=blue!30!black]{hyperref}
+\usepackage{geometry}
+\geometry{left=1.5cm,right=1.5cm,top=1.0cm,bottom=1.0cm}
+\newenvironment{cvitems}{
+    \begin{justify}
+    \begin{description}[
+        labelwidth=1.8cm,
+        leftmargin=2cm,
+        % labelsep=0.5cm,
+        parsep=0pt]
+    
+}{
+    \end{description}
+    \end{justify}
+}
+\renewcommand\descriptionlabel[1]{\sffamily #1}
+
+\newenvironment{githubs}{
+    \begin{list}{\faGithubSquare}{
+        \setlength{\topsep}{0pt}
+        \setlength{\partopsep}{0pt}
+        \setlength{\parsep}{0pt}
+        \setlength{\itemsep}{0pt}}
+}{
+    \end{list}
+}
+
+\newenvironment{subcvitems}{
+    \begin{list}{\faCaretSquareORight}{
+        \setlength{\topsep}{0pt}
+        \setlength{\partopsep}{0pt}
+        \setlength{\parsep}{0pt}
+        \setlength{\itemsep}{0pt}
+        \setlength{\leftmargin}{0.55cm}}
+}{
+    \end{list}
+}
+\def\githublink#1{\,\href{https://github.com/LogCreative/#1}{\faGithubSquare{}~\sffamily #1}\,}
+
+\def\section#1{
+    \noindent\hskip2cm \textbf{\large #1} \hrulefill
+}
+
+\def\rightnote#1{
+    {%
+    \unskip\nobreak\hfil\penalty50
+    \hskip2em\hbox{}\nobreak\hfil\textcolor{gray}{\emph{#1}}%
+    \parfillskip=0pt \finalhyphendemerits=0 \par}
+}
+
+\def\tip#1{
+    {\kaishu #1}~\vrule~
+}
+
+\title{\sffamily Log Creative}
+\author{\small\sffamily \href{https://github.com/LogCreative}{\faGithub~LogCreative}
+\href{https://space.bilibili.com/31271993}{\includegraphics[height=2ex]{bilibili.png}~LogCreative}
+\href{mailto:logcreative@outlook.com}{\faEnvelope~logcreative@outlook.com}}
+\date{}
+\begin{document}
+    \begin{minipage}{0.8\textwidth}
+        \maketitle
+    \end{minipage}
+    \begin{minipage}{0.15\textwidth}
+        \includegraphics[width=\linewidth]{ProfilePhoto.png}
+    \end{minipage}
+    
+    \thispagestyle{empty}
+    
+    % 教育经历
+    \section{教育经历}
+    \begin{cvitems}
+        \item[本科生] \textbf{上海交通大学} 三年级 \rightnote{上海}
+        
+        电子信息与电气工程学院~计算机科学与技术\rightnote{预计 2019--2023}
+
+        数学科学学院~数学与应用数学\rightnote{2018--2019}
+    
+        \tip{核心学积分} 86.3/100\quad \tip{CET6} 560
+        
+        \tip{A/A+专业课} 计算机科学中的数学基础、编译原理、计算机系统结构实验。
+    \end{cvitems}
+
+    % 技能
+    \section{专业能力}
+    \begin{cvitems}
+        \item[编程语言] 
+        \begin{subcvitems}
+            \item[\faCheck] 熟悉基于 FLTK 的 \textsf{C/C++}\githublink{GraphGenDecomp}、基于 WinForm/WPF/XAML 的 \textsf{VB{\scriptsize .NET}/C\#\,} \githublink{ClassBookController} \githublink{DialogCreator}、排版程式 \textsf{\LaTeX}\,\githublink{AutoBeamer}相关的界面编程。\rightnote{2015--2021}
+            \item[\faCheckCircle] 了解 \textsf{Python} 计算机视觉库、数据分析与机器学习与网络编程\githublink{Networking}。\rightnote{2019--2021}
+            \item[\faCheckCircle] 了解 \textsf{HTML/CSS/JavaScript}\,\href{https://logcreative.github.io/LaTeXSparkle/}{\faGithubSquare~\sffamily\LaTeX{}Sparkle} 和 \textsf{Vue.js}\githublink{PGFPlotsEdt}网页制作。\rightnote{2020--2021}
+            \item[\faCheckCircleO] 入门 \textsf{Java}\githublink{OS-Projects}、\textsf{Rust}\githublink{CompilerPrinciple}编写小项目。\rightnote{2020}
+        \end{subcvitems}
+        \item[视觉展现] 
+        \begin{subcvitems}
+            \item[\faCheck] 熟练地使用 \textsf{Premiere} 视频剪辑、\textsf{After Effects} 制作特效、\textsf{Cinema 4D} 三维建模\,\href{https://www.bilibili.com/video/BV1Qb411a7FH/}{\includegraphics[height=2ex]{bilibili.png}}。\hfill\textcolor{gray}{\emph{2012--2020}}
+            \item[\faCheckCircle\hskip1pt] 了解使用 \textsf{Unity} 编写三维交互程序。\textsf{PowerPoint} 讲师。\rightnote{2019--2020}
+        \end{subcvitems}
+        \item[开源参与] 
+        \begin{subcvitems}
+            \item[\faCheckCircle] 了解\,\textsf{cmd}/\textsf{PowerShell}/\textsf{bash}\,脚本语言，版本控制工具\,\textsf{Git}，持续集成工具\,\textsf{GitHub Actions}\,的使用。
+            \item[\faCaretSquareORight\hskip1pt] 校内社群 \href{https://sjtug.org}{\textsf{SJTUG}} 成员，向\TeX{}中文社区 \textsf{C\TeX{}-org} 贡献代码\,\href{https://github.com/CTeX-org/learnlatex.github.io}{\faGithubSquare~\sffamily learnlatex.github.io}。
+            \item[\faCaretSquareORight\hskip1.15pt] 参与 \textsf{VS Code} 中文社区线下活动，完成 2021 年微软开源学习社群实践项目\githublink{mnist-calculator} \githublink{custom-tensor-op}\githublink{qlib-CNN}。\rightnote{2021} 
+        \end{subcvitems}
+    \end{cvitems}
+
+    % 竞赛经历
+    \section{获得荣誉}
+
+    \begin{cvitems}
+        \item \textbf{美国大学生数学建模竞赛} Meritorious Winner \rightnote{2021}
+            \tip{主要贡献} 使用 \textsf{sklearn} 库对 DBSCAN 无监督学习模型的距离重定义，以更好地对森林着火点范围进行预测。使用 Mathematica 进行地理相关的计算。
+        \item \textbf{全国大学生物联网竞赛} 全国二等奖 \rightnote{2020}
+            \tip{主要贡献} 使用前端技术编写餐厅就餐数据展示网页，将 Nigara 与华为云数据库连接以更好地基于历史数据进行预测。\githublink{SJTUCanteenDataWidget}
+        \item \textbf{上海交通大学优秀奖学金} C 等 \rightnote{2018--2019, 2020--2021}
+    \end{cvitems}
+
+    % 社团经历
+    \section{社团经历}
+
+    \begin{cvitems}
+        \item \textbf{上海交通大学 Linux 用户组} $\cdot$ SJTU\TeX{} Maintainer \rightnote{2021}
+        \tip{相关工作} \LaTeX{} 幻灯片模板 \href{https://github.com/sjtug/SJTUBeamer}{\faGithubSquare~\sffamily SJTUBeamer} \faStar~\textsf{192}~主要维护者之一。
+        \item \textbf{上海交通大学艺术中心} $\cdot$ 技术部部长 \rightnote{2019--2020}
+        \tip{相关工作} 视频制作者。编写多路直播管理软件 \href{https://github.com/SJTU-Art-Center/ACLiveConsole}{\faGithubSquare~\sffamily ACLiveConsole} \faStar~\textsf{7}~界面化管理 Nginx，支持对 bilibili 弹幕进行艺术处理与多路视频的导播平滑切换，服务于多场校级晚会与商业活动。
+    \end{cvitems}
+
+\end{document}

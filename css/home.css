@@ -1,0 +1,220 @@
+
+/* Borrowed from Steven Lei. */
+/* https://codepen.io/stevenlei/pen/QWGNjKj */
+
+#titlegraphic{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50vh;
+  flex-direction: column;
+  background-color: #222;
+  
+  perspective: 2500px;
+}
+
+h1,h2{
+    padding: 0;
+    margin: 0;
+    position: relative;
+    color: #fff;
+    perspective: 2500px;
+}
+    
+h1 {
+  font-size: 10rem;
+  animation: 5s rotate ease-in-out infinite;
+}
+
+@keyframes rotate {
+  0%, 100% {
+    transform: rotate3d(0, 1, 0, -20deg);
+  }
+  50% {
+    transform: rotate3d(0, 1, 0, 20deg);
+  }
+}
+
+h2 {
+  font-size: 1rem;
+  /* letter-spacing: 2px; */
+  animation: 2.5s thank-you ease-in-out infinite;
+}
+
+@keyframes thank-you {
+  0%, 100% {
+    transform: rotate3d(1, 0, 0, -10deg);
+  }
+  50% {
+    transform: rotate3d(1, 0, 0, 10deg);
+  }
+}
+
+h1::before,
+h1::after {
+  content: '10';
+}
+
+h2::before,
+h2::after {
+  content: 'Log Creative 10th Anniversary';
+}
+
+h1::before,
+h1::after,
+h2::before,
+h2::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+/* Fix Chrome Issue */
+h1::after,
+h2::after {
+  z-index: -2;
+}
+/*  */
+
+h1::before {
+  color: #009CDE;
+  animation: 5s h1-before ease-in-out infinite;
+}
+
+@keyframes h1-before {
+  0%, 100% {
+    transform: translate3d(15px, 5px, -10px);
+  }
+  50% {
+    transform: translate3d(-15px, 5px, -10px);
+  }
+}
+
+h1::after {
+  color: #003C71;
+  animation: 5s h1-after ease-in-out infinite;
+}
+
+@keyframes h1-after {
+  0%, 100% {
+    transform: translate3d(30px, 10px, -20px);
+  }
+  50% {
+    transform: translate3d(-30px, 10px, -20px);
+  }
+}
+
+:root {
+  --offset: 6px;
+}
+
+#counter{
+  background-color: #444444;
+  padding: 30px 0px;
+}
+
+#counter-inner{
+    justify-content: center;
+    text-align: center;
+    padding-left: 5px;
+    color: white;
+    font-size: 30px;
+    line-height: 50px;
+}
+
+/* Borrowed from Steven Lei. */
+/* https://codepen.io/stevenlei/pen/RwpRgzy */
+.mask {
+  display: inline-block;
+  width: 120px;
+  height: 50px;
+  position: relative;
+  overflow: hidden;
+  margin-top: var(--offset);
+  vertical-align: middle;
+}
+.mask span {
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  top: 48px;
+  padding-bottom: var(--offset);
+  background-color: white;
+  font-weight: bold;
+  
+  background-size: 100% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-repeat: no-repeat;
+}
+.mask span[data-show] {
+  transform: translateY(-100%);
+  transition: .5s transform ease-in-out;
+}
+.mask span[data-up] {
+  transform: translateY(-200%);
+  transition: .5s transform ease-in-out;
+}
+.mask span:nth-child(1) {
+  background-image: linear-gradient(45deg, #0ecffe 50%, #07a6f1);
+}
+.mask span:nth-child(2) {
+  background-image: linear-gradient(45deg, #18e198 50%, #0ec15d);
+}
+.mask span:nth-child(3) {
+  background-image: linear-gradient(45deg, #8a7cfb 50%, #633e9c);
+}
+.mask span:nth-child(4) {
+  background-image: linear-gradient(45deg, #fa7671 50%, #f45f7f);
+}
+
+#mask1{
+  width: 120px;
+}
+
+#mask1 span{
+  width: 120px;
+  text-align: center;
+}
+
+#intro, #about{
+  color: white;
+  padding: 30px 35px 30px 35px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#intro{
+  background-color: #666;
+}
+#about{
+  background-color: #888;
+}
+
+.innercontent{
+  display: inline-block;
+  width: 60vw;
+  max-width: 580px;
+}
+
+.innerbutton{
+  display: inline-block;
+  cursor: pointer;
+  padding: 10px 15px;
+  border: 2px solid white;
+  background-color: transparent;
+  color: white;
+  transition: 0.3s;
+}
+
+.innerbutton:hover{
+  background-color: white;
+  color: black;
+}
+
+.innerbutton:hover::after{
+  content: '〉';
+}

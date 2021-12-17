@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log Creative</title>
+</head>
+<style>
+    body{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 100vh;
+        padding: 0px;
+        margin: 0px;
+    }
+
+    #notice{
+        background-color: yellow;
+        width: 100%;
+        text-align: center;
+        padding: 0px;
+        background-image: linear-gradient(
+            -45deg,
+            rgba(0,0,0,1) 0, rgba(0,0,0,1) 25%, transparent 25%, transparent 50%,
+            rgba(0,0,0,1) 50%, rgba(0,0,0,1) 75%, transparent 75%, transparent 100%
+        );
+        background-size: 75px 75px;
+        animation: shift 1s infinite linear;
+        margin: 0px;
+    }
+
+    #line {
+        font-size: larger;
+        font-weight: bold;
+    }
+
+    @keyframes shift {
+        from {
+            background-position-x: 0px;
+        }
+        to {
+            background-position-x: -75px;
+        }
+    }
+
+    #calendar{
+        max-width: 100%;
+        margin-bottom: 8px;
+        overflow-x: auto;
+        display: flex;
+        margin: 5px 0px;
+    }
+
+    #calendar .day {
+        height: 1rem;
+    }
+
+    #calendar .day {
+        white-space: nowrap;
+    }
+
+    #notice, #calendar {
+        font-family: Helvetica, sans-serif;
+    }
+
+    .day {
+        display: inline-block;
+        padding: 6px;
+        border-radius: 5px;
+        color: rgba(128, 128, 128, 0.5);
+        background: whitesmoke;
+        box-shadow: inset 1px 1px 2px #bebebe,
+                    inset -1px -1px 2px #ffffff;
+        font-size: small;
+        font-weight: bold;
+        margin: 0px 2px;
+        cursor: pointer;
+        transition:  1s;
+    }
+
+    .complete, .day:hover {
+        color: grey;
+        background: whitesmoke;
+        box-shadow:  1px 1px 2px #bebebe,
+                    -1px -1px 2px #ffffff;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    .link {
+        border-radius: 10px;
+        padding: 1em;
+        transition: 1s;
+    }
+
+    .link:hover {
+        background: whitesmoke;
+        box-shadow: inset 1px 1px 2px #bebebe,
+                    inset -1px -1px 2px #ffffff;
+    }
+
+    .floater {
+        width: 40%; 
+        float: right;
+    }
+
+    .sched {
+        border: 1px solid rgba(109, 109, 109, 0.5);
+    }
+
+    #schedule {
+        display: none;
+        width: 100%;
+        height: 50vh;
+        min-height: 400px;
+        background: linear-gradient(145deg, #cacaca, #f0f0f0);
+        background: #e0e0e0;
+        box-shadow: inset 20px 20px 60px #bebebe,
+            inset -20px -20px 60px #ffffff;
+    }
+
+    .card {
+        padding: 1em 2em;
+        background: #e0e0e0;
+        box-shadow:  20px 20px 60px #bebebe,
+                    -20px -20px 60px #ffffff;
+        width: 100%;
+        transition: 1s;
+        cursor: default;
+        color: black;
+    }
+
+    h1, h2, h3{
+        font-weight: lighter;
+    }
+    h2{
+        font-size: medium;
+    }
+    h3{
+        font-size: small;
+    }
+
+
+
+</style>
+<body>
+    <div id="header"></div>
+    <div id="notice">
+        <p>Log Creative · 2021</p>
+        <p id="line">Under Construction</p>
+    </div>
+    <div id="calendar">
+        <a href="https://logcreative.github.io/LogCreative/dev/dev.pdf"><div class="day">Dev Log</div></a>
+    </div>
+    <div id="schedule">
+        <div class="day complete card" id="note-23">
+            <h1><embed src="img/frontendlogo.svg"></h1>
+            <a href="https://www.bilibili.com/video/BV1Lh411z7tZ/" target="_blank"><p class="page complete link floater">▶️ 直播集锦</p></a>
+            <h2>7 月 23 日 9:00 - 11:00</h2>
+            <h3>0 一些闲话</h3>
+            <a href="https://github.com/kamranahmedse/developer-roadmap/tree/master/translations/chinese" target="_blank"><p class="page complete link">前端开发路线图</p></a>
+            <a href="https://neumorphism.io" target="_blank"><p class="page complete link">拟态元素生成器</p></a>
+            <a href="http://www.wtfpl.net/" target="_blank"><p class="page complete link">WTFPL – Do What the F**k You Want to Public License</p></a>
+        </div>
+        <div class="day complete card" id="note-7-26">
+            <h1><embed src="img/cnflogo.svg"></h1>
+            <h2>7 月 26 日 9:00 - 11:00</h2>
+            <h3>录制 第一节 前言</h3>
+            <a href="https://logcreative.github.io/LaTeXSparkle/src/art/chapter01.html" target="_blank"><p class="page complete link">像模像样 LaTeX 第一节 前言</p></a>
+        </div>
+        <div class="day complete card" id="note-7-28">
+            <h1><embed src="img/cnflogo.svg"></h1>
+            <h2>7 月 28 日 9:00 - 11:00</h2>
+            <h3>制作 第一节 前言</h3>
+        </div>
+        <div class="day complete card" id="note-7-30">
+            <h1><embed src="img/cnflogo.svg"></h1>
+            <h2>7 月 30 日 9:00 - 11:00</h2>
+            <h3>讨论 字幕机</h3>
+            <a href="https://github.com/LogCreative/manim-subtitler" target="_blank"><p class="page complete link">manim-subtitler</p></a>
+        </div>
+        <div class="day complete card" id="note-8-2">
+            <h1><embed src="img/cnflogo.svg"></h1>
+            <h2>8 月 2 日 9:00 - 11:00</h2>
+            <h3>剪片</h3>
+        </div>
+        <div class="day complete card" id="note-8-6">
+            <h1><embed src="img/cnflogo.svg"></h1>
+            <h2>8 月 6 日 21:30 - 22:30</h2>
+            <h3>读文章/写文档</h3>
+        </div>
+        <div class="day complete card" id="note-8-7">
+            <h1><embed src="img/cnflogo.svg"></h1>
+            <h2>8 月 7 日 21:30 - 22:30</h2>
+            <h3>读文章/写文档</h3>
+        </div>
+        <div class="day complete card" id="note-8-8">
+            <h1><embed src="img/cnflogo.svg"></h1>
+            <h2>8 月 8 日 21:30 - 22:30</h2>
+            <h3>读文章</h3>
+        </div>
+        <div class="day complete card" id="note-8-31">
+            <h1><embed src="img/cnflogo.svg"></h1>
+            <h2>8 月 31 日 20:00 - 21:00</h2>
+            <h3>新品发布会</h3>
+        </div>
+    </div>
+    </body>
+    <script>
+        var details = function(e) {
+            var selected = parseInt(e.target.innerHTML);
+            var schedule = document.getElementById('schedule');
+            var cards = schedule.querySelectorAll("div");
+            var elnum = cards.length;
+            for (var i = 0; i < elnum; ++i)
+                cards[i].style.display = 'none';
+            if ((s = schedule.querySelector('#note-7-' + String(selected))) || (s = schedule.querySelector('#note-8-' + String(selected)))){
+                s.style.display = 'block';
+                schedule.style.display = 'flex';
+            }
+        }
+        
+        var start = 19;
+        var pass = (new Date()).getDate();
+        var end = 31;
+        var cal = document.getElementById('calendar');
+        for (var i = start; i <= end; ++i) {
+            var d = document.createElement('div');
+            d.className = 'day';
+            // if (i <= pass) 
+            d.className += ' complete';
+            d.innerHTML = String(i);
+            d.addEventListener("click", details);
+            if(document.querySelector("#schedule #note-7-"+i))
+                d.className += ' sched';
+            cal.appendChild(d);
+        }
+        cal.appendChild(document.createElement('br'));
+        for (var i = 1; i <= 31; ++i) {
+            var d = document.createElement('div');
+            d.className = 'day';
+            if (i <= pass) 
+                d.className += ' complete';
+            d.innerHTML = String(i);
+            d.addEventListener("click", details);
+            if(document.querySelector("#schedule #note-8-"+i))
+                d.className += ' sched';
+            cal.appendChild(d);
+        }
+    </script>
+</html>

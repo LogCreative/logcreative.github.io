@@ -1,0 +1,134 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{mathpazo}
+\usepackage{enumitem}
+\usepackage{ragged2e}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{fontawesome}
+\usepackage[colorlinks,urlcolor=blue!30!black]{hyperref}
+\usepackage{geometry}
+\geometry{left=1.5cm,right=1.5cm,top=1.0cm,bottom=1.0cm}
+\newenvironment{cvitems}{
+    \begin{justify}
+    \begin{description}[
+        labelwidth=1.8cm,
+        leftmargin=2.5cm,
+        % labelsep=0.5cm,
+        parsep=0pt]
+    
+}{
+    \end{description}
+    \end{justify}
+}
+\renewcommand\descriptionlabel[1]{\hbox to 2.3cm{\sffamily #1}}
+
+\newenvironment{githubs}{
+    \begin{list}{\faGithubSquare}{
+        \setlength{\topsep}{0pt}
+        \setlength{\partopsep}{0pt}
+        \setlength{\parsep}{0pt}
+        \setlength{\itemsep}{0pt}}
+}{
+    \end{list}
+}
+
+\newenvironment{subcvitems}{
+    \begin{list}{\faCaretSquareORight}{
+        \setlength{\topsep}{0pt}
+        \setlength{\partopsep}{0pt}
+        \setlength{\parsep}{0pt}
+        \setlength{\itemsep}{0pt}
+        \setlength{\leftmargin}{0.55cm}}
+}{
+    \end{list}
+}
+\def\githublink#1{\,\href{https://github.com/LogCreative/#1}{\faGithubSquare{}~\sffamily #1}\,}
+
+\def\section#1{
+    \noindent\hskip2.5cm \textbf{\large\scshape #1} \hrulefill
+}
+
+\def\rightnote#1{
+    {%
+    \unskip\nobreak\hfil\penalty50
+    \hskip2em\hbox{}\nobreak\hfil\textcolor{gray}{\emph{#1}}%
+    \parfillskip=0pt \finalhyphendemerits=0 \par}
+}
+
+\def\tip#1{{\slshape \itshape #1}~\vrule\,}
+
+\title{\sffamily Log Creative}
+\author{\small\sffamily \href{https://github.com/LogCreative}{\faGithub~LogCreative}
+\href{https://space.bilibili.com/31271993}{\includegraphics[height=2ex]{bilibili.png}~LogCreative}
+\href{mailto:logcreative@outlook.com}{\faEnvelope~logcreative@outlook.com}}
+\date{}
+\begin{document}
+    \begin{minipage}{0.8\textwidth}
+        \maketitle
+    \end{minipage}
+    \begin{minipage}{0.15\textwidth}
+        \includegraphics[width=\linewidth]{ProfilePhoto.png}
+    \end{minipage}
+    
+    \thispagestyle{empty}
+    
+    % 教育经历
+    \section{Education Experiences}
+    \begin{cvitems}
+        \item[Undergraduate] \textbf{Shanghai Jiao Tong University} Junior \rightnote{Shanghai, China}
+        
+        Computer Science and Technology (CS) \\ @ School of Electronic, Information and Electrical Engineering (SEIEE) \rightnote{Expected 2019--2023}
+
+        Mathematics @ School of Mathematical Sciences \rightnote{Transferred 2018--2019}
+    
+        \tip{GPA} 3.63/4.3\quad \tip{CET6} 560
+        
+        \tip{A/A+ Courses} Mathematical Foundamental in Computer Sciences, Compiler Principles, Computer Architechture Labs
+    \end{cvitems}
+
+    % 技能
+    \section{Skills}
+    \begin{cvitems}
+        \item[Programming] 
+        \begin{subcvitems}
+            \item[\faCheck] Familiar with interface programming like FLTK in \textsf{C/C++}\githublink{GraphGenDecomp}, WinForm/WPF/XAML in \textsf{VB{\scriptsize .NET}/C\#\,} \githublink{ClassBookController} \githublink{DialogCreator}, Typesetting of \textsf{\LaTeX}\,\githublink{AutoBeamer}.\rightnote{2015--2021}
+            \item[\faCheckCircle] Acknowledge OpenCV, pandas, pytorch and networking \githublink{Networking} in \textsf{Python}.\rightnote{2019--2021}
+            \item[\faCheckCircle] Acknowledge webpage making in \textsf{HTML/CSS/JavaScript}\,\href{https://logcreative.github.io/LaTeXSparkle/}{\faGithubSquare~\sffamily\LaTeX{}Sparkle} (Blog), and use JavaScript framework \textsf{Vue.js}\githublink{PGFPlotsEdt}.\rightnote{2020--2021}
+            \item[\faCheckCircleO] Get started with \textsf{Java}\githublink{OS-Projects} and \textsf{Rust}\githublink{CompilerPrinciple}.\rightnote{2020}
+        \end{subcvitems}
+        \item[Visualization] 
+        \begin{subcvitems}
+            \item[\faCheck] Familiar with Video Editing in \textsf{Premiere}, Special Effects in \textsf{After Effects}, 3D Modeling in \textsf{Cinema 4D}\,\href{https://www.bilibili.com/video/BV1Qb411a7FH/}{\includegraphics[height=2ex]{bilibili.png}}.\hfill\textcolor{gray}{\emph{2012--2020}}
+            \item[\faCheckCircle\hskip1pt] Acknowledge \textsf{Unity} to make 3D interactive programs. \textsf{PowerPoint} Lecturer.\rightnote{2019--2020}
+        \end{subcvitems}
+        \item[Open Source] 
+        \begin{subcvitems}
+            \item[\faCheckCircle] Acknowledge \,\textsf{cmd}/\textsf{PowerShell}/\textsf{bash}\,script languages, version control tool\,\textsf{Git}, and continous integration tool\,\textsf{GitHub Actions}.
+            \item[\faCaretSquareORight\hskip1pt] Member of \href{https://sjtug.org}{\textsf{SJTUG}}. Chinese \TeX{} Society \textsf{C\TeX{}-org} committer\,\href{https://github.com/CTeX-org/learnlatex.github.io}{\faGithubSquare~\sffamily learnlatex.github.io}.
+            \item[\faCaretSquareORight\hskip1.15pt] Participate in \textsf{VS Code} Chinese Group Sharing. Finish 2021 Microsoft Open-Source Study Group Projects \githublink{mnist-calculator} \githublink{custom-tensor-op}\githublink{qlib-CNN}.\rightnote{2021} 
+        \end{subcvitems}
+    \end{cvitems}
+
+    % 竞赛经历
+    \section{Honors}
+
+    \begin{cvitems}
+        \item \textbf{Mathematical Contest in Modeling (MCM)} $\cdot$ Meritorious Winner \rightnote{2021}
+            \tip{Contribution} Redefine the distance of DBSCAN in sklearn library, in order to perform a better prediction in the range of wildfire. Perform geographical calculations in Mathematica.
+        \item \textbf{National Undergraduate IOT Design Contest} $\cdot$ Second Prize \rightnote{2020}
+            \tip{Contribution} Make a webpage to visualize canteen data and connect Nigara to HUAWEI Cloud database to make prediction based on the historical data. \githublink{SJTUCanteenDataWidget}
+        \item \textbf{SJTU Scholarship} $\cdot$ Class C \rightnote{2018--2019, 2020--2021}
+    \end{cvitems}
+
+    % 社团经历
+    \section{Communities}
+
+    \begin{cvitems}
+        \item \textbf{SJTU Linux User Group} $\cdot$ SJTU\TeX{} Maintainer \rightnote{2021}
+        \tip{Related Work} Maintainer of \LaTeX{} Beamer Template \href{https://github.com/sjtug/SJTUBeamer}{\faGithubSquare~\sffamily SJTUBeamer} \faStar~\textsf{195}.
+        \item \textbf{SJTU Art Center} $\cdot$ Leader of Tech Division \rightnote{2019--2020}
+        \tip{Related Work} Video Producer. Create multi-streaming software \href{https://github.com/SJTU-Art-Center/ACLiveConsole}{\faGithubSquare~\sffamily ACLiveConsole} \faStar~\textsf{7}~to manage NGINX visually, support art processing of bilibli danmaku, and fluent PGM animation. The software has serviced multiple events, including the commercial ones.
+    \end{cvitems}
+
+\end{document}

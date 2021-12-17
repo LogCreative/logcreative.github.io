@@ -1,0 +1,25 @@
+#aboutlist{
+    text-decoration: none;
+    padding: 0px;
+}
+.card{
+    color: gray;
+    margin: 0px 10px;
+}
+.card:hover{
+    color: black;
+    text-decoration: none;
+}
+.card li{
+    display: block;
+    border: 2px solid gray;
+    padding: 0px 20px;
+    transition: 0.3s;
+}
+.card li:hover{
+    border-color: black;
+}
+.card p{
+    font-size: medium;
+    font-weight: normal;
+}

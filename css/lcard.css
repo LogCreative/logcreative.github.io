@@ -1,0 +1,25 @@
+.lcard{
+    float: right;
+    clear: both;
+    padding: 20px;
+    margin: 4px;
+    border: 1.5px solid gray;
+    border-radius: 5px;
+    background-image: linear-gradient(45deg, white 50%, white);
+    transition: 0.3s;
+}
+
+.lcard a{
+    color: gray;
+    transition: 0.3s;
+}
+
+.lcard a:hover{
+    color: white;
+}
+
+.lcard:hover{
+    background-image: linear-gradient(90deg, #666 50%, #444);
+    border-color: #888;
+    color: white;
+}
