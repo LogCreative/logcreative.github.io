@@ -185,6 +185,7 @@ h1::after {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  font-size: normal;
 }
 
 #intro{
@@ -208,6 +209,7 @@ h1::after {
   background-color: transparent;
   color: white;
   transition: 0.3s;
+  font-size: normal;
 }
 
 .innerbutton:hover{
