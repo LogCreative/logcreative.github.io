@@ -138,15 +138,18 @@
 </ul>
 <style>
     #ghmetrics {
-        margin: 20px;
+        margin: 40px 0px 20px 0px;
     }
     #ghmetrics img{
         max-width: 100%
     }
 </style>
 <div id="ghmetrics" align="center">
-    <img alt="Metrics" srcset="/assets/images/github-metrics-small.svg 768w,
-    /assets/images/github-metrics-large.svg">
+    <picture>
+        <source media="(max-width: 599px)" srcset="/assets/images/github-metrics-small.svg">
+        <source media="(min-width: 600px)" srcset="/assets/images/github-metrics-large.svg">
+        <img src="/assets/images/github-metrics-large.svg" alt="Metrics">
+    </picture>
 </div>
 
 </div>
