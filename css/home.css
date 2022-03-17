@@ -179,7 +179,7 @@ h1::after {
   text-align: center;
 }
 
-#intro, #about{
+#intro, #about, #billboard{
   color: white;
   padding: 30px 35px 30px 35px;
   display: flex;
@@ -193,6 +193,9 @@ h1::after {
 }
 #about{
   background-color: #888;
+}
+#billboard{
+  background-color: #000;
 }
 
 .innercontent{
