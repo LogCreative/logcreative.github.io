@@ -1,0 +1,15 @@
+.imgcard {
+    float: right;
+    border: 2px solid gray;
+    width: 10%;
+    padding: 3px;
+    margin: 2px;
+}
+
+@media(max-width: 600px){
+    .imgcard {
+        display: block;
+        float: none;
+        width: 95%;
+    }
+}
