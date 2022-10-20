@@ -1,9 +1,14 @@
 .imgcard {
-    float: right;
     border: 2px solid gray;
-    width: 10%;
     padding: 3px;
-    margin: 2px;
+}
+
+@media(min-width: 600px){
+    .imgcard {
+        max-width: 300px;
+        margin-left: calc(50% - 150px);
+        margin-right: calc(50% - 150px);
+    }
 }
 
 @media(max-width: 600px){
@@ -11,5 +16,6 @@
         display: block;
         float: none;
         width: 95%;
+        margin: 2px;
     }
 }
