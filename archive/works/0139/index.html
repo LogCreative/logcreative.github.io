@@ -13,11 +13,13 @@
     body{
         margin: 0px;
     }
-    #main, footer{
-        padding: 0px 35px;
-    }
     #main{
         margin-bottom: 30px;
+    }
+
+    .widthlimit {
+        width: min(850px, 100% - 4rem);
+        margin-inline: auto;
     }
 
     a{
@@ -106,7 +108,7 @@
 
 <h2>2018-02-02</h2>
 
-<div id="main">
+<div id="main" class="widthlimit">
     <p>作为摄影社又一力作，全长1个多小时，制作历时18天，由组员合作完成。本人担任摄影指导、视频制作、技术总监，在拍摄中，继续使用 Multicamera（多机位）技术，并创新性地使用穿越摄影技术，我使用手持自拍杆的形式进行摄影。在视频制作中，继续使用多种特效（包括Motion Track,运动追踪技术），创新性地使用分屏技术。</p>
 <p><strong>摄影指导 技术总监</strong> Log Creative
 <strong>视频制作</strong> 李仪邦,Log Creative,李文涛
@@ -121,9 +123,11 @@ ED:唤醒的奇迹！(加藤逹也)，My Soul(July)</p>
 </div>
 
     <footer>
-        <p>版权所有 © Log Creative 2012-2023，保留所有权利。</p>
-        <p>除有开源协议声明的，未经许可，不可用于商业用途。</p>
-        <p>Powered by <a href="https://www.11ty.dev/" target="_blank">Eleventy</a> | <a href="https://beian.miit.gov.cn" target="_blank">沪ICP备2021032524号</a></p>
+        <div class="widthlimit">
+            <p>版权所有 © Log Creative 2012-2023，保留所有权利。</p>
+            <p>除有开源协议声明的，未经许可，不可用于商业用途。</p>
+            <p>Powered by <a href="https://www.11ty.dev/" target="_blank">Eleventy</a> | <a href="https://beian.miit.gov.cn" target="_blank">沪ICP备2021032524号</a></p>
+        </div>
     </footer>
 </body>
 </html>

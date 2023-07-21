@@ -13,11 +13,13 @@
     body{
         margin: 0px;
     }
-    #main, footer{
-        padding: 0px 35px;
-    }
     #main{
         margin-bottom: 30px;
+    }
+
+    .widthlimit {
+        width: min(850px, 100% - 4rem);
+        margin-inline: auto;
     }
 
     a{
@@ -104,7 +106,7 @@
 
 <h2>助力教育欠发达。</h2>
 
-<div id="main">
+<div id="main" class="widthlimit">
     <p>我的中学阶段是在一个城镇中学完成的。这个地方的教育水平并不是那么发达，大部分老师的教育思想都是非常落后的：成为小镇做题家，然后考上好大学，其余与学习无关的事情都是有害的。</p>
 <p>与其抱怨环境的不平等，不如尝试去改善当下的环境。</p>
 <h3>学习</h3>
@@ -128,9 +130,11 @@
 </div>
 
     <footer>
-        <p>版权所有 © Log Creative 2012-2023，保留所有权利。</p>
-        <p>除有开源协议声明的，未经许可，不可用于商业用途。</p>
-        <p>Powered by <a href="https://www.11ty.dev/" target="_blank">Eleventy</a> | <a href="https://beian.miit.gov.cn" target="_blank">沪ICP备2021032524号</a></p>
+        <div class="widthlimit">
+            <p>版权所有 © Log Creative 2012-2023，保留所有权利。</p>
+            <p>除有开源协议声明的，未经许可，不可用于商业用途。</p>
+            <p>Powered by <a href="https://www.11ty.dev/" target="_blank">Eleventy</a> | <a href="https://beian.miit.gov.cn" target="_blank">沪ICP备2021032524号</a></p>
+        </div>
     </footer>
 </body>
 </html>

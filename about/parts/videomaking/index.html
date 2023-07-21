@@ -13,11 +13,13 @@
     body{
         margin: 0px;
     }
-    #main, footer{
-        padding: 0px 35px;
-    }
     #main{
         margin-bottom: 30px;
+    }
+
+    .widthlimit {
+        width: min(850px, 100% - 4rem);
+        margin-inline: auto;
     }
 
     a{
@@ -104,7 +106,7 @@
 
 <h2>用自己的经历理解后期制作逻辑。</h2>
 
-<div id="main">
+<div id="main" class="widthlimit">
     <h3>基本流程</h3>
 <p>制作视频的基本流程大致为：框架（Framework）、素材（Footage）、剪辑（Editing）。</p>
 <p>视频需要一个框架才能开工。框架是视频之魂。为了做出一个令人印象深刻的视频，你需要一些灵感让视频拥有灵魂。当你能想象出你的视频里的一幕幕场景时，你就可以开工了。当然，和许多人一起做视频时，将想法落实到分镜上能便于更好地交流。</p>
@@ -148,9 +150,11 @@
 </div>
 
     <footer>
-        <p>版权所有 © Log Creative 2012-2023，保留所有权利。</p>
-        <p>除有开源协议声明的，未经许可，不可用于商业用途。</p>
-        <p>Powered by <a href="https://www.11ty.dev/" target="_blank">Eleventy</a> | <a href="https://beian.miit.gov.cn" target="_blank">沪ICP备2021032524号</a></p>
+        <div class="widthlimit">
+            <p>版权所有 © Log Creative 2012-2023，保留所有权利。</p>
+            <p>除有开源协议声明的，未经许可，不可用于商业用途。</p>
+            <p>Powered by <a href="https://www.11ty.dev/" target="_blank">Eleventy</a> | <a href="https://beian.miit.gov.cn" target="_blank">沪ICP备2021032524号</a></p>
+        </div>
     </footer>
 </body>
 </html>

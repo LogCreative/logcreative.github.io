@@ -13,11 +13,13 @@
     body{
         margin: 0px;
     }
-    #main, footer{
-        padding: 0px 35px;
-    }
     #main{
         margin-bottom: 30px;
+    }
+
+    .widthlimit {
+        width: min(850px, 100% - 4rem);
+        margin-inline: auto;
     }
 
     a{
@@ -106,7 +108,7 @@
 
 <h2>2016-05-05</h2>
 
-<div id="main">
+<div id="main" class="widthlimit">
     <p>暴风计划(Plan Storm)为本人在班中执行的计划，目的是以计划促进同学学习。而这一路走的异常艰难，曾受到过三方（老师、家长、同学）阻挠，但在谷文治的支持下，我能够坚信自己做的是正确的。而这个由PPT做成的短片正是一路走来的写照。</p>
 <p><strong>制作</strong> Log Creative
 <strong>版权</strong> (LC)No.0081
@@ -119,9 +121,11 @@
 </div>
 
     <footer>
-        <p>版权所有 © Log Creative 2012-2023，保留所有权利。</p>
-        <p>除有开源协议声明的，未经许可，不可用于商业用途。</p>
-        <p>Powered by <a href="https://www.11ty.dev/" target="_blank">Eleventy</a> | <a href="https://beian.miit.gov.cn" target="_blank">沪ICP备2021032524号</a></p>
+        <div class="widthlimit">
+            <p>版权所有 © Log Creative 2012-2023，保留所有权利。</p>
+            <p>除有开源协议声明的，未经许可，不可用于商业用途。</p>
+            <p>Powered by <a href="https://www.11ty.dev/" target="_blank">Eleventy</a> | <a href="https://beian.miit.gov.cn" target="_blank">沪ICP备2021032524号</a></p>
+        </div>
     </footer>
 </body>
 </html>

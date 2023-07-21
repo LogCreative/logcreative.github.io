@@ -13,11 +13,13 @@
     body{
         margin: 0px;
     }
-    #main, footer{
-        padding: 0px 35px;
-    }
     #main{
         margin-bottom: 30px;
+    }
+
+    .widthlimit {
+        width: min(850px, 100% - 4rem);
+        margin-inline: auto;
     }
 
     a{
@@ -106,7 +108,7 @@
 
 <h2>2021-04-02</h2>
 
-<div id="main">
+<div id="main" class="widthlimit">
     <h3>Log Creative 八周年纪念</h3>
 <p>一个尚未完成的视频：<a href="https://v.qq.com/x/page/f32372ux5he.html">LogInfinity</a>，以及分镜版本：<a href="/assets/LogInfinity/storyboard.pdf">StoryBoard</a>。</p>
 <h3>Log Creative 十周年纪念</h3>
@@ -136,9 +138,11 @@
 </div>
 
     <footer>
-        <p>版权所有 © Log Creative 2012-2023，保留所有权利。</p>
-        <p>除有开源协议声明的，未经许可，不可用于商业用途。</p>
-        <p>Powered by <a href="https://www.11ty.dev/" target="_blank">Eleventy</a> | <a href="https://beian.miit.gov.cn" target="_blank">沪ICP备2021032524号</a></p>
+        <div class="widthlimit">
+            <p>版权所有 © Log Creative 2012-2023，保留所有权利。</p>
+            <p>除有开源协议声明的，未经许可，不可用于商业用途。</p>
+            <p>Powered by <a href="https://www.11ty.dev/" target="_blank">Eleventy</a> | <a href="https://beian.miit.gov.cn" target="_blank">沪ICP备2021032524号</a></p>
+        </div>
     </footer>
 </body>
 </html>
