@@ -1,0 +1,18 @@
+<h1>EnkaCard-web</h1>
+<p>A static web page generator for EnkaCard</p>
+<p>This project is to provide a static page generator that could be deployed to
+your personal website based on <a href="https://github.com/DEViantUA/EnkaCard">EnkaCard</a>
+project.</p>
+<p>Since the profile is generated in image form, the web
+page generated is not as interactive as the original https://enka.network/,
+but it is enough for most use cases.</p>
+<h2>Usage</h2>
+<p>Install the dependencies:</p>
+<pre class="language-bash"><code class="language-bash">pip <span class="token function">install</span> <span class="token parameter variable">-r</span> requirements.txt</code></pre>
+<p>And run the script, pass the uid as the argument:</p>
+<pre class="language-bash"><code class="language-bash">python main.py <span class="token parameter variable">-u</span> <span class="token number">273518546</span></code></pre>
+<p>If you want to change the language, for example, to Chinese (Simplified), then use:</p>
+<pre class="language-bash"><code class="language-bash">python main.py <span class="token parameter variable">-u</span> <span class="token number">273518546</span> <span class="token parameter variable">-l</span> chs</code></pre>
+<p>You could get more help by</p>
+<pre class="language-bash"><code class="language-bash">python main.py <span class="token parameter variable">-h</span></code></pre>
+<p>After the generation, you could open <code>enkacard.html</code> directly to preview the result. You could directly deploy those files to your website.</p>
