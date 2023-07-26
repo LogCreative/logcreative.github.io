@@ -23,3 +23,44 @@
     font-size: medium;
     font-weight: normal;
 }
+
+.iconbox {
+    display: flex;
+    align-items:end;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.iconbox a {
+    opacity: 0.5;
+    margin: 0 2px;
+}
+
+.iconbox a:hover {
+    text-decoration: none;
+    opacity: 1;
+}
+
+.iconbox a img {
+    margin: 0 2px;
+}
+
+#icondetail img {
+    display: none;
+}
+
+#github_icon:hover~#icondetail>#github_profile,
+#bilibili_icon:hover~#icondetail>#bilibili_profile,
+#genshin_icon:hover~#icondetail>#genshin_profile
+{
+    display: block;
+}
+
+#icondetail {
+    width: 100%;
+}
+
+#icondetail img{
+    margin: 0 auto;
+    width: min(100%, 500px);
+}
