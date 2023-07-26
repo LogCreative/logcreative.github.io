@@ -33,16 +33,12 @@
 
 .iconbox a {
     opacity: 0.5;
-    margin: 0 2px;
+    padding: 0 4px;
 }
 
 .iconbox a:hover {
     text-decoration: none;
     opacity: 1;
-}
-
-.iconbox a img {
-    margin: 0 2px;
 }
 
 #icondetail img {
