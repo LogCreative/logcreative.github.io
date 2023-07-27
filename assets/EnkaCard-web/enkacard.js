@@ -22,14 +22,19 @@ chara_img_list = []
 function showCharacter(e) {
     chara_img_list.forEach(element => {
         element.style.setProperty("width", "48px")
+        element.style.setProperty("box-shadow", "0px 0px whitesmoke")
+        element.setAttribute("class","")
     });
+    chara_rarity = this.id.split('-')[1]
+    this.setAttribute("class", "rarity" + chara_rarity)
     this.style.setProperty("width", "56px")
+    this.style.setProperty("box-shadow", "2px 2px 2px 1px whitesmoke")
     character_obj_narrow = document.getElementById("enkacard_detail_narrow")
-    character_obj_narrow.setAttribute("srcset", imgdir + "/narrow_" + this.id + ".jpg")
+    character_obj_narrow.setAttribute("srcset", imgdir + "/narrow-" + this.id + ".jpg")
     character_obj_wide = document.getElementById("enkacard_detail_wide")
-    character_obj_wide.setAttribute("srcset", imgdir + "/wide_" + this.id + ".jpg")
+    character_obj_wide.setAttribute("srcset", imgdir + "/wide-" + this.id + ".jpg")
     character_obj_img = document.getElementById("enkacard_detail_img")
-    character_obj_img.setAttribute("src", imgdir + "/wide_" + this.id + ".jpg")
+    character_obj_img.setAttribute("src", imgdir + "/wide-" + this.id + ".jpg")
 }
 
 characters.forEach(character => {
@@ -37,7 +42,7 @@ characters.forEach(character => {
     chara_div.setAttribute("class", "imgdiv")
     chara_img = document.createElement("img")
     chara_img.setAttribute("id",character)
-    chara_img.setAttribute("src",`${imgdir}/icon_${character}.png`)
+    chara_img.setAttribute("src",`${imgdir}/avatar-${character}.png`)
     chara_img.addEventListener('click', showCharacter)
     chara_img_list.push(chara_img)
     chara_div.appendChild(chara_img)
