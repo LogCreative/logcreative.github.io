@@ -1,60 +1,27 @@
-<p align="center">
- <img src="https://raw.githubusercontent.com/DEViantUA/StarRailCard/main/StarRailCardM.png" alt="Баннер"/>
-</p>
+## StarRailCard-web
 
-____
+A static web page generator for StarRailCard based on [StarRailCard](https://github.com/DEViantUA/StarRailCard).
 
-## StarRailCard
-Module for generating Honkai Star Rail character cards
+<img width="669" alt="preview" src="https://github.com/LogCreative/StarRailCard/assets/61653082/731cd519-0d3c-4a6d-a63e-f04c91263ade">
 
-:white_medium_square: Ability to generate with or without background.<br>
-:white_medium_square: Ability to set a custom image.<br>
-:white_medium_square: Flexible map settings.
+## Usage
 
-## Installation:
-```
-pip install starrailcard
+Install the dependencies:
+```bash
+pip install -r requirements.txt
 ```
 
-## Launch:
-``` python
-from starrailcard import honkaicard 
-import asyncio
-
-async def mains():
-    async with honkaicard.MiHoMoCard(template=1) as hmhm:
-        r = await hmhm.creat(700649319)
-        print(r)
-
-asyncio.run(mains())
+And run the script, pass the uid as the argument:
+```bash
+python main.py -u 109814396
+```
+If you want to change the language, for example, to Chinese (Simplified), then use:
+```bash
+python main.py -u 109814396 -l cn
+```
+You could get more help by
+```bash
+python main.py -h
 ```
 
-## Languages Supported
-| Languege    |  Code   | Languege    |  Code   | Languege    |  Code   |
-|-------------|---------|-------------|---------|-------------|---------|
-|  English    |     en  |  русский    |     ru  |  Chinese    |    chs  |
-|  Tiếng Việt |     vi  |  ไทย        |     th  | Taiwan     |    cht  |
-|  português  |     pt  | 한국어      |     kr  | deutsch    |     de  |
-|  日本語      |     jp  | 中文        |     cn  | español    |     es  |
-|  中文        |     zh  | Indonesian |     id  | français   |     fr  |
-
-
-
-<details>
-<summary>Sample 1 template</summary>
- 
-[![Adaptation][3]][3]
- 
-[3]: https://raw.githubusercontent.com/DEViantUA/StarRailCard/main/a-18.png
-  
-</details>
-
-
-<details>
-<summary>Sample 2 template</summary>
- 
-[![Adaptation][4]][4]
- 
-[4]: https://raw.githubusercontent.com/DEViantUA/StarRailCard/main/a-19.png
- 
-</details>
+After the generation, you could open `railcard.html` directly to preview the result. You could directly deploy those files to your website. Click the avatar to display the detail of different characters.
