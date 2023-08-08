@@ -1,0 +1,77 @@
+<p align="center">
+ <img src="https://raw.githubusercontent.com/DEViantUA/StarRailCard/main/StarRailCardM.png" alt="Баннер"/>
+</p>
+<hr>
+<h2>StarRailCard</h2>
+<p>Module for generating Honkai Star Rail character cards</p>
+<p>:white_medium_square: Ability to generate with or without background.<br>
+:white_medium_square: Ability to set a custom image.<br>
+:white_medium_square: Flexible map settings.</p>
+<h2>Installation:</h2>
+<pre><code>pip install starrailcard
+</code></pre>
+<h2>Launch:</h2>
+<pre class="language-python"><code class="language-python"><span class="token keyword">from</span> starrailcard <span class="token keyword">import</span> honkaicard <br><span class="token keyword">import</span> asyncio<br><br><span class="token keyword">async</span> <span class="token keyword">def</span> <span class="token function">mains</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span><br>    <span class="token keyword">async</span> <span class="token keyword">with</span> honkaicard<span class="token punctuation">.</span>MiHoMoCard<span class="token punctuation">(</span>template<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token keyword">as</span> hmhm<span class="token punctuation">:</span><br>        r <span class="token operator">=</span> <span class="token keyword">await</span> hmhm<span class="token punctuation">.</span>creat<span class="token punctuation">(</span><span class="token number">700649319</span><span class="token punctuation">)</span><br>        <span class="token keyword">print</span><span class="token punctuation">(</span>r<span class="token punctuation">)</span><br><br>asyncio<span class="token punctuation">.</span>run<span class="token punctuation">(</span>mains<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
+<h2>Languages Supported</h2>
+<table>
+<thead>
+<tr>
+<th>Languege</th>
+<th>Code</th>
+<th>Languege</th>
+<th>Code</th>
+<th>Languege</th>
+<th>Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>English</td>
+<td>en</td>
+<td>русский</td>
+<td>ru</td>
+<td>Chinese</td>
+<td>chs</td>
+</tr>
+<tr>
+<td>Tiếng Việt</td>
+<td>vi</td>
+<td>ไทย</td>
+<td>th</td>
+<td>Taiwan</td>
+<td>cht</td>
+</tr>
+<tr>
+<td>português</td>
+<td>pt</td>
+<td>한국어</td>
+<td>kr</td>
+<td>deutsch</td>
+<td>de</td>
+</tr>
+<tr>
+<td>日本語</td>
+<td>jp</td>
+<td>中文</td>
+<td>cn</td>
+<td>español</td>
+<td>es</td>
+</tr>
+<tr>
+<td>中文</td>
+<td>zh</td>
+<td>Indonesian</td>
+<td>id</td>
+<td>français</td>
+<td>fr</td>
+</tr>
+</tbody>
+</table>
+<details>
+<summary>Sample 1 template</summary>
+<p><a href="https://raw.githubusercontent.com/DEViantUA/StarRailCard/main/a-18.png"><img src="https://raw.githubusercontent.com/DEViantUA/StarRailCard/main/a-18.png" alt="Adaptation"></a></p>
+</details>
+<details>
+<summary>Sample 2 template</summary>
+<p><a href="https://raw.githubusercontent.com/DEViantUA/StarRailCard/main/a-19.png"><img src="https://raw.githubusercontent.com/DEViantUA/StarRailCard/main/a-19.png" alt="Adaptation"></a></p>
+</details>

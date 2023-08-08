@@ -52,6 +52,10 @@
     display: block;
 }
 
+#github_profile, #bilibili_profile, #genshin_profile {
+    padding-top: 5px;
+}
+
 #icondetail {
     width: 100%;
 }

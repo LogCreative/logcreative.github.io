@@ -1,0 +1,18 @@
+<h2>StarRailCard-web</h2>
+<p>A static web page generator for StarRailCard.</p>
+<blockquote>
+<p><a href="https://github.com/DEViantUA/StarRailCard">StarRailCard</a> has an active update on PyPI, but not on GitHub.</p>
+<p>This repo has some fixes on optimizing the experience for Chinese users, whose related issue has been reported on <a href="https://github.com/DEViantUA/StarRailCard/issues/1">Issue #1</a>.</p>
+<p>Still looking forward to see more feature development on the upstream package.</p>
+</blockquote>
+<img width="669" alt="preview" src="https://github.com/LogCreative/StarRailCard/assets/61653082/731cd519-0d3c-4a6d-a63e-f04c91263ade">
+<h2>Usage</h2>
+<p>Install the dependencies:</p>
+<pre class="language-bash"><code class="language-bash"><span class="token builtin class-name">cd</span> <span class="token punctuation">..</span><br>python <span class="token function">install</span> <span class="token parameter variable">-e</span> <span class="token builtin class-name">.</span><br><span class="token builtin class-name">cd</span> web    <span class="token comment"># back to this dir</span></code></pre>
+<p>And run the script, pass the uid as the argument:</p>
+<pre class="language-bash"><code class="language-bash">python main.py <span class="token parameter variable">-u</span> <span class="token number">109814396</span></code></pre>
+<p>If you want to change the language, for example, to Chinese (Simplified), then use:</p>
+<pre class="language-bash"><code class="language-bash">python main.py <span class="token parameter variable">-u</span> <span class="token number">109814396</span> <span class="token parameter variable">-l</span> cn</code></pre>
+<p>You could get more help by</p>
+<pre class="language-bash"><code class="language-bash">python main.py <span class="token parameter variable">-h</span></code></pre>
+<p>After the generation, you could open <code>railcard.html</code> directly to preview the result. You could directly deploy those files to your website. Click the avatar to display the detail of different characters.</p>
