@@ -48,12 +48,13 @@
 
 #github_icon:hover~#icondetail>#github_profile,
 #bilibili_icon:hover~#icondetail>#bilibili_profile,
-#genshin_icon:hover~#icondetail>#genshin_profile
+#genshin_icon:hover~#icondetail>#genshin_profile,
+#starrail_icon:hover~#icondetail>#starrail_profile
 {
     display: block;
 }
 
-#github_profile, #bilibili_profile, #genshin_profile {
+#github_profile, #bilibili_profile, #genshin_profile, #starrail_profile {
     padding-top: 5px;
 }
 
@@ -63,5 +64,5 @@
 
 #icondetail img{
     margin: 0 auto;
-    width: min(100%, 500px);
+    width: min(100%, 450px);
 }

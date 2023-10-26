@@ -4,7 +4,7 @@
 \usepackage{ragged2e}
 \usepackage{xcolor}
 \usepackage{graphicx}
-\usepackage{fontawesome}
+\usepackage{fontawesome5}
 \usepackage[colorlinks,urlcolor=blue!30!black]{hyperref}
 \usepackage{geometry}
 \geometry{left=1.5cm,right=1.5cm,top=1.0cm,bottom=1.0cm}
@@ -33,7 +33,7 @@
 }
 
 \newenvironment{subcvitems}{
-    \begin{list}{\faCaretSquareORight}{
+    \begin{list}{{\faCaretSquareRight[regular]\hskip1pt}}{
         \setlength{\topsep}{0pt}
         \setlength{\partopsep}{0pt}
         \setlength{\parsep}{0pt}
@@ -45,7 +45,7 @@
 \def\githublink#1{\,\href{https://github.com/LogCreative/#1}{\faGithubSquare{}~\sffamily #1}\,}
 
 \def\section#1{
-    \noindent\hskip2cm \textbf{\large #1} \hrulefill
+    \noindent\hskip2cm \textsf{\large #1} \hrulefill
 }
 
 \def\rightnote#1{
@@ -55,13 +55,11 @@
     \parfillskip=0pt \finalhyphendemerits=0 \par}
 }
 
-\def\tip#1{
-    {\kaishu #1}~\vrule~
-}
+\def\tip#1{{\kaishu #1}\space~\vrule\space~}
 
 \title{\sffamily Log Creative}
 \author{\small\sffamily \href{https://github.com/LogCreative}{\faGithub~LogCreative}
-\href{https://logcreative.tech}{\faExternalLink~logcreative.tech}\hspace*{8.5ex}\\
+\href{https://logcreative.tech}{\faExternalLink*~logcreative.tech}\hspace*{8.5ex}\\
 \small\sffamily
 \href{https://space.bilibili.com/31271993}{\includegraphics[height=2ex]{bilibili.png}~LogCreative}
 \href{mailto:logcreative@outlook.com}{\faEnvelope~logcreative@outlook.com}}
@@ -79,15 +77,18 @@
     % 教育经历
     \section{教育经历}
     \begin{cvitems}
-        \item[本科生] \textbf{上海交通大学} 四年级 \rightnote{上海}
+        \item[研究生] \textbf{上海交通大学}~硕士一年级 \rightnote{上海}
         
-        电子信息与电气工程学院~计算机科学与技术\rightnote{预计 2019--2023}
+        电子信息与电气工程学院~电子信息\rightnote{预计 2023--2026}
+
+        电子信息与电气工程学院~计算机科学与技术\rightnote{2019--2023}
 
         数学科学学院~数学与应用数学\rightnote{2018--2019}
     
-        \tip{核心学积分} 87.25/100\quad \tip{CET6} 545 (口语: B+)
+        % \tip{核心学积分} 87.25/100\quad 
+        % \tip{CET6} 545 (口语: B+)
         
-        \tip{A/A+专业课} 虚拟现实与增强现实技术、机器学习、数据可视化与可视分析、计算机科学中的数学基础、编译原理、计算机系统结构实验。
+        %\tip{A/A+专业课} 虚拟现实与增强现实技术、机器学习、数据可视化与可视分析、计算机科学中的数学基础、编译原理、计算机系统结构实验。
     \end{cvitems}
 
     % 技能
@@ -95,10 +96,13 @@
     \begin{cvitems}
         \item[编程语言] 
         \begin{subcvitems}
-            \item[\faCheck] 熟悉基于 FLTK 的 \textsf{C/C++}\githublink{GraphGenDecomp}、基于 WinForm/WPF/XAML 的 \textsf{VB{\scriptsize .NET}/C\#\,} \githublink{ClassBookController} \githublink{DialogCreator}、排版程式 \textsf{\LaTeX}\,\githublink{AutoBeamer}相关的界面编程。\rightnote{2015--2021}
-            \item[\faCheckCircle] 了解 \textsf{Python} 数据分析、计算机视觉库、机器学习\githublink{ML}与网络编程\githublink{Networking}。\rightnote{2019--2021}
-            \item[\faCheckCircle] 了解 \textsf{HTML/CSS/JavaScript}\,\href{https://logcreative.github.io/LaTeXSparkle/}{\faGithubSquare~\sffamily\LaTeX{}Sparkle} 和 \textsf{Vue.js}\githublink{PGFPlotsEdt}网页制作。\rightnote{2020--2021}
-            \item[\faCheckCircleO] 入门 \textsf{Java}\githublink{OS-Projects}、\textsf{Rust}\githublink{CompilerPrinciple}编写小项目。\rightnote{2020}
+            \item[\faCheck] 熟悉 \textsf{Python}, \textsf{C/C++}, \textsf{C\#/VB{\scriptsize .NET}}, \textsf{\LaTeX} 编程。\rightnote{2018--2023}
+            \item[\faCheckCircle] 了解 \textsf{HTML/CSS/JavaScript} 网页制作 \githublink{PGFPlotsEdt} \faStar~\textsf{15}。\rightnote{2020--2023}
+            \item[{\faCaretSquareRight[regular]}\hskip1pt] 入门 \textsf{Java}、\textsf{Rust} 编写小项目。\rightnote{2020}
+            % \item[\faCheck] 熟悉基于 FLTK 的 \textsf{C/C++}\githublink{GraphGenDecomp}、基于 WinForm/WPF/XAML 的 \textsf{VB{\scriptsize .NET}/C\#\,} \githublink{ClassBookController} \githublink{DialogCreator}、排版程式 \textsf{\LaTeX}\,\githublink{AutoBeamer}相关的界面编程。\rightnote{2015--2021}
+            % \item[\faCheckCircle] 了解 \textsf{Python} 数据分析、计算机视觉库、机器学习\githublink{ML}与网络编程\githublink{Networking}。\rightnote{2019--2021}
+            % \item[\faCheckCircle] 了解 \textsf{HTML/CSS/JavaScript}\,\href{https://logcreative.github.io/LaTeXSparkle/}{\faGithubSquare~\sffamily\LaTeX{}Sparkle} 和 \textsf{Vue.js}\githublink{PGFPlotsEdt}网页制作。\rightnote{2020--2021}
+            % \item[{\faCheckCircle[regular]}] 入门 \textsf{Java}\githublink{OS-Projects}、\textsf{Rust}\githublink{CompilerPrinciple}编写小项目。\rightnote{2020}
         \end{subcvitems}
         \item[视觉展现] 
         \begin{subcvitems}
@@ -108,8 +112,8 @@
         \item[开源参与] 
         \begin{subcvitems}
             \item[\faCheckCircle] 了解\,\textsf{cmd}/\textsf{PowerShell}/\textsf{bash}\,脚本语言，版本控制工具\,\textsf{Git}，持续集成工具\,\textsf{GitHub Actions}\,的使用。
-            \item[\faCaretSquareORight\hskip1pt] 校内社群 \href{https://sjtug.org}{\textsf{SJTUG}} 成员，向\TeX{}中文社区 \textsf{C\TeX{}-org} 贡献代码\,\href{https://github.com/CTeX-org/learnlatex.github.io}{\faGithubSquare~\sffamily learnlatex.github.io}，开展 \LaTeX{} 校内讲座 \href{https://github.com/sjtug/sjtulib-latex-talk}{\faGithubSquare~\sffamily sjtulib-latex-talk}。
-            \item[\faCaretSquareORight\hskip1.15pt] 参与 \textsf{VS Code} 中文社区线下活动，完成 2021 年微软开源学习社群实践项目\githublink{mnist-calculator} \githublink{custom-tensor-op}\githublink{qlib-CNN}。\rightnote{2021} 
+            \item[{\faCaretSquareRight[regular]}\hskip1pt] 校内社群 \href{https://sjtug.org}{\textsf{SJTUG}} 成员，向\TeX{}中文社区 \textsf{C\TeX{}-org} 贡献代码\,\href{https://github.com/CTeX-org/learnlatex.github.io}{\faGithubSquare~\sffamily learnlatex.github.io}，开展 \LaTeX{} 校内讲座 \href{https://github.com/sjtug/sjtulib-latex-talk}{\faGithubSquare~\sffamily sjtulib-latex-talk} \faStar~\textsf{56}。\rightnote{2022}
+            \item[{\faCaretSquareRight[regular]}\hskip1.15pt] 参与 \textsf{VS Code} 中文社区线下活动，完成 2021 年微软开源学习社群实践项目\githublink{mnist-calculator} \githublink{custom-tensor-op}\githublink{qlib-CNN}。\rightnote{2021} 
         \end{subcvitems}
     \end{cvitems}
 
@@ -117,7 +121,9 @@
     \section{获得荣誉}
 
     \begin{cvitems}
-        \item \textbf{全国大学生物联网竞赛} 鸿蒙特别创新奖 (10/1417) ~全国一等奖 \rightnote{2022}
+        \item \textbf{上海交通大学计算机科学与技术专业优秀学士学位论文}~系优秀奖 \rightnote{2023}
+            \tip{科研成果} Chunyu Qi, \textbf{Zilong Li}, Zhuoran Song and Xiaoyao Liang. ``ViTframe: Vision Transformer Acceleration via Informative Frame Selection for Video Recognition.'' In: \textit{IEEE International Conference on Computer Design (ICCD)}. 2023.
+        \item \textbf{全国大学生物联网竞赛}~鸿蒙特别创新奖 (10/1417) ~全国一等奖 \rightnote{2022}
             \tip{主要贡献} 借助于 HarmonyOS 的分布式软总线特性开发鸿蒙应用，服务于线上线下混合课堂，在云服务器上搭建交互平台互联客户端、\href{http://iot.logcreative.tech}{浏览器端}、硬件端。
         \item \textbf{美国大学生数学建模竞赛} Meritorious Winner \rightnote{2021}
             \tip{主要贡献} 使用 \textsf{sklearn} 库对 DBSCAN 无监督学习模型的距离重定义，以更好地对森林着火点范围进行预测。使用 Mathematica 进行地理相关的计算。
@@ -131,7 +137,7 @@
 
     \begin{cvitems}
         \item \textbf{上海交通大学 Linux 用户组} $\cdot$ SJTU\TeX{} Maintainer \rightnote{2021--2022}
-        \tip{相关工作} \LaTeX{} 幻灯片模板 \href{https://github.com/sjtug/SJTUBeamer}{\faGithubSquare~\sffamily SJTUBeamer} \faStar~\textsf{309}~主要维护者之一。
+        \tip{相关工作} \LaTeX{} 幻灯片模板 \href{https://github.com/sjtug/SJTUBeamer}{\faGithubSquare~\sffamily SJTUBeamer} \faStar~\textsf{449}~主要维护者之一。
         \item \textbf{上海交通大学艺术中心} $\cdot$ 技术部部长 \rightnote{2019--2020}
         \tip{相关工作} 视频制作者。编写多路直播管理软件 \href{https://github.com/SJTU-Art-Center/ACLiveConsole}{\faGithubSquare~\sffamily ACLiveConsole} \faStar~\textsf{7}~界面化管理 Nginx，支持对 bilibili 弹幕进行艺术处理与多路视频的导播平滑切换，服务于多场校级晚会与商业活动。
     \end{cvitems}

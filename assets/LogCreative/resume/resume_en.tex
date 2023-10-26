@@ -5,7 +5,7 @@
 \usepackage{ragged2e}
 \usepackage{xcolor}
 \usepackage{graphicx}
-\usepackage{fontawesome}
+\usepackage{fontawesome5}
 \usepackage[colorlinks,urlcolor=blue!30!black]{hyperref}
 \usepackage{geometry}
 \geometry{left=1.5cm,right=1.5cm,top=1.0cm,bottom=1.0cm}
@@ -34,7 +34,7 @@
 }
 
 \newenvironment{subcvitems}{
-    \begin{list}{\faCaretSquareORight}{
+    \begin{list}{{\faCaretSquareRight[regular]\hskip1pt}}{
         \setlength{\topsep}{0pt}
         \setlength{\partopsep}{0pt}
         \setlength{\parsep}{0pt}
@@ -60,7 +60,7 @@
 
 \title{\sffamily Log Creative}
 \author{\small\sffamily \href{https://github.com/LogCreative}{\faGithub~LogCreative}
-\href{https://logcreative.tech}{\faExternalLink~logcreative.github.io}\hspace*{4ex}\\
+\href{https://logcreative.tech}{\faExternalLink*~logcreative.github.io}\hspace*{4ex}\\
 \small\sffamily
 \href{https://space.bilibili.com/31271993}{\includegraphics[height=2ex]{bilibili.png}~LogCreative}
 \href{mailto:logcreative@outlook.com}{\faEnvelope~logcreative@outlook.com}}
@@ -78,15 +78,17 @@
     % 教育经历
     \section{Education Experiences}
     \begin{cvitems}
-        \item[Undergraduate] \textbf{Shanghai Jiao Tong University} Senior \rightnote{Shanghai, China}
+        \item[Graduate] \textbf{Shanghai Jiao Tong University} Master (1st year) \rightnote{Shanghai, China}
         
-        Computer Science and Technology (CS) \\ @ School of Electronic, Information and Electrical Engineering (SEIEE) \rightnote{Expected 2019--2023}
+        Electronic Information @ School of Electronic, Information and Electrical Engineering \rightnote{Expected 2023--2026} 
+
+        Computer Science and Technology (CS) @ School of Electronic, Information and Electrical Engineering \rightnote{2019--2023}
 
         Mathematics @ School of Mathematical Sciences \rightnote{Transferred 2018--2019}
     
-        \tip{GPA} 3.71/4.3\quad \tip{CET6} 545 (Oral: B+)
+        %\tip{GPA} 3.71/4.3\quad \tip{CET6} 545 (Oral: B+)
         
-        \tip{A/A+ Courses} VR, Machine Learning, Data Visualization, Mathematical Foundamental in Computer Sciences, Compiler Principles, Computer Architechture Labs
+        %\tip{A/A+ Courses} VR, Machine Learning, Data Visualization, Mathematical Foundamental in Computer Sciences, Compiler Principles, Computer Architechture Labs
     \end{cvitems}
 
     % 技能
@@ -94,10 +96,13 @@
     \begin{cvitems}
         \item[Programming] 
         \begin{subcvitems}
-            \item[\faCheck] Familiar with interface programming like FLTK in \textsf{C/C++}\githublink{GraphGenDecomp}, WinForm/WPF/XAML in \textsf{VB{\scriptsize .NET}/C\#\,} \githublink{ClassBookController} \githublink{DialogCreator}, Typesetting of \textsf{\LaTeX}\,\githublink{AutoBeamer}.\rightnote{2015--2021}
-            \item[\faCheckCircle] Acknowledge OpenCV, pandas, pytorch and networking \githublink{Networking} in \textsf{Python}.\rightnote{2019--2021}
-            \item[\faCheckCircle] Acknowledge webpage making in \textsf{HTML/CSS/JavaScript}\,\href{https://logcreative.github.io/LaTeXSparkle/}{\faGithubSquare~\sffamily\LaTeX{}Sparkle} (Blog), and use JavaScript framework \textsf{Vue.js}\githublink{PGFPlotsEdt}.\rightnote{2020--2021}
-            \item[\faCheckCircleO] Get started with \textsf{Java}\githublink{OS-Projects} and \textsf{Rust}\githublink{CompilerPrinciple}.\rightnote{2020}
+            \item[\faCheck] Familiar with \textsf{Python}, \textsf{C/C++}, \textsf{C\#/VB{\scriptsize .NET}}, \textsf{\LaTeX} Programming. \rightnote{2018--2023}
+            \item[\faCheckCircle] Acknowledge \textsf{HTML/CSS/JavaScript} webpage making \githublink{PGFPlotsEdt} \faStar~\textsf{15}. \rightnote{2020--2023}
+            \item[{\faCaretSquareRight[regular]}\hskip1pt] Get started with \textsf{Java} and \textsf{Rust}. \rightnote{2020}
+            % \item[\faCheck] Familiar with interface programming like FLTK in \textsf{C/C++}\githublink{GraphGenDecomp}, WinForm/WPF/XAML in \textsf{VB{\scriptsize .NET}/C\#\,} \githublink{ClassBookController} \githublink{DialogCreator}, Typesetting of \textsf{\LaTeX}\,\githublink{AutoBeamer}.\rightnote{2015--2021}
+            % \item[\faCheckCircle] Acknowledge OpenCV, pandas, pytorch and networking \githublink{Networking} in \textsf{Python}.\rightnote{2019--2021}
+            % \item[\faCheckCircle] Acknowledge webpage making in \textsf{HTML/CSS/JavaScript}\,\href{https://logcreative.github.io/LaTeXSparkle/}{\faGithubSquare~\sffamily\LaTeX{}Sparkle} (Blog), and use JavaScript framework \textsf{Vue.js}\githublink{PGFPlotsEdt}.\rightnote{2020--2021}
+            % \item[{\faCheckCircle[regular]}] Get started with \textsf{Java}\githublink{OS-Projects} and \textsf{Rust}\githublink{CompilerPrinciple}.\rightnote{2020}
         \end{subcvitems}
         \item[Visualization] 
         \begin{subcvitems}
@@ -107,8 +112,8 @@
         \item[Open Source] 
         \begin{subcvitems}
             \item[\faCheckCircle] Acknowledge \,\textsf{cmd}/\textsf{PowerShell}/\textsf{bash}\,script languages, version control tool\,\textsf{Git}, and continous integration tool\,\textsf{GitHub Actions}.
-            \item[\faCaretSquareORight\hskip1pt] Member of \href{https://sjtug.org}{\textsf{SJTUG}}. Chinese \TeX{} Society \textsf{C\TeX{}-org} committer\,\href{https://github.com/CTeX-org/learnlatex.github.io}{\faGithubSquare~\sffamily learnlatex.github.io}. Give lectures about \LaTeX{} \href{https://github.com/sjtug/sjtulib-latex-talk}{\faGithubSquare~\sffamily sjtulib-latex-talk}.
-            \item[\faCaretSquareORight\hskip1.15pt] Participate in \textsf{VS Code} Chinese Group Sharing. Finish 2021 Microsoft Open-Source Study Group Projects \githublink{mnist-calculator} \githublink{custom-tensor-op}\githublink{qlib-CNN}.\rightnote{2021} 
+            \item[{\faCaretSquareRight[regular]}\hskip1pt] Member of \href{https://sjtug.org}{\textsf{SJTUG}}. Chinese \TeX{} Society \textsf{C\TeX{}-org} committer\,\href{https://github.com/CTeX-org/learnlatex.github.io}{\faGithubSquare~\sffamily learnlatex.github.io}. Give lectures about \LaTeX{} \href{https://github.com/sjtug/sjtulib-latex-talk}{\faGithubSquare~\sffamily sjtulib-latex-talk} \faStar~\textsf{56}.
+            \item[{\faCaretSquareRight[regular]}\hskip1.15pt] Participate in \textsf{VS Code} Chinese Group Sharing. Finish 2021 Microsoft Open-Source Study Group Projects \githublink{mnist-calculator} \githublink{custom-tensor-op}\githublink{qlib-CNN}.\rightnote{2021} 
         \end{subcvitems}
     \end{cvitems}
 
@@ -116,6 +121,8 @@
     \section{Honors}
 
     \begin{cvitems}
+        \item \textbf{SJTU CS Outstanding Bachelor's Thesis} \rightnote{2023}
+            \tip{Publication} Chunyu Qi, \textbf{Zilong Li}, Zhuoran Song and Xiaoyao Liang. ``ViTframe: Vision Transformer Acceleration via Informative Frame Selection for Video Recognition.'' In: \textit{IEEE International Conference on Computer Design (ICCD)}. 2023.
         \item \textbf{National Undergraduate IOT Design Contest} $\cdot$ HarmonyOS Special Award (Top 10) \rightnote{2022}
             \tip{Contribution} Develop a HarmonyOS App based on the technology of distributed database, to service the hybrid class with social distancing. Build a cloud platform to interconnect clients, \href{http://iot.logcreative.tech}{web}, and a hardware.
         \item \textbf{Mathematical Contest in Modeling (MCM)} $\cdot$ Meritorious Winner \rightnote{2021}
@@ -130,7 +137,7 @@
 
     \begin{cvitems}
         \item \textbf{SJTU Linux User Group} $\cdot$ SJTU\TeX{} Maintainer \rightnote{2021}
-        \tip{Related Work} Maintainer of \LaTeX{} Beamer Template \href{https://github.com/sjtug/SJTUBeamer}{\faGithubSquare~\sffamily SJTUBeamer} \faStar~\textsf{309}.
+        \tip{Related Work} Maintainer of \LaTeX{} Beamer Template \href{https://github.com/sjtug/SJTUBeamer}{\faGithubSquare~\sffamily SJTUBeamer} \faStar~\textsf{449}.
         \item \textbf{SJTU Art Center} $\cdot$ Leader of Tech Division \rightnote{2019--2020}
         \tip{Related Work} Video Producer. Create multi-streaming software \href{https://github.com/SJTU-Art-Center/ACLiveConsole}{\faGithubSquare~\sffamily ACLiveConsole} \faStar~\textsf{7}~to manage NGINX visually, support art processing of bilibli danmaku, and fluent PGM animation. The software has serviced multiple events, including the commercial ones.
     \end{cvitems}

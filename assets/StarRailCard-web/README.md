@@ -15,13 +15,15 @@ And run the script, pass the uid as the argument:
 ```bash
 python main.py -u 109814396
 ```
-If you want to change the language, for example, to Chinese (Simplified), then use:
+If you want to change the language, for example, to Chinese (Simplified) with the correct font being used, then use:
 ```bash
-python main.py -u 109814396 -l cn
+python main.py -u 109814396 -l cn -f "NotoSansCJKsc-Bold"
 ```
+where `NotoSansCJKsc-Bold` font should be installed on your computer manually.
+
 You could get more help by
 ```bash
 python main.py -h
 ```
 
-After the generation, you could open `railcard.html` directly to preview the result. You could directly deploy those files to your website. Click the avatar to display the detail of different characters.
+After the generation, you could open `railcard.html` directly to preview the result. You could directly deploy those files to your website. Click the avatar to display the detail of different characters. And `profile.jpg` is also generated for your own use. You could add your customized style to make it look better.
