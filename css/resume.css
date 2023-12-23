@@ -48,6 +48,7 @@
     .subblock{
         width: 47%;
         display: inline-block;
+        vertical-align: top;
     }
 }
 
