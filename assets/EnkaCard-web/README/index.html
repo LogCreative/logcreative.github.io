@@ -6,7 +6,7 @@ project.</p>
 <p>Since the profile is generated in image form, the web
 page generated is not as interactive as the original https://enka.network/,
 but it is enough for most use cases.</p>
-<img width="100%" alt="screenshot" src="https://github.com/LogCreative/EnkaCard-web/assets/61653082/80a9f14b-061d-47b6-be1e-ccdc7737814d">
+<img width="100%" alt="screenshot" src="https://github.com/LogCreative/EnkaCard-web/assets/61653082/074e98a5-a59a-4218-8e72-64013b721dfc">
 <h2>Usage</h2>
 <p>Install the dependencies:</p>
 <pre class="language-bash"><code class="language-bash">pip <span class="token function">install</span> <span class="token parameter variable">-r</span> requirements.txt</code></pre>
@@ -16,5 +16,10 @@ but it is enough for most use cases.</p>
 <pre class="language-bash"><code class="language-bash">python main.py <span class="token parameter variable">-u</span> <span class="token number">273518546</span> <span class="token parameter variable">-l</span> chs</code></pre>
 <p>You could get more help by</p>
 <pre class="language-bash"><code class="language-bash">python main.py <span class="token parameter variable">-h</span></code></pre>
+<blockquote>
+<p>If you encounter: <code>ERROR:enkanetwork.assets:Character not found with id: </code>, try run this command first</p>
+<pre class="language-bash"><code class="language-bash">python update_assets.py</code></pre>
+<p>to update the asset library.</p>
+</blockquote>
 <p>After the generation, you could open <code>enkacard.html</code> directly to preview the result. You could directly deploy those files to your website. Click the avatar to display the detail of different characters.
 And <code>profile.jpg</code> is also generated for your own use. You could add your customized style to make it look better.</p>

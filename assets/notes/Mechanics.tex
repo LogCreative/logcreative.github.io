@@ -1,0 +1,430 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{CJKutf8}
+\usepackage[english]{babel}
+%\usepackage[utf8x]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{dsfont}
+\usepackage{graphicx}
+%\usepackage[UTF8]{ctex}
+\usepackage{geometry}
+\usepackage{bm}
+\geometry{left=2.0cm,right=2.0cm,top=2.5cm,bottom=2.5cm}
+\numberwithin{equation}{section}
+
+\begin{document}
+\begin{CJK}{UTF8}{gbsn} % Windows 用户需要将字体改为 song
+
+\title{Mechanics Summary}
+\author{Log Creative}
+\date{}
+\maketitle
+
+\section{只涉及三维坐标的质点运动学}
+\paragraph{自然坐标系}
+
+\begin{equation}
+  x(t)-x_0=\int_0^t \left( v_0 + \int_0^t a dt \right)dt
+\end{equation}
+
+\begin{equation}
+  \bm{r}(t)-\bm{r}_0=\int_0^t \left( \bm{v}_0 + \int_0^t \bm{a} dt \right)dt
+\end{equation}
+
+\begin{equation}
+  \bm{v}=\bm{\omega}\times \bm{r}
+\end{equation}
+
+\begin{equation}
+  \bm{a}=\bm{a}_t+\bm{a}_n=\frac{dv}{dt}\bm{e}_t+\frac{v^2}{\rho} \bm{e}_n
+\end{equation}
+
+\paragraph{极坐标系}
+
+\begin{align}
+  \dot{\bm{e_r}}&=\dot{\theta}\bm{e_{\theta}} \\
+  \dot{\bm{e_{\theta}}}&=- \dot{\theta}\bm{e_r} \\
+  \bm{v}&=\dot{r} \bm{e}_r +r \dot{\theta} \bm{e}_{\theta} \\
+  \bm{a}&=\left(\ddot{r}-r\dot{\theta}^2\right)\bm{e}_r+\left( r \ddot{\theta}+2 \dot{r} \dot{\theta} \right)\bm{e}_{\theta}
+\end{align}
+
+\paragraph{相对运动(伽利略变换)}
+\begin{align}
+  \bm{v} & =\bm{v}^{\prime}+\bm{v}_f \\
+  \bm{a} & =\bm{a}^{\prime}+\bm{a}_f
+\end{align}
+
+\paragraph{匀速转动}
+\begin{align}
+  \bm{v} & = \bm{v}^{\prime} + \bm{\omega} \times \bm{r} \\
+  \bm{a} & =\bm{a}^{\prime} + \bm{\omega} \times (\bm{\omega} \times \bm{r}^{\prime} )+2 \bm{\omega} \times \bm{v}^{\prime}
+\end{align}
+
+\section{加入了力的牛顿运动定律}
+\paragraph{牛顿第二定律}
+\begin{equation}
+  \bm{F}=m\bm{a}
+\end{equation}
+
+\paragraph{虚拟力}
+\begin{equation}
+  \bm{F}_i=m\bm{a'}-m\bm{a}
+\end{equation}
+
+\paragraph{科里奥利力}
+
+\begin{equation}
+ m \bm{a}^{\prime}  =m \bm{a} - m \bm{\omega} \times (\bm{\omega} \times \bm{r}^{\prime} )+ 2 m \bm{v}^{\prime} \times  \bm{\omega}
+\end{equation}
+
+\section{更广泛适用的动量}
+\paragraph{质点系动量定理}
+\begin{equation}
+  \bm{F}_{ex}=\frac{d\bm{p}}{dt}
+\end{equation}
+
+\paragraph{质心}
+\begin{equation}
+  \bm{F}_{ex}=m\bm{a}_c
+\end{equation}
+\begin{equation}
+  \bm{r}_C=\frac{\int \bm{r} dm}{\int dm}
+\end{equation}
+
+\section{具有守恒性质的衡量 功与能}
+
+\paragraph{引入定义}
+\begin{align}
+\bm{F}&=m\bm{C} \\
+\bm{F}&=-\bm{\nabla}U \\
+\bm{C}&=-\bm{\nabla} \Psi
+\end{align}
+
+\begin{equation}
+  \bm{A}\cdot d\bm{A}=AdA
+\end{equation}
+
+\paragraph{质点系中功能原理}
+\begin{align}
+  W_{ex}+W_{ic}+W_{in}&=E_k(b)-E_k(a)\\
+  W_{ex}+W_{in}&=E(b)-E(a)
+\end{align}
+
+\begin{align}
+  E_k &= \frac{1}{2}mv_C^2 +E_{kC} = \frac{1}{2}mv_C^2 + \sum_i \frac{1}{2} m_i v_i^{\prime2} \\
+  W_{ex}^{\prime}+W_{in}^{\prime} &=E^{\prime}-E_0^{\prime}
+\end{align}
+
+\paragraph{碰撞}
+\begin{equation}
+  e=\frac{v_2-v_1}{u_1-u_2}\in[0,1]
+\end{equation}
+\begin{align}
+  v_1 &= \frac{m_1-em_2}{m_1+m_2}u_1+\frac{(1+e)m_2}{m_1+m_2}u_2 \\
+  v_2 &= \frac{(1+e)m_1}{m_1+m_2}u_1-\frac{em_1-m_2}{m_1+m_2}u_2 \\
+  \Delta E&=\frac{1}{2}(1-e^2)\frac{m_1m_2}{m_1+m_2}(u_1+u_2)^2
+\end{align}
+
+\section{力矩的积分 角动量}
+\paragraph{力矩}
+\begin{equation}
+  \bm{M}=\bm{r}\times\bm{F}
+\end{equation}
+\paragraph{力偶}
+\begin{equation}
+  |\bm{M}_{\textrm{duality force}}|=Fd
+\end{equation}
+\paragraph{角动量}
+\begin{equation}
+  \bm{L}=\bm{r}\times\bm{p}
+\end{equation}
+\paragraph{角动量定理}
+\begin{equation}
+  \bm{M}_{ex}=\frac{dL}{dt}
+\end{equation}
+
+\section{质点力学的组合 刚体力学}
+
+\paragraph{角量}
+\begin{equation}
+  \varphi(t)-\varphi_0=\int_0^t \left( \omega_0 + \int_0^t \alpha dt \right)dt
+\end{equation}
+
+\begin{equation}
+  \bm{a}=\bm{a}_t+\bm{a}_n=\frac{d\bm{\omega}}{dt}\times \bm{r}+\bm{\omega}\times(\bm{\omega}\times\bm{r})
+\end{equation}
+
+\paragraph{转动惯量}
+\begin{align}
+  J&=\int r^2 dm \\
+  M&=J\alpha \\
+  L&=J\omega
+\end{align}
+
+
+\begin{center}
+  \begin{tabular}{cc}
+  \hline
+  % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+  刚体 & 转动惯量 \\
+  \hline
+  圆环 & $mR^2$ \\
+  圆柱 & $\frac{1}{2}mR^2$ \\
+  圆筒 & $\frac{1}{2}m(R_1^2+R_2^2)$ \\
+  细棒 & (中部)$\frac{1}{12}ml^2$ \\
+  圆球 & $\frac{2}{5}mR^2$ \\
+  薄球壳 & $\frac{2}{3}mR^2$ \\
+  \hline
+\end{tabular}
+\end{center}
+
+\paragraph{平行轴定理、正交轴定理}
+\begin{align}
+  J_A &= J_C+md^2 \\
+  J_z &= J_x+J_y
+\end{align}
+
+\paragraph{刚体的动能定理}
+\begin{equation}
+  W_{ex}=\int M_zd\varphi=\frac{1}{2}J\omega^2-\frac{1}{2}J\omega_0^2
+\end{equation}
+
+\paragraph{平面平行运动\\}
+动能
+\begin{equation}
+  E_k=\frac{1}{2}J\omega^2
+\end{equation}
+
+纯滚动
+\begin{align}
+  v_C &=R\omega \\
+  a_C &=R\alpha
+\end{align}
+
+\paragraph{进动}
+\begin{equation}
+  \bm{M}=\bm{\Omega}\times\bm{L}
+\end{equation}
+
+\section{周期性的运动 振动}
+\paragraph{简谐振动}
+\begin{align}
+  m\ddot{x} &=-kx \\
+  x&=A\cos(\omega t+\varphi) \\
+  \omega &= \sqrt{\frac{k}{m}} \\
+  A &= \sqrt{x_0^2+\frac{v_0^2}{\omega^2}} \\
+  tan\varphi &= \frac{-v_0}{\omega x_0} \\
+  E&=\frac{1}{2}kA^2
+\end{align}
+
+\paragraph{谐振子}
+\begin{equation}
+  \ddot{x}+\omega^2x=0
+\end{equation}
+
+\paragraph{振动的合成}
+\subparagraph{平行、同频率}
+
+\begin{equation}
+  \left\{
+    \begin{array}{ll}
+      x_1=A_1\cos(\omega t+\varphi_1) \\
+      x_2=A_2\cos(\omega t+\varphi_2)
+    \end{array}
+  \right.
+\end{equation}
+
+
+\begin{align}
+  A&=\sqrt{A_1^2+A_2^2+2A_1A_2\cos(\varphi_2-\varphi_1)}\\
+    \varphi&=\tan^{-1} \frac{A_1\sin \varphi_1+A_2\sin \varphi_2}{A_1 \cos \varphi_1+A_2 \cos \varphi_2}
+\end{align}
+
+\subparagraph{平行、近频率}
+
+ \begin{equation}
+  \left\{
+    \begin{array}{ll}
+      x_1=A\cos(\omega_1 t+\varphi_1) \\
+      x_2=A\cos(\omega_2 t+\varphi_2)
+    \end{array}
+  \right.
+ \end{equation}
+
+
+\begin{align}
+  x&=x_1+x_2=2A\cos\frac{\omega_1-\omega_2}{2}t\cos\left(\frac{\omega_1+\omega_2}{2}+\varphi\right) \\
+    \Delta\nu&=\left|\frac{\omega_1-\omega_2}{2\pi}\right|
+\end{align}
+
+\subparagraph{垂直、同频率}
+
+ \begin{equation}
+  \left\{
+    \begin{array}{ll}
+      x=A_x\cos(\omega t+\varphi_x) \\
+      y=A_y\cos(\omega t+\varphi_y)
+    \end{array}
+  \right.
+ \end{equation}
+
+
+\begin{equation}
+  \frac{x^2}{A_x^2}+\frac{y^2}{A_y^2}-\frac{2xy}{A_xA_y}\cos(\varphi_x-\varphi_y)=\sin^2(\varphi_x-\varphi_y)
+\end{equation}
+
+\subparagraph{垂直、不同频率\\}
+李萨如图形，注意角度起始坐标轴。
+
+\section{超越实体的波}
+
+
+\paragraph{简谐波}
+\begin{align}
+  y(x,t)&= A\cos\left[ \omega\left(t-\frac{x}{u}\right)+\varphi \right] \\
+  y(x,t)&= A\cos\left(\omega t-kx+\varphi \right) \\
+ y(x,t)&= A\cos\left[2\pi \left(\frac{t}{T}-\frac{x}{\lambda}\right)+\varphi\right]
+\end{align}
+
+\paragraph{波动方程}
+\begin{equation}
+  u=\frac{\lambda}{T}=\frac{\omega}{k}
+\end{equation}
+\begin{equation}
+  \frac{\partial^2y}{\partial t^2}=\frac{E}{\rho}\frac{\partial^2y}{\partial x^2}
+\end{equation}
+\begin{align}
+  u_{\parallel}&=\sqrt{\frac{E}{\rho}} \\
+  u_{\perp}&=\sqrt{\frac{G}{\rho}}
+\end{align}
+\begin{align}
+  \frac{\partial^2y}{\partial t^2}&=u^2\frac{\partial^2y}{\partial x^2} \\
+    u&=\sqrt{\frac{F_T}{\rho_l}}
+\end{align}
+
+\paragraph{波的能量与强度}
+\begin{align}
+  \Delta E_k&=\frac{1}{2}\rho\Delta V \left( \frac{\partial y}{\partial t} \right)^2 \\
+  \Delta E_p&=\frac{1}{2}E\Delta V \left( \frac{\partial y}{\partial x} \right)^2
+\end{align}
+
+\begin{align}
+    \Delta E&=\rho \Delta V \omega^2 A^2 \sin^2\omega \left( t-\frac{x}{u} \right) \\
+    \varepsilon &=\frac{\Delta E}{\Delta V}=\rho \omega^2 A^2 \sin^2\omega \left( t-\frac{x}{u} \right) \\
+    \bm{I}&=\frac{1}{2} \rho \omega^2 A^2 \bm{u}
+\end{align}
+
+\paragraph{球面波}
+\begin{equation}
+  A\propto \frac{1}{r}
+\end{equation}
+
+\paragraph{干涉}
+\begin{align}
+  y_1 &=A_1\cos(\omega t+\varphi_1-kr_1) \\
+  y_2 &=A_2\cos(\omega t+\varphi_2-kr_2) \\
+  \Delta &= \varphi_1 - \varphi_2 +k(r_2-r_1)
+\end{align}
+$\Delta=2n\pi$ 加强；$\Delta=(2n+1)\pi$ 减弱。
+
+\paragraph{驻波}
+\begin{align}
+  y_1 &=A\cos(\omega t-kx+\varphi_1) \\
+  y_2 &=A\cos(\omega t+kx+\varphi_2) \\
+  y=y_1+y_2&=2A\cos\left( kx+\frac{\varphi_2-\varphi_1}{2} \right)\cos\left( \omega t+ \frac{\varphi_2+\varphi_1}{2} \right)
+\end{align}
+
+$kx+\frac{\varphi_2-\varphi_1}{2}=n\pi$ 波腹； $kx+\frac{\varphi_2-\varphi_1}{2}=\frac{2n+1}{2}\pi$ 波节。
+
+\paragraph{简正模式}
+\begin{equation}
+  \nu_n=\frac{n}{2l}\sqrt{\frac{F_T}{\rho_l}}
+\end{equation}
+
+\paragraph{多普勒效应}
+\begin{equation}
+  \nu_R=\frac{u+v_R}{u-v_S}\nu_S
+\end{equation}
+\begin{equation}
+  \nu'=\frac{1+\frac{v\cos\theta}{u}}{1-\frac{v\cos\theta}{u}}\nu =\left(1+\frac{2v\cos \theta}{u}\right)\nu (\textrm{if} \quad v\ll u)
+\end{equation}
+(考虑相对论)
+\begin{equation}
+  \nu=\sqrt{\frac{c+v}{c-v}} \nu^{\prime}
+\end{equation}
+
+\section{光速不变的相对论}
+\begin{equation}
+  \beta=\sqrt{1-\frac{v^2}{c^2}}
+\end{equation}
+\paragraph{尺缩、钟慢}
+\begin{align}
+  l &= l_0 \beta \\
+  t &= \frac{t_0}{\beta}
+\end{align}
+
+\paragraph{洛伦兹变换\\}
+(正变换)
+\begin{equation}
+\left\{
+  \begin{array}{ll}
+    x^{\prime}=\frac{x-vt}{\beta} \\
+    y^{\prime}=y \\
+    z^{\prime}=z \\
+    t^{\prime}=\frac{t-\frac{vx}{c^2}}{\beta}
+  \end{array}
+\right.
+\end{equation}
+
+(逆变换)
+\begin{equation}
+\left\{
+  \begin{array}{ll}
+    x=\frac{x^{\prime}+vt^{\prime}}{\beta} \\
+    y=y^{\prime} \\
+    z=z^{\prime} \\
+    t=\frac{t^{\prime}+\frac{vx^{\prime}}{c^2}}{\beta}
+  \end{array}
+\right.
+\end{equation}
+
+\paragraph{洛伦兹速度变换\\}
+(正变换)
+\begin{equation}
+\left\{
+  \begin{array}{ll}
+    u_x^{\prime}=\frac{u_x-v}{1-\frac{vu_x}{c^2}} \\
+    u_y^{\prime}=\frac{u_y\beta}{1-\frac{vu_x}{c^2}} \\
+    u_z^{\prime}=\frac{u_z\beta}{1-\frac{vu_x}{c^2}}
+  \end{array}
+\right.
+\end{equation}
+
+(逆变换)
+\begin{equation}
+\left\{
+  \begin{array}{ll}
+    u_x=\frac{u_x^{\prime}+v}{1+\frac{vu_x^{\prime}}{c^2}} \\
+    u_y=\frac{u_y^{\prime}\beta}{1+\frac{vu_x^{\prime}}{c^2}} \\
+    u_z=\frac{u_z^{\prime}\beta}{1+\frac{vu_x^{\prime}}{c^2}}
+  \end{array}
+\right.
+\end{equation}
+
+\paragraph{动量与能量}
+\begin{align}
+  m&=\frac{m_0}{\beta} \\
+  E&=mc^2 \\
+  \bm{p}&=m\bm{v} \\
+  E^2&=p^2c^2+m_0^2c^4
+\end{align}
+
+\paragraph{光子}
+\begin{equation}
+  E=pc
+\end{equation}
+
+
+\end{CJK}
+
+\end{document}

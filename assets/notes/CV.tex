@@ -1,0 +1,256 @@
+\documentclass[twocolumn]{ctexart}
+\pagestyle{plain}
+\ctexset{paragraph/beforeskip=0pt,subparagraph/beforeskip=0pt}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{geometry}
+\geometry{left=1cm,right=1cm,top=2cm,bottom=2cm}
+\def\ee{\mathrm{e}}
+\def\dd{\mathrm{d}}
+\def\jj{\mathrm{j}}
+\title{CV复习}
+\date{}
+\begin{document}
+\maketitle
+\setcounter{section}{1}
+\section{数字图像基础}
+\paragraph{简单的成像模型}
+入射分量 $i(x,y)\in [0,+\infty)$，反射分量 $r(x,y)\in [0,1]$，图像$f(x,y)=i(x,y)r(x,y)\in[L_{\min},L_{\max}]$。
+\section{灰度变换与空间滤波}
+\paragraph{基本灰度变换函数}
+\subparagraph{图像反转} $s=L-1-r$。
+\subparagraph{对数变换} $s=c\log(1+r)$。
+\subparagraph{伽马变换} $s=cr^\gamma$。
+\subparagraph{分段变换} 对比度拉伸、灰度级分层、比特平面分层。
+\paragraph{直方图均衡化} 图像大小 $M\times N$。
+\subparagraph{归一化直方图} $p_r(r_k)=\frac{n_k}{MN}$。
+\subparagraph{离散形式} $s_k=T(r_k)=(L-1)\sum_{j=0}^k p_r(r_j)$。
+\subparagraph{直方图匹配} 用于生成具有规定直方图的图像方法。
+\subparagraph{局部直方图} 非重叠区域可能会产生块状效应。
+\paragraph{空间滤波} 滤波器（核）大小 $m\times n$。$a=\frac{m-1}{2},b=\frac{n-1}{2}$
+\subparagraph{线性空间滤波（空间相关）}满足分配律。 $g(x,y)=\sum_{x=-a}^{a}\sum_{y=-b}^{b}w(s,t)f(x+s,y+t)$。
+\subparagraph{空间卷积} 满足交换律、结合律、分配律。$w(x,y)\bigstar f(x,y)=\sum_{y=-b}^{b}w(s,t)f(x-s,y-t)$。
+\subparagraph{与频率域滤波} 卷积是空间域滤波的基础，它等效于频率域中的乘法，反之亦然；空间域中振幅为$A$的冲激，是频率域中值为$A$的一个常数，反之亦然。
+\paragraph{平滑空间滤波器}
+\subparagraph{线性} 盒状滤波器、低通高斯滤波器（边界常数---复制填充；边界细节---镜像填充）。
+\subparagraph{非线性} 中值滤波器（对椒盐噪声有效）、最大值滤波器、最小值滤波器。
+\paragraph{锐化空间滤波器}
+\subparagraph{拉普拉斯算子}
+\begin{equation*}
+    \begin{bmatrix}
+        0 & -1 & 0 \\ -1 & 4 & -1 \\ 0 & -1 & 0
+    \end{bmatrix}
+    \begin{bmatrix}
+        -1 & -1 & -1 \\ -1 & 8 & -1 \\ -1 & -1 & -1
+    \end{bmatrix}
+\end{equation*}
+\subparagraph{非锐化遮蔽} $g(x,y)=f(x,y)+k[f(x,y)-\overline{f}(x,y)]$
+\subparagraph{使用一阶微分} Roberts 交叉梯度算子
+\begin{equation*}
+    \begin{bmatrix}
+        -1 & 0 \\ 0 & -1
+    \end{bmatrix}
+    \begin{bmatrix}
+        0 & -1 \\ 1 & 0
+    \end{bmatrix}
+\end{equation*}
+Sobel 算子，奇数大小的核，用于边缘缺陷检测
+\begin{equation*}
+    \begin{bmatrix}
+        -1 & -2 & -1 \\ 0 & 0 & 0 \\ 1 & 2 & 1
+    \end{bmatrix}
+    \begin{bmatrix}
+        -1 & 0 & 1 \\ -2 & 0 & 2 \\ -1 & 0 & 1
+    \end{bmatrix}
+\end{equation*}
+\section{频率域滤波}
+\paragraph{连续变量傅立叶变换}
+\subparagraph{正变换}
+$F(\mu)=\mathcal{F}\{f(t)\}=\int_{-\infty}^{\infty}f(t)\ee^{-\jj 2\pi\mu t}\dd t$
+\subparagraph{反变换}
+$f(t)=\mathcal{F}^{-1}\{F(\mu)\}=\int_{-\infty}^{\infty}F(\mu)
+\ee^{\jj 2\pi\mu t}\dd \mu$
+\subparagraph{冲激响应} $\mathcal{F}\{\delta(t-t_0)\}=\ee^{-\jj 2\pi\mu t_0}$
+\subparagraph{冲激串} 周期为 $\Delta T$ 冲激串的傅立叶变换为周期为 $\frac{1}{\Delta T}$ 的冲激串。
+\subparagraph{卷积定理} 空间域中两个函数的卷积的傅立叶变换，等于频率域中两个函数的傅立叶变换的乘积；反之亦然。
+$(f\bigstar h)(t)\Leftrightarrow (H\cdot F)(\mu); (f\cdot h)(t)\Leftrightarrow (H\bigstar F)(\mu)$
+\paragraph{取样}
+\subparagraph{取样函数} $\tilde{f}(t)=f(t)s_{\Delta T}(t)=\sum_{n=-\infty}^{\infty} f(t)\delta(t-n\Delta T)$
+\subparagraph{取样点} $f_k=\int_{-\infty}^{\infty}f(t)\delta(t-k\Delta T)\dd t=f(k\Delta T)$
+\subparagraph{傅立叶变换} 周期 $\Delta T$ 取样函数的傅立叶变换是周期为 $\frac{1}{\Delta T}$ 的周期函数。
+\subparagraph{取样定理} $\frac{1}{\Delta T}>2\mu_{\max}$ 能够完全由其样本集合复原（$\mu$ 表示原始）。奈奎斯特率 $\mu_{\max}=\frac{1}{2\Delta T}$。
+\subparagraph{混叠} 以低于奈奎斯特取样率取样的最终效果是周期重叠，即混叠。混叠不可避免。可以通过平滑输入函数减少高频成分的方法来降低混淆的影响，被称为\emph{抗混叠}，必须在函数被取样之前完成。\emph{莫尔效应}：有时是周期或近似周期成分对场景取样产生的。
+\subparagraph{复原函数} 样本值加权的 sinc 函数的无限和 $f(t)=\sum_{n=-\infty}^{\infty}f(n\Delta T)\text{sinc}\frac{t-n\Delta T}{\Delta T}$。
+\paragraph{单变量离散傅立叶变换（DFT）} 有限样本下
+\subparagraph{DFT} $F(u)=\sum_{x=0}^{M-1}f(x)\ee^{-\jj 2\pi u x/M}$
+\subparagraph{IDFT} $f(x)=\frac{1}{M}\sum_{u=0}^{M-1}F(u)\ee^{\jj 2\pi ux/M}$
+这些函数都是无限周期的。DFT的频率分辨率 $\Delta u$ 与记录的长度 $T$ 成反比；DFT跨越的频率范围则取决于取样间隔 $\Delta T$。
+\subparagraph{一维离散卷积定理} $(f\bigstar h)(t)\Leftrightarrow (H\cdot F)(\mu); (f\cdot h)(t)\Leftrightarrow \frac{1}{M}(H\bigstar F)(\mu)$
+\paragraph{二变量离散傅立叶变换}
+\subparagraph{DFT} $F(u,v)=\sum_{x=0}^{M-1}\sum_{y=0}^{N-1}f(x,y)\ee^{-\jj 2\pi(\frac{ux}{M}+\frac{vy}{N})}$
+\subparagraph{IDFT} $f(x,y)=\frac{1}{MN}\sum_{u=0}^{M-1}\sum_{v=0}^{N-1}F(u,v)\ee^{\jj 2\pi(\frac{ux}{M}+\frac{vy}{N})}$
+\subparagraph{二维离散卷积定理} $(f\bigstar h)(t)\Leftrightarrow (H\cdot F)(\mu); (f\cdot h)(t)\Leftrightarrow \frac{1}{MN}(H\bigstar F)(\mu)$
+\subparagraph{性质}
+(二维离散傅立叶变换)\\
+\begin{tabular}{cc}
+    平均值 & $\bar{f}(x,y)=\frac{1}{MN}F(0,0)$ \\
+    平移性 & $f(x,y)\ee^{\jj 2\pi(\frac{u_0x}{M}+\frac{v_0y}{N})}\Leftrightarrow F(u-u_0,v-v_0)$\\
+    & $f(x-x_0,y-y_0)\Leftrightarrow F(u,v)\ee^{-\jj 2\pi(\frac{ux_0}{M}+\frac{vy_0}{N})}$ \\
+    旋转性 & $f(r,\theta+\theta_0)\Leftrightarrow F(\omega,\phi+\theta_0)$ \\
+    周期性 & $f(x,y)(-1)^{x+y}\Leftrightarrow F(u-\frac{M}{2},v-\frac{N}{2})$\\
+    离散单位冲激 & $\delta(x,y)\Leftrightarrow 1;1\Leftrightarrow MN\delta(u,v)$\\
+    高斯 & $A2\pi\sigma^2\ee^{-2\pi^2\sigma^2(t^2+z^2)}\Leftrightarrow A\ee^{-\frac{\mu^2+\sigma^2}{2\sigma^2}}$
+\end{tabular}
+\paragraph{基本滤波公式} $g(x,y)=\mathcal{F}^{-1}[H(u,v)F(u,v)]$ 填充只在空间域进行，将 $H(u,v)$ 用 IDFT 转化为空间域，填充后再⽤ DFT 转化到频率域。这种做法的问题在于，空间域的不连续可能在频率域中产⽣\emph{振铃现象}。
+\paragraph{低通滤波平滑图像}
+\subparagraph{理想低通滤波器(ILPF)} 有振铃现象。
+\begin{equation*}
+    H(u,v)=\begin{cases}
+        1, & D(u,v)\leq D_0\\ 0, & D(u,v)>D_0
+    \end{cases}
+\end{equation*}
+\subparagraph{高斯低通滤波器(GLPF)} 不会有振铃现象。$$H(u,v)=\ee^{-\frac{D^2(u,v)}{2D_0^2}}$$
+\subparagraph{Butterworth LPF(BLPF)} 需要用截止频率来控制低频和高频过渡的情况。
+$$H(u,v)=\frac{1}{1+\left[\frac{D(u,v)}{D_0}\right]^{2n}}$$
+\paragraph{高通滤波锐化图像}
+$H_\text{HP}(u,v)=1-H_\text{LP}(u,v)$，拉普拉斯算子，非锐化遮蔽，高提升滤波都是可行的。
+\paragraph{同态滤波} 图像取对数后 DFT 的低频成分与照射相联系，⾼频成分与反射相联系。由于$\mathcal{F}\{\ln f(x,y)\}=\mathcal{F}\{\ln i(x,y)\}+\mathcal{F}\{\ln r(x,y)\}$，新图像$g(x,y)=\ee^{i^\prime(x,y)}\ee^{r^\prime(x,y)}$
+\paragraph{选择性滤波} 
+\subparagraph{理想带阻滤波器(IBRF)}
+\begin{equation*}
+    H(u,v)=\begin{cases}
+        0, & C_0-\frac{W}{2}\leq D(u,v)\leq C_0+\frac{W}{2}\\ 1, & \text{otherwise}
+    \end{cases}
+\end{equation*}
+\subparagraph{高斯带阻滤波器(GBRF)}
+$$H(u,v)=1-\ee^{-\left[\frac{D^2(u,v)-C_0^2}{D(u,v)W}\right]^2}$$
+\subparagraph{Butterworth BRF(BBRF)}
+$$H(u,v)=\frac{1}{1+\left[\frac{D(u,v)W}{D^2(u,v)-C_0^2}\right]^{2n}}$$
+\subparagraph{带通滤波器} $H_\text{BP}(u,v)=1-H_\text{BR}(u,v)$
+\subparagraph{陷波滤波器} 选择性地修改 DFT 的局部区域。陷波滤波器拒绝（或通过）实现定义的关于频率矩形中⼼的⼀个邻域的频率。零相移滤波
+器必须是关于原点对称的。陷波带阻滤波器由高通滤波器乘积构造，
+$$H_\text{NR}(u,v)=\prod_{k=1}^Q H_k(u,v)H_{-k}(u,v)$$
+陷波带通滤波器 $H_\text{NP}(u,v)=1-H_\text{NR}(u,v)$
+\paragraph{快速傅立叶变换(FFT)} $\mathcal{O}(N^2)\rightarrow \mathcal{O}(N\log N)$。
+\section{图像复原与重建}
+\paragraph{退化模型} 空间域$g(x,y)=h(x,y)\bigstar f(x,y)+\eta(x,y)$ 或频率域 $G(u,v)=H(u,v)F(u,v)+N(u,v)$
+\paragraph{噪声模型} 白噪声（傅立叶谱是常量）、高斯噪声、瑞利噪声、伽马噪声、指数噪声、均匀噪声、椒盐噪声、周期噪声。
+\paragraph{只存在噪声的复原---空间域滤波} 均值滤波器（算术、几何、谐波、逆谐波
+$$\hat{f}(x,y)=\frac{\sum_{(r,c)\in S_{xy}}g(r,c)^{Q+1}}{\sum_{(r,c)\in S_{xy}}g(r,c)^Q}$$
+$Q>0$ 消除椒噪声细化和模糊暗色区域，$Q<0$ 消除盐噪声，$Q=0$ 算术，$Q=-1$ 谐波
+），统计排序滤波器（中值、最大值和最小值、中点滤波器---最大与最小的中点、修正阿尔法均值滤波器---去掉最高部分去掉最低部分剩下平均），自适应滤波器。
+\paragraph{降低周期噪声---频率域滤波} 带阻滤波器：可⽤来消除周期噪声。带通滤波器：可⽤来提取噪声模式。陷波（带阻/带通）滤波器：可⽤来消除/提取周期噪声。最佳陷波滤波器：在⼀定意义上是最
+佳的，因为它最⼩化了复原的估计值的局部⽅差。
+
+估计退化略。最小均方误差（维纳）滤波、约束最小二乘方滤波、几何均值滤波略。
+\section{彩色图像处理}
+\paragraph{彩色模型}
+\subparagraph{CMY(K)}
+\begin{align*}
+    1-R = C&=C(1-K)+K\\
+    1-G = M&=M(1-K)+K\\
+    1-B = Y&=Y(1-Y)+K\\
+    \min(C,M,Y)&=K
+\end{align*}
+\subparagraph{HSI} $I=\frac{1}{3}(R+G+B)$\\
+\includegraphics[width=\linewidth]{hsi.pdf}
+\section{小波变换}
+\paragraph{海森堡盒} $$\sigma_t^2\sigma_f^2\geq \frac{1}{16\pi^2}$$
+\paragraph{常见变换基向量} 傅立叶基（实部和虚部）、离散余弦基、Walsh-Hadamard基、斜坡基、Haar基、Daubechies基、双正交B样条及其对偶、标准基。\\
+\includegraphics[width=\linewidth]{wavelet.pdf}
+\paragraph{二维图像变换} $r$ 和 $s$ 分别为正、反变换核。
+\begin{align*}
+    T(u,v)&=\sum_{x=0}^{N-1}\sum_{y=0}^{N-1}f(x,y)r(x,y,u,v)\\
+    f(x,y)&=\sum_{x=0}^{N-1}\sum_{y=0}^{N-1}T(u,v)s(x,y,u,v)\\
+\end{align*}
+\paragraph{基图像} $$\mathbf{F}=\sum_{u=0}^{N-1}\sum_{v=0}^{N-1}T(u,v)\mathbf{S}_{u,v}$$其中 $\mathbf{F}$ 是二维图像，$\mathbf{S}_{u,v}$ 称为基图像。如果底层的 $s(x,y,u,v)$ 是实值的、可分离的、对称的，则直接相乘 $\mathbf{S}_{u,v}=\mathbf{s}_u\mathbf{s}_v^\top$。
+\paragraph{Walsh--Hadamard 变换} \emph{哈达玛}
+$$\mathbf{A}_\text{W}=\frac{1}{\sqrt{N}}\mathbf{H}_N,\quad H_{2N}=\begin{bmatrix}
+    H_N & H_N \\ H_N & -H_N
+\end{bmatrix}$$
+\paragraph{Haar 变换} \emph{哈尔}
+$$A_H=\frac{1}{\sqrt{2}}\begin{bmatrix}
+    1 & 1 \\ 1 & -1
+\end{bmatrix},\quad A_H=\frac{1}{2}\begin{bmatrix}
+    1 & 1 & 1 & 1 \\ 1 & 1 & -1 & -1 \\ \sqrt{2} & -\sqrt2 \\ & & \sqrt2 & -\sqrt2
+\end{bmatrix}$$
+\paragraph{多分辨率展开}
+\subparagraph{对尺度函数要求（MRA要求）}
+尺度函数对其整数平移是正交的；
+低尺度的尺度函数跨越的⼦空间，嵌套在⾼尺度跨越的⼦空间内；
+唯⼀对所有 $V_j$ 通⽤的函数是 $f(x)=0$；
+任何函数都可以按任意精度表示。
+\subparagraph{快速小波变换（FWT）} 将函数分解为尺度和小波函数之和，$\mathcal{O}(N)$。
+\subparagraph{小波包} 更好地控制时间---频率平面的划分（得到更小的高频带宽），$\mathcal{O}(N\log_2 N)$。
+\section{图像压缩和水印}
+\paragraph{相对数据冗余} $R=1-\frac{1}{C}$，$C$ 是压缩率，$C=\frac{b}{b^\prime}>1$。主要有：编码冗余、空间和时间冗余、无关信息。
+\paragraph{熵} $H=-\sum_{j=1}^J P(a_j)\log P(a_j)$
+\paragraph{灰度信源的熵} $\tilde{H}=-\sum_{k=0}^{L-1}p_r(r_k)\log_2p_r(r_k)$
+\paragraph{Shannon第一定理}
+$$\lim_{n\rightarrow\infty}\frac{L_\text{avg}}{n}=\lim_{n\rightarrow\infty}\frac{\sum_{k=0}^{n-1}l(r_k)p_r(r_k)}{n}=H$$
+\paragraph{数据压缩分类}
+\subparagraph{⽆损压缩}包括熵编码、⽆损预测编码、字典编码。
+\subparagraph{有损压缩}包括有损预测编码、变换编码、⼩波编码。
+\paragraph{无损压缩编码}
+\subparagraph{Huffman编码}
+\subparagraph{Golomb编码} $G_m(n)$：1.形成商$\lfloor n/m\rfloor$的一元编码（$q$个1一个0）2. $k=\lceil\log_2 m\rceil, c=2^k-m, r=n\mod m$，$$r^\prime=\begin{cases}
+    r\text{截断至}k-1\text{比特},&0\leq r<c\\
+    r+c\text{截断至}k\text{比特},&其他
+\end{cases}$$连接1.和2.的结果。
+
+为计算 $G_4(9)$， $\lfloor 9/4 \rfloor=2=(110)_2$；$k=\lceil\log_2 4\rceil=2,c=2^k-4=0,r=9\bmod 4=1=(0001)_2$，$r^\prime$ 是 $r+c$截断 $k$ 比特的结果（因为 $r\geq c$；否则应当为 $r$ 截断至 $k-1$ 比特）；连接后得到 $11001$。
+\subparagraph{算术编码}依照概率，不是一一对应。\\
+\includegraphics[width=\linewidth]{arith.pdf}
+\subparagraph{LZW编码} 无误差压缩方法，字典。GIF、TIFF。
+\subparagraph{行程编码（RLE）}去除像素冗余，⽤⾏程的灰度和⾏程的⻓度代替⾏程本身。BMP、JPEG、M-JPEG。
+\subparagraph{基于符号} JBIG2
+\subparagraph{比特平面} 涉及格雷码：
+$g_i=a_i\,\text{异或}\,a_{i+1},g_{m-1}=a_{m-1}$，连续码字只有一个比特位置不同，小灰度变化不太可能影响全部比特平面。JBIG2、JPEG-2000。
+\paragraph{有损压缩编码} 略。
+\section{形态学处理}
+\paragraph{腐蚀与膨胀}
+\subparagraph{腐蚀} $A\ominus B$
+\subparagraph{膨胀} $A\oplus B$
+\subparagraph{对偶性} $(A\ominus B)^c=A^c\oplus \hat{B}$; $(A\oplus B)^c=A^c\ominus \hat{B}$
+\paragraph{开与闭运算}
+\subparagraph{开运算} $A\circ B=(A\ominus B)\oplus B$ 平滑轮廓、断开狭颈、消除细长突出物
+\subparagraph{闭运算} $A\bullet B=(A\oplus B)\ominus B$ 弥合沟壑、消除小孔、填补缝隙
+\subparagraph{对偶性} $(A\circ B)^c=(A^c\bullet \hat{B}), (A\bullet B)^c=(A^c\circ \hat{B})$
+\subparagraph{性质} $A\circ B\subseteq A; C\subseteq D\Rightarrow C\circ B\subseteq D\circ B; (A\circ B)\circ B=A\circ B; A\subseteq A\bullet B; C\subseteq D\Rightarrow C\bullet B\subseteq D\bullet B;(A\bullet B)\bullet B=A\bullet B$
+\paragraph{击中击不中变换} $I\circledast B_{1,2}=(A\ominus B_1)\cap (A^c \ominus B_2)$ 形状检测。
+\paragraph{基本形态学算法}
+\subparagraph{边界提取} $\beta(A)=A-(A\ominus B)$
+\subparagraph{孔洞填充} $X_k=(X_{k-1}\oplus B)\cap I^c$，迭代结束条件 $X_k=X_{k-1}$，如果不加以控制，膨胀将填充整个区域。
+\subparagraph{提取连通分量} $X_k=(X_{k-1}\oplus B)\cap I\downarrow X_k=X_{k-1}$。
+\subparagraph{凸包} 粗略（使用了腐蚀）：$X_k^i=(X_{k-1}^i\circledast B^i)\cup X_{k-1}^i\downarrow X_k^i=X_{k-1}^i$，$C(A)=\bigcup_{i=1}^M D_i$。
+\subparagraph{细化} $A\otimes B=A-(A\circledast B)$，不破坏连通性的前提。
+\subparagraph{粗化} $A\odot B=A\cup (A\circledast B)$，不合并对象的前提。
+\subparagraph{骨架} $S(A)=\bigcup_{k=0}^K S_k(A), S_k(A)=(A\ominus kB)-(A\ominus kB)\circ B$
+\subparagraph{裁剪（Pruning）} 骨架后处理，清除某些寄生成分。
+\paragraph{形态学重建} 标记图像 $F$ 包含重建的起点，模板图像 $G$ 约束重建，结构元 $B$ 用于定义连通性。
+\subparagraph{测地膨胀} $D_G^{(1)}(F)=(F\oplus B)\cap G$ \emph{Geodesic Dilation}
+\subparagraph{测地腐蚀} $E_G^{(1)}(F)=(F\ominus B)\cup G$ \emph{Geodesic Erotion}
+\subparagraph{膨胀形态学重建} $R_G^D(F)=D_G^{(k)}(F)\downarrow D_G^{(k)}(F)=D_G^{(k+1)}(F)$
+\subparagraph{腐蚀形态学重建} $R_G^E(F)=E_G^{(k)}(F)\downarrow E_G^{(k)}(F)=E_G^{(k+1)}(F)$
+\subparagraph{重建开运算} $O_R^{(n)}(F)=R_F^D(F\ominus nB)$ 精确地恢复腐蚀后保留目标的形状。
+\subparagraph{重建闭运算} $C_R^{(n)}(F)=R_F^E(F\oplus nB)$ 在背景像素上执行。
+\subparagraph{填充孔洞自动算法}
+$$F(x,y)=\begin{cases}
+    1-I(x,y), &(x,y)\text{在边框上}\\
+    0, &\text{其他}
+\end{cases}, H=[R_{I^c}^D(F)]^c$$
+\subparagraph{边界清除} $X=I-R_I^D(F)$ 目标不接触边界。
+\paragraph{灰度腐蚀和膨胀}
+\subparagraph{灰度腐蚀} $[f\ominus b](x,y)=\min_{(s,t)\in b}\{f(x+s,y+t)-b_N(s,t)\}$
+\subparagraph{灰度膨胀} $[f\oplus b](x,y)=\max_{(s,t)\in b}\{f(x+s,y+t)+\hat{b}_N(s,t)\}$
+\paragraph{灰度开与闭运算} 用剖面解释，性质上将 $\subseteq$ 换成 $\hookleftarrow$ 符号，表示既是子集而且每个点都比后者小\\
+\includegraphics[width=0.5\linewidth]{openclose.pdf}
+\paragraph{形态学梯度} $g=(f\oplus b)-(f\ominus b)$
+\paragraph{顶帽变换和底帽变换} 用一个结构元从图像中删除目标，而不是拟合将被删除的目标。
+\subparagraph{顶帽变换} $T_\text{hat}(f)=f-(f\circ b)$ 暗背景上的亮目标
+\subparagraph{底帽变换} $B_\text{hat}(f)=(f\bullet b)-f$ 亮背景上的暗目标
+\vspace*{3ex}
+
+图像分割、特征提取、图像模式分类略。
+\end{document}

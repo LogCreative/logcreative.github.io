@@ -1,0 +1,399 @@
+\documentclass[10pt,a4paper]{article}
+% \pagestyle{plain}
+\renewcommand{\tablename}{表}
+\usepackage{amsmath, amssymb}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{xcolor}
+\usepackage[colorlinks]{hyperref}
+\usepackage{caption}
+\definecolor{grey}{rgb}{0.8,0.8,0.8}
+\definecolor{darkgreen}{rgb}{0,0.3,0}
+\definecolor{darkblue}{rgb}{0,0,0.3}
+\usepackage{enumitem}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable,raster,listingsutf8}
+\lstset{language=[x86masm]Assembler}
+\newtcbinputlisting{code}[3]{colframe=yellow!30!black,listing options={showstringspaces=false,
+		showspaces=false,%
+		tabsize=2,%
+		basicstyle={\ttfamily\normalsize},%
+		keywordstyle=\color{blue!80!black}\bfseries,%
+		identifierstyle=,%
+		commentstyle=\color{green!50!blue}\itshape,%
+		stringstyle=\color{green!50!black},%
+		rulesepcolor=\color{gray!20!white},
+		breaklines,
+		columns=flexible,
+		extendedchars=false},listing file={code/#1},title={\textbf{#2}\\\small #3},listing only, breakable}
+\usepackage{array}
+\tcbset{fonttitle=\bfseries,breakable,
+	colback=white,
+	every box/.style={enhanced,
+		before=\par\smallskip,after=\par\smallskip},
+	every box on layer 2/.style={reset,every box,colback=yellow!10!white,
+		drop fuzzy shadow}}
+\geometry{left=1cm,right=1cm,top=1cm,bottom=1.5cm}
+\graphicspath{{img/}}
+%\def\img#1#2{\begin{figure}[htb]\centering\includegraphics[width=0.7\columnwidth]{img/#1.png}\caption{#2}\label{fig:#1}\end{figure}}
+\def\img#1#2{\begin{tcolorbox}[title=#2]\includegraphics[width=\textwidth]{#1.png}\end{tcolorbox}}
+\def\pdf#1#2{\begin{tcolorbox}[title=#2]\includegraphics[width=\textwidth]{#1.pdf}\end{tcolorbox}}
+\setlist{nosep}
+\setlength{\parindent}{0pt} 
+\begin{document}
+    \title{Computer Graphics}
+    \date{}
+
+    \begin{multicols}{3}
+        \maketitle
+
+        % \input{chapter/pipeline.tex}
+
+		\section{Pipeline}
+
+		\begin{itemize}
+			\item[IN] Application
+			\item Vertex Processing
+			\item Triangle Processing
+			\item Rasteriztion
+			\item Fragment Processing
+			\item Framebuffer Operations
+			\item[OUT] Display
+		\end{itemize}
+
+		\section{Transformation}
+
+		Translation
+		\begin{equation*}
+			\mathbf{T}(t_x,t_y,t_z) = \begin{pmatrix}
+				1 & 0 & 0 & t_x \\
+				0 & 1 & 0 & t_y \\
+				0 & 0 & 1 & t_z \\
+				0 & 0 & 0 & 1 \\
+			\end{pmatrix}
+		\end{equation*}
+
+		Rotation
+		\begin{equation*}
+			\mathbf{R}(\phi) = \begin{pmatrix}
+				\cos\phi & -\sin\phi \\
+				\sin\phi & \cos\phi \\
+			\end{pmatrix}
+		\end{equation*}
+
+		Scale
+		\begin{equation*}
+			\mathbf{S}(s_x,s_y,s_z) = \begin{pmatrix}
+				s_x & 0 & 0 & 0 \\
+				0 & s_y & 0 & 0 \\
+				0 & 0 & s_z & 0 \\
+				0 & 0 & 0 & 1 \\
+			\end{pmatrix}
+		\end{equation*}
+
+		Shear
+		\begin{equation*}
+			\mathbf{H}_{xz}(s) = \begin{pmatrix}
+				1 & 0 & s & 0 \\
+				0 & 1 & 0 & 0 \\
+				0 & 0 & 1 & 0 \\
+				0 & 0 & 0 & 0 \\
+			\end{pmatrix}
+		\end{equation*}
+
+		General Transformation (\textsc{TRaSh})
+		\begin{equation*}
+			\mathbf{TRSO}
+		\end{equation*}
+
+		Point
+		\begin{equation*}
+			(x,y,z,1)^T
+		\end{equation*}
+
+		\noindent Normalized Device Coordinates (NDC)
+		\begin{equation*}
+			(x,y,z,w)^T = (\frac{x}{w},\frac{y}{w},\frac{z}{w})^T
+		\end{equation*}
+
+		Vector
+		\begin{equation*}
+			(x,y,z,0)^T
+		\end{equation*}
+
+		Euler Angles (roll, pitch, yaw)
+		\begin{equation*}
+			\mathbf{R}_{xyz}(\alpha,\beta,\gamma) = \mathbf{R}_x(\alpha)\mathbf{R}_y(\beta)\mathbf{R}_z(\gamma)
+		\end{equation*}
+
+		Rodrigues' Rotation Formula: Rotation by angle $\alpha$ around axis $\mathbf{n}$.
+		\begin{equation*}
+			\begin{split}
+				\mathbf{R}(\mathbf{n},&\alpha)\\ =& \cos(\alpha)\mathbf{I} \\&+ (1-\cos(\alpha))\mathbf{n}\mathbf{n}^T \\&+ \sin(\alpha)\begin{pmatrix}
+					0 & -n_z & n_y \\
+					n_z & 0 & -n_x \\
+					-n_y & n_x & 0 \\
+				\end{pmatrix}
+			\end{split}
+		\end{equation*}
+
+		View Transformation (Book p. 67)
+		\begin{align*}
+			M_\text{view} &= R_\text{view}T_\text{view}\\
+			T_\text{view} &= \begin{pmatrix}
+				1 & 0 & 0 & -x_e \\
+				0 & 1 & 0 & -y_e \\
+				0 & 0 & 1 & -z_e \\
+				0 & 0 & 0 & 1 \\
+			\end{pmatrix}\\
+			R_\text{view} &= \begin{pmatrix}
+				x_{\hat{g}\times\hat{t}} & y_{\hat{g}\times\hat{t}} & z_{\hat{g}\times\hat{t}} & 0 \\
+				x_t & y_t & z_t & 0 \\
+				x_{-g} & y_{-g} & z_{-g} & 0 \\
+				0 & 0 & 0 & 1 \\
+			\end{pmatrix}
+		\end{align*}
+
+		Orthographic Projection (Book p. 94)
+		\begin{align*}
+			&\mathbf{P}_o = \mathbf{S}(\mathbf{s})\mathbf{T}(\mathbf{t}) \\
+				&= \begin{pmatrix}
+					\frac{2}{r-l} & 0 & 0 & 0 \\
+					0 & \frac{2}{t-b} & 0 & 0 \\
+					0 & 0 & \frac{2}{n-f} & 0 \\
+					0 & 0 & 0 & 1 \\
+				\end{pmatrix}\\&\begin{pmatrix}
+					1 & 0 & 0 & -\frac{r+l}{2} \\
+					0 & 1 & 0 & -\frac{t_b}{2} \\
+					0 & 0 & 1 & -\frac{n+f}{2} \\
+					0 & 0 & 0 & 1 \\
+				\end{pmatrix} \\
+				&= \begin{pmatrix}
+					\frac{2}{r-l} & 0 & 0 & -\frac{r+l}{r-l} \\
+					0 & \frac{2}{t-b} & 0 & -\frac{t+b}{t-b} \\
+					0 & 0 & \frac{2}{f-n} & -\frac{f+n}{f-n} \\
+					0 & 0 & 0 & 1 \\
+				\end{pmatrix}
+		\end{align*}
+
+		Perspective Transform Matrix (Book p. 99)
+		\begin{equation*}
+			\mathbf{P}_p = \begin{pmatrix}
+				\frac{n}{r} & 0 & 0 & 0 \\
+				0 & \frac{n}{t} & 0 & 0 \\
+				0 & 0 & -\frac{f+n}{f-n} & -\frac{2fn}{f-n} \\
+				0 & 0 & -1 & 0 \\
+			\end{pmatrix}
+		\end{equation*}
+
+		Canonical Cube to Screen: transform $[-1,1]^2$ to $[0,w]\times[0,h]$.
+		\begin{equation*}
+			\mathbf{M}_\text{viewport} = \begin{pmatrix}
+				\frac{w}{2} & 0 & 0 & \frac{w}{2} \\
+				0 & \frac{h}{2} & 0 & \frac{h}{2} \\
+				0 & 0 & 1 & 0 \\
+				0 & 0 & 0 & 1 \\
+			\end{pmatrix}
+		\end{equation*}
+
+		\section{Shading Basics}
+		Gooch Shading Model (Book p. 104)
+		\begin{align*}
+			\mathbf{c}_\text{shaded} =& s\mathbf{c}_\text{hightlight} \\ 
+			&+ (1-s)(t\mathbf{c}_\text{warm}+(1-t)\mathbf{c}_\text{cool})
+		\end{align*}
+
+		Transparency (\textbf{over} operator)
+		\begin{equation*}
+			\mathbf{c}_o = \alpha_s\mathbf{c}_s + (1-\alpha_s)\mathbf{c}_d
+		\end{equation*}
+
+		\section{Illumination}
+
+		Diffuse Shading (\textbf{Lambertian})
+		\begin{equation*}
+			L_d = k_d\frac{I}{r^2}\max(0,\mathbf{n}\cdot\mathbf{l})
+		\end{equation*}
+
+		Specular Shading (\textbf{Blinn-Phong})
+		\begin{equation*}
+			L_s = k_s\frac{I}{r^2}\max(0,\mathbf{n}\cdot\mathbf{h})^p
+		\end{equation*}
+		where $\mathbf{h} = \text{bisector}(\mathbf{v},\mathbf{l})$ (see p. 336).
+
+		Ambient Shading
+		\begin{equation*}
+			L_a = k_aI_a
+		\end{equation*}
+
+		Blinn-Phong Reflection Model
+		\begin{align*}
+			L &= L_a + L_d + L_s \\
+			&= k_aI_a + k_d\frac{I}{r^2}\max(0,\mathbf{n}\cdot\mathbf{l})\\&+ k_s\frac{I}{r^2}\max(0,\mathbf{n}\cdot\mathbf{h})^p
+		\end{align*}
+
+		\begin{description}
+			\item[Flat Shading] shade each triangle/face.
+			\item[Gouraud Shading] shade each vertex.
+			\item[Phong Shading] shade each pixel.  
+		\end{description}
+
+		MSAA p. 139
+
+		\section{Texture}
+		Corresponder function
+		\begin{itemize}
+			\item wrap
+			\item mirror
+			\item clamp
+			\item border
+		\end{itemize}
+
+		Barycentric Coordinates
+		\begin{equation*}
+			(x,y) = \alpha A + \beta B + \gamma C
+		\end{equation*}
+		where $\alpha + \beta + \gamma = 1$.
+
+		\begin{align*}
+			\alpha &= \frac{S_{BxC}}{S} \\
+			\beta &= \frac{S_{AxC}}{S} \\
+			\gamma &= \frac{S_{AxB}}{S}
+		\end{align*}
+
+		\paragraph{Bump Mapping} Access a texture to modify the surface normal instead of using a texture to
+		change a color component in the illumination equation. Store three vectors: vertex normal $\mathbf{n}$, tangent $\mathbf{t}$, and bitangent $\mathbf{b}$.
+
+		\begin{equation*}
+			\begin{pmatrix}
+				t_x & t_y & t_z & 0 \\
+				b_x & b_y & b_z & 0 \\
+				n_x & n_y & n_z & 0 \\
+				0 & 0 & 0 & 1 \\
+			\end{pmatrix}
+		\end{equation*}
+
+		\emph{A problem with bump and normal mapping is that the bumps
+		never shift location with the view angle, nor ever block each
+		other. }
+
+		\paragraph{Parallax Mapping} take an educated guess of what should be seen in a pixel by examining the
+		height of what was found to be visible. The bumps are stored in a heightfield texture.
+
+		\paragraph{Environment Map} A function from the sphere to colors, stored as a texture.
+
+		\section{Geometry}
+
+			Represent Geometry
+		\begin{itemize}
+			\item Implicit
+			\begin{itemize}
+				\item Level set
+				\item Algebraic surface $f(\mathbf{p})<0$ Inside
+				\item Distance functions
+			\end{itemize}
+			\item Explicit
+			\begin{itemize}
+				\item Point cloud
+				\item Polygon mesh
+				\item Subdivision, NURBS (p. 781)
+			\end{itemize}
+		\end{itemize}
+
+		B\'{e}zier Curve (p. 720) 
+		\begin{align*}
+			\mathbf{b}_0^1(\mathbf{t})&=(1-t)\mathbf{b}_0 + t\mathbf{b}_1\\
+			\mathbf{b}_0^2(\mathbf{t})&=(1-t)^2\mathbf{b}_0 + 2t(1-t)\mathbf{b}_1 + t^2 \mathbf{b}_2 \\
+			&\cdots \\
+			\mathbf{b}_0^n(t) &= \sum_{j=0}^nB_j^n(t) \mathbf{b}_j
+		\end{align*}
+		where Bernstein polynomials
+		\begin{equation*}
+			B_i^n(t) = \binom{n}{i}t^i(1-t)^{n-i}
+		\end{equation*}
+
+		de Casteljau Algorithm (p. 737)
+
+		\section{Mesh}
+
+		Local Mesh Operations
+		\begin{description}
+			\item[Edge Flip] Change the division method of triangles
+			\item[Edge Split] Get more triangles
+			\item[Edge Collapse] Replace edge with a single vertex
+		\end{description}
+
+		Global Mesh Operations
+		\begin{description}
+			\item[Mesh Subdivision] upsampling
+			\item[Mesh Simplification] downsampling --- Quadric Error Metrics (p. 708)
+			\item[Mesh Regularization] same number of triangles 
+			\item[Loop Subdivision]  Split each triangle into four (p. 758)
+			\item[Catmull-Clark Subdivision] Regular Quad Mesh (p. 762)
+		\end{description}
+
+		\section{Raytracing}
+
+	 	\paragraph{Ray Casting}: Perform
+		shading calculation
+		here to computer color of pixel
+		(e.g. Blinn Phong model)
+
+		\paragraph{Recursive Ray Tracing (Whitted-Style)}
+		\begin{enumerate}
+			\item Trace secondary rays
+			recursively until hit a non
+			specular surface (or max
+			desired levels of recursion)
+			\item At each hit point, trace shadow
+			rays to test light visibility (no
+			contribution if blocked)
+			\item Final pixel color is weighted
+			sum of contributions along rays,
+			as shown
+			\item Gives more sophisticated
+			effects (e.g. specular reflection,
+			refraction, shadows), but we
+			will go much
+			further to derive a physically
+			based illumination model
+		\end{enumerate}
+
+		Ray Equation (p. 943)
+		\begin{equation*}
+			\mathbf{r}(t) = \mathbf{o} + t\mathbf{d}
+		\end{equation*}
+
+		Plane Equation
+		\begin{equation*}
+			(\mathbf{p}-\mathbf{p^\prime})\cdot\mathbf{N}=0
+		\end{equation*}
+
+		AABB (Axis Aligned
+		Bounding Box) p. 944
+
+		OBB (Oriented Bouding Box) p.945
+
+		Ray intersection with AABB
+		\begin{align*}
+			t_\text{enter} &= \max t_\text{min} \\
+			t_\text{exit} &= \min t_\text{max} \\
+			\begin{cases}
+				t_\text{enter} < t_\text{exit} \\
+				t_\text{exit} \geq 0
+			\end{cases}
+		\end{align*}
+
+		Spatial Partitioning
+		\begin{itemize}
+			\item Oct-Tree p. 824
+			\item KD-Tree p. 822
+			\item BSP-Tree p. 823
+		\end{itemize}
+
+    \end{multicols}
+
+\end{document}
