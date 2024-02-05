@@ -19,9 +19,23 @@ a:hover{
 
 #navigation{
     background-color: black;
-    margin: 0px;
     padding: 0px;
 }
+#navigation .widthlimit {
+    width: min(900px, 100% - 4rem);
+    margin-inline: auto;
+}
+@media (max-width: 900px) {
+    #navigation .widthlimit > a,
+    #navigation .widthlimit > ul {
+        display: block;
+        text-align: center;
+    }
+    #navigation .widthlimit > ul {
+        padding: 5pt 0pt 5pt 0pt;
+    }
+}
+
 #navigation img{
     display: inline-block;
     vertical-align: middle;
