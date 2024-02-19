@@ -1,1 +1,264 @@
-% To be filled.
+\documentclass[a4paper,12pt]{article}
+\usepackage{CJKutf8}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{subfigure}
+\usepackage{gbt7714}
+\usepackage{appendix}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{float}
+\lstset{
+    language=Python,
+    basicstyle=\ttfamily,
+    keywordstyle=\color{blue},
+    numbers=left,
+    numberstyle={\ttfamily\scriptsize\color{red!60!black!60!white}},
+    numbersep=5pt,
+    columns=flexible,
+    breaklines=true,
+    keywordstyle    =   \color{blue},
+    keywordstyle    =   [2] \color{teal},
+    stringstyle     =   \color{magenta},
+    commentstyle    =   \color{red}\ttfamily,
+}
+
+
+\bibliographystyle{gbt7714-numerical}
+% 边距
+\geometry{left=1.0cm,right=1.0cm,top=3.0cm,bottom=3.0cm}
+\renewcommand{\figurename}{图}
+\begin{document}
+\begin{CJK}{UTF8}{gbsn}  % on Windows, change to `song`
+\title{托卡马克装置两种磁场合磁场的磁力线形貌}
+\author{Log Creative}
+\date{2020 年 12 月 1 日}
+\maketitle
+\normalsize
+
+\section{问题描述}
+
+\textbf{问题 9-5 9-6}
+
+研究受控热核反应的托卡马克装置（图\ref{toka}）中，用螺绕环产生的磁场来约束其中的等离子体。设某一托卡马克装置中环管轴线的半径为$R=2.0\text{m}$，管截面半径为$r=1.0\text{m}$，环上均匀绕有$l=10\text{km}$长的水冷铜线。
+
+等离子体除了受到螺绕环电流的磁约束外，还会受到自身的感应电流产生的磁场的约束。试分析这两种磁场的合磁场的磁力线形貌。
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{tokamak_field.jpg}
+    \caption{托卡马克装置\cite{Li2014}}
+    \label{toka}
+\end{figure}
+
+\section{构建外壳}
+
+托卡马克外壳主体是一个环面，我参考了百度百科\cite{ring}上对于环面的数学定义式：
+$$
+    \begin{cases}
+        x(u,v) &= (R+r\cos v)\cos u \\
+        y(u,v) &= (R+r\cos v)\sin u \\
+        z(u,v) &= r\sin v
+    \end{cases}
+$$
+其中$u,v\in[0,2\pi]$，$R$是管子的中心到画面的中心的距离，$r$是圆管的半径。
+
+然后参考了 scipython 上关于环面的示例代码\cite{ringcode}，采用分段的方式生成环面，如图\ref{ring}所示，代码见附录\ref{ringcodes}。
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{ring.png}
+    \caption{环面}\label{ring}
+\end{figure}
+
+\section{环向场线圈产生的磁力线}
+
+我们近似地将环向场线圈产生的磁力线看作环内均匀的，螺绕环的总匝数为
+\begin{equation}
+    N = \frac{l}{2\pi r}
+\end{equation}
+
+则由安培环路定理可得，
+\begin{equation}
+    B\cdot 2\pi R = \mu_0 NI
+\end{equation}
+
+\begin{equation*}
+    B = \frac{\mu_0lI}{4\pi^2Rr}=11.62\text{T}
+\end{equation*}
+
+我们观察最外圈的磁力线，也是一个环形，如图\ref{Singles}所示，代码见附录\ref{Single}。
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{Single.png}
+    \caption{环向场线圈产生的磁力线}
+    \label{Singles}
+\end{figure}
+
+\section{自身的感应电流产生的磁场}
+
+如果需要将自身的感应电流与其合成，就不再使用上一节的解析画法了。我在此处使用微元法计算每一步的磁力线偏移。
+
+如图\ref{e1}所示，计算由环向场线圈产生的切向磁感应强度的方向向量，首先定义当前位置的半径变量：
+$$
+R_t = \sqrt{x^2+y^2}
+$$
+然后计算切向方向向量
+$$
+\textbf{e}_1 = \left( -\frac{y}{R_t}, \frac{x}{R_t}, 0 \right)
+$$
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.3\textwidth]{b1.pdf}
+    \caption{切向磁感应强度方向向量$\textbf{e}_1$}\label{e1}
+\end{figure}
+
+然后计算该位置由自身的感应电流产生的小圆切向磁感应强度方向向量。首先计算小圆的中心位置
+$$
+O_1=\left( R\frac{x}{R_t}, R\frac{y}{R_t}, 0\right)
+$$
+
+然后计算小圆半径
+$$
+r^{\prime} = \left(\frac{R}{R_t} - 1\right)^2(x^2+y^2) + z^2
+$$
+
+如图\ref{e2}所示，计算小圆切向磁感应强度方向向量
+$$
+\textbf{e}_2 = \left( -\frac{z}{r^\prime}\frac{x}{R_t}, -\frac{z}{r^\prime}\frac{y}{R_t}, \frac{R-R_t}{r^\prime} \right)
+$$
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.15\textwidth]{b2.pdf}
+    \caption{小圆切向磁感应强度方向向量$\textbf{e}_2$}\label{e2}
+\end{figure}
+
+则两者合成的效果如图\ref{curInf}所示，由于现有知识无法完全量化环流等离子体的磁场，这里按照直线电流产生的磁场与半径成反比来计算：
+\begin{equation}
+    B_2 \propto \frac{1}{r^\prime}
+\end{equation}
+大小关系仅为推测，代码见附录\ref{self}。
+
+会发现磁力线有一定的偏移，这所带来的利处在于可以增加磁感应强度，增加约束；弊处在于会增大等离子体的活动空间，对管壁形成冲击，减少设备的使用寿命，所以必须进行修正。
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{CurrentInf.png}
+    \caption{合成磁力线}\label{curInf}
+\end{figure}
+
+所以还需要极向场线圈进行修正，由于这一部分已经完全超过目前所学的知识\cite{jtext}，不再深入探究：
+$$
+\begin{cases}
+    B_r &= -\frac{1}{2\pi r}\frac{\partial \Phi^0_\text{core}}{\partial z}=0 \\
+    B_z &= \frac{1}{2\pi r}\frac{\partial \Phi^0_\text{core}}{\partial r} = -\frac{\mu_0I_s}{Z_\text{Fe}}
+\end{cases}
+$$
+
+$$
+\begin{cases}
+    B_r &= -\frac{1}{2\pi r}\frac{\partial \Phi^s_\text{vacuum}}{\partial z} = \mu_0I_s\frac{z-Z_s}{r}\frac{1}{\sqrt{(r+R_s)^2+(z-Z_s)^2}}\left(-K(k^2)+\frac{r^2+R_s^2+(z-Z_s)^2}{(r-R_s)^2+(z-Z_s)^2}E(k^2)\right)\\
+    B_z &= \frac{1}{2\pi r}\frac{\partial \Phi^s_\text{vacuum}}{\partial r} = \mu_0I_s\frac{1}{\sqrt{(r+R_s)^2+(z-Z_s)^2}}\left(K(k^2)+\frac{r^2+R_s^2+(z-Z_s)^2}{(r-R_s)^2+(z-Z_s)^2}E(k^2)\right)
+\end{cases}
+$$
+
+$$
+\begin{cases}
+    B_r &= -\frac{1}{2\pi r}\frac{\partial \Phi^m_\text{vacuum}}{\partial z} = \mu_0I_s\frac{z-Z_m}{r}\frac{1}{\sqrt{(r+R_m)^2+(z-Z_m)^2}}\left(-K(k^2)+\frac{r^2+R_m^2+(z-Z_m)^2}{(r-R_m)^2+(z-Z_m)^2}E(k^2)\right)\\
+    B_z &= \frac{1}{2\pi r}\frac{\partial \Phi^m_\text{vacuum}}{\partial r} = \mu_0I_s\frac{1}{\sqrt{(r+R_m)^2+(z-Z_m)^2}}\left(K(k^2)+\frac{r^2+R_m^2+(z-Z_m)^2}{(r-R_m)^2+(z-Z_m)^2}E(k^2)\right)
+\end{cases}
+$$
+
+\section{感想}
+
+通过这个学期参加 python 物理模型及图像绘制，我对物理问题的解决有了更加直观的认识，培养了我对问题的直觉。感谢老师提供这样的一个机会，写一个非常有意义的大作业，拓宽了我的视野，提高了我的潜在物理水平。
+
+\bibliography{ref}
+
+\appendix
+\section{生成环面}\label{ringcodes}
+\begin{lstlisting}
+import numpy as np
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+
+R = 2.0 
+r = 1.0  
+
+SEG = 100
+
+u = np.linspace(0, 2. * np.pi, SEG)
+v = np.linspace(0, 2. * np.pi, SEG)
+u, v = np.meshgrid(u, v)
+
+x = (R + r * np.cos(v)) * np.cos(u)
+y = (R + r * np.cos(v)) * np.sin(u)
+z = r * np.sin(v)
+
+fig1 = plt.figure()
+ax = fig1.add_axes([0, 0, 1, 1], projection='3d')
+ax.set_zlim(-2,2)
+ax.plot_surface(x, y, z, alpha = 1)
+fig1.show()
+\end{lstlisting}
+
+\section{环向场线圈产生的磁力线}\label{Single}
+\begin{lstlisting}
+theta = np.linspace(0, 2*np.pi, SEG)
+x1 = (R + r) * np.cos(theta)
+y1 = (R + r) * np.sin(theta)
+z1 = np.linspace(0, 0, SEG)
+
+fig2 = plt.figure()
+ax2 = fig2.add_axes([0, 0, 1, 1], projection='3d')
+ax2.set_zlim(-2,2)
+ax2.plot_surface(x, y, z, alpha = 0.3)
+ax2.plot(x1,y1,z1, label='Single')
+plt.legend(loc = 0, ncol = 2)
+fig2.show()
+\end{lstlisting}
+
+\section{自身的感应电流产生的磁场}\label{self}
+\begin{lstlisting}
+STARTR = R + 0.3 * r
+
+point = np.array([STARTR, 0, 0])
+x3 = [point[0]]
+y3 = [point[1]]
+z3 = [point[2]]
+
+DETAIL = 100000
+STEP = 2 * np.pi * STARTR / DETAIL
+SUBSTEP = STEP / 30
+for i in range(0,round(DETAIL*1)):
+    xp = point[0]
+    yp = point[1]
+    zp = point[2]
+    Rt = (xp * xp + yp * yp) ** 0.5
+    point = [point[0] - yp / Rt * STEP, point[1] + xp / Rt * STEP, point[2]]
+    rr = ((R - (xp*xp + yp*yp)**0.5)**2 + zp*zp) ** 0.5
+    point = [point[0] - (zp / rr * xp / Rt) * SUBSTEP * 1 / rr, point[1] - (zp / rr * yp / Rt) * SUBSTEP * 1 / rr, point[2] + (R - Rt) / rr * SUBSTEP * 1 / rr]
+    x3.append(point[0])
+    y3.append(point[1])
+    z3.append(point[2])
+
+fig3 = plt.figure()
+ax3 = fig3.add_axes([0, 0, 1, 1], projection='3d')
+ax3.set_zlim(-2,2)
+ax3.plot_surface(x, y, z, alpha = 0.3)
+ax3.plot(x3,y3,z3, label='Self Current Inflenced')
+plt.legend(loc = 0, ncol = 2)
+# ax3.view_init(90, 0)
+fig3.show()
+\end{lstlisting}
+
+\end{CJK}
+\end{document}
