@@ -1,4 +1,0 @@
-starrailcard>=1.2.2
-numpy
-more_itertools
-bs4
