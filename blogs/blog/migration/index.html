@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <title>迁移记录</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link href="https://unpkg.com/prismjs@1.20.0/themes/prism.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/main.css"><link rel="stylesheet" href="/css/lcard.css"></head>
+<body>
+    <div id="navigation">
+        <div class="widthlimit">
+        <a href="/"><img src="/assets/images/LC.gif" height="64px"></a>
+        <ul><li>
+                    <a href="/">主页</a>
+                </li><li>
+                    <a href="/blogs">博客</a>
+                </li><li>
+                    <a href="/archive">存储库</a>
+                </li><li>
+                    <a href="/notes">课程记录</a>
+                </li><li>
+                    <a href="/about">关于</a>
+                </li></ul>
+        </div>
+    </div>
+
+    
+<h1>迁移记录</h1>
+
+<h2>腾讯云旧服务器到期，不停机迁移到新的服务器上。</h2>
+
+<h2>2024-10-07</h2>
+
+<div id="main" class="widthlimit">
+
+    <a href="https://cloud.tencent.com/act/cps/redirect?redirect=6150&cps_key=3b86b83ec1516f560c5dc351fe35065b&from=console"><img src="/assets/images/rhino-design-1200x90x2.png" alt="【腾讯云】2核2G云服务器新老同享 99元/年，续费同价，云服务器3年机/5年机限时抢购，低至 2.5折" style="max-width:100%;cursor:pointer;"></img></a>
+
+
+    <h3>服务器到期</h3>
+<p>2021 年“双11”期间购买的腾讯云轻量服务器，在 3 年后的今天即将到期了。在 2023 年已经开始储备下一个备用服务器，现在新服务器已经续费到很久之后才会到期。</p>
+<p>由于新的活动提供的配置要比原始的服务器低，主要是系统盘容量更小，导致无法直接通过控制台镜像的方式将服务器进行迁移。而且新服务器安装的系统是 Ubuntu 22.04-Docker26，支持在腾讯云控制台对镜像进行处理，比较方便，所以服务器迁移方面计划采用手动的方式对原始的每个部件进行迁移。</p>
+<h3>网站数据迁移</h3>
+<p>首先，在 git 平台账户上将新服务器的 SSH 密钥设置为信任，把主网站和子地址的数据通过 git SSH 的方式克隆到新的服务器上。</p>
+<p>然后，对于一些曾经需要 Python 动态部署的不重要的部分，就把一些请求 URL 静态化为一个文件，由后面的 nginx 直接进行静态部署，注意 nginx 配置中默认会使用 <code>application/octet-stream</code> 进行响应，对于需要使用 JSON 响应的部分只能手动更改对应的 JavaScript 代码解析文本为 JSON：</p>
+<pre class="language-js"><code class="language-js">data <span class="token operator">=</span> <span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>最后，需要预先对服务器防火墙进行调整，放行一些端口以启用新的服务器之间的连接关系。</p>
+<h3>服务迁移</h3>
+<p>然后，在新服务器上安装 nginx，</p>
+<pre class="language-bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> nginx</code></pre>
+<p>然后修改 <code>nginx.conf</code> 文件配置它，并修改 <code>sites-enabled/default</code> 具体网站的配置。配置完成后，先进行 nginx 检查：</p>
+<pre class="language-bash"><code class="language-bash"><span class="token function">sudo</span> nginx <span class="token parameter variable">-t</span></code></pre>
+<p>如果检查通过，即可在不重启 nginx 的情况下重载配置：</p>
+<pre class="language-bash"><code class="language-bash"><span class="token function">sudo</span> nginx <span class="token parameter variable">-s</span> reload</code></pre>
+<p>一切就绪后，之后可以通过修改 DNS 解析服务（或者 CDN 源站信息）将域名切换到新的服务器上。</p>
+<h3>EdgeOne CDN 配置</h3>
+<p>由于腾讯云现在推荐下一代的 EdgeOne CDN，正值老的 CDN 包过期，就购买了一年的新 EdgeOne CDN 包。购买 EdgeOne CDN 后，就可以直接通过在 EdgeOne CDN 控制台中修改 DNS 记录为加速域名的方式将请求重定向到新 CDN 中去，请注意需要在 CDN 中设置 HTTPS 证书，而不要只更新服务器上的 HTTPS 证书。</p>
+<p>目前 EdgeOne 的预热缓存功能并不是非常完善，比如并不能直接预热目录，只能预热 URL，则需要对部署产物遍历生成一个文件上传。</p>
+<pre class="language-python"><code class="language-python"><span class="token keyword">import</span> os<br><br>output_file <span class="token operator">=</span> <span class="token string">"urls.txt"</span><br><span class="token builtin">open</span><span class="token punctuation">(</span>output_file<span class="token punctuation">,</span><span class="token string">"w"</span><span class="token punctuation">)</span><span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span><br><br><span class="token keyword">def</span> <span class="token function">write_file_list</span><span class="token punctuation">(</span>root_url<span class="token punctuation">,</span> root_dir<span class="token punctuation">)</span><span class="token punctuation">:</span><br>    <span class="token keyword">with</span> <span class="token builtin">open</span><span class="token punctuation">(</span>output_file<span class="token punctuation">,</span> <span class="token string">"a"</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span><br>        <span class="token keyword">for</span> root<span class="token punctuation">,</span> dirs<span class="token punctuation">,</span> files <span class="token keyword">in</span> os<span class="token punctuation">.</span>walk<span class="token punctuation">(</span>root_dir<span class="token punctuation">,</span> topdown<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token comment"># 自上而下递归</span><br>            <span class="token comment"># 删除 . 开头的文件夹（比如 .git）</span><br>            dirs<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span>d <span class="token keyword">for</span> d <span class="token keyword">in</span> dirs <span class="token keyword">if</span> <span class="token keyword">not</span> d<span class="token punctuation">.</span>startswith<span class="token punctuation">(</span><span class="token string">"."</span><span class="token punctuation">)</span><span class="token punctuation">]</span><br>            <span class="token keyword">for</span> <span class="token builtin">file</span> <span class="token keyword">in</span> files<span class="token punctuation">:</span><br>                full_path <span class="token operator">=</span> root_url <span class="token operator">+</span> os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>relpath<span class="token punctuation">(</span>os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>join<span class="token punctuation">(</span>root<span class="token punctuation">,</span> <span class="token builtin">file</span><span class="token punctuation">)</span><span class="token punctuation">,</span> root_dir<span class="token punctuation">)</span><br>                <span class="token keyword">if</span> <span class="token builtin">file</span><span class="token punctuation">.</span>startswith<span class="token punctuation">(</span><span class="token string">"."</span><span class="token punctuation">)</span><span class="token punctuation">:</span>  <span class="token comment"># 删除 . 开头的文件</span><br>                    <span class="token keyword">continue</span><br>                f<span class="token punctuation">.</span>write<span class="token punctuation">(</span>full_path <span class="token operator">+</span> <span class="token string">"\n"</span><span class="token punctuation">)</span><br><br>write_file_list<span class="token punctuation">(</span><span class="token string">"https://logcreative.tech/"</span><span class="token punctuation">,</span> <span class="token string">"logcreative.github.io"</span><span class="token punctuation">)</span></code></pre>
+<p>鉴于全量更新列表较大（甚至由于服务器的性能会有一定比例刷新失败），可以考虑使用 git 增量生成差异文件列表。</p>
+<pre class="language-python"><code class="language-python"><span class="token keyword">import</span> subprocess<br><br>output_file <span class="token operator">=</span> <span class="token string">"incrurls.txt"</span><br><span class="token builtin">open</span><span class="token punctuation">(</span>output_file<span class="token punctuation">,</span> <span class="token string">"w"</span><span class="token punctuation">)</span><span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span><br><br><span class="token keyword">def</span> <span class="token function">write_changed_files</span><span class="token punctuation">(</span>root_url<span class="token punctuation">,</span> git_dir<span class="token punctuation">)</span><span class="token punctuation">:</span><br>    subprocess<span class="token punctuation">.</span>run<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'git'</span><span class="token punctuation">,</span> <span class="token string">'fetch'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> check<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> cwd<span class="token operator">=</span>git_dir<span class="token punctuation">)</span><br>    result <span class="token operator">=</span> subprocess<span class="token punctuation">.</span>run<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'git'</span><span class="token punctuation">,</span> <span class="token string">'diff'</span><span class="token punctuation">,</span> <span class="token string">'--name-only'</span><span class="token punctuation">,</span> <span class="token string">'..origin'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <br>                            check<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> stdout<span class="token operator">=</span>subprocess<span class="token punctuation">.</span>PIPE<span class="token punctuation">,</span> text<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span><br>    changed_files <span class="token operator">=</span> result<span class="token punctuation">.</span>stdout<span class="token punctuation">.</span>strip<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">'\n'</span><span class="token punctuation">)</span><br>    changed_urls <span class="token operator">=</span> <span class="token punctuation">[</span>root_url <span class="token operator">+</span> f <span class="token keyword">for</span> f <span class="token keyword">in</span> changed_files<span class="token punctuation">]</span><br>    <span class="token keyword">with</span> <span class="token builtin">open</span><span class="token punctuation">(</span>output_file<span class="token punctuation">,</span> <span class="token string">"a"</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span><br>        <span class="token keyword">for</span> url <span class="token keyword">in</span> changed_urls<span class="token punctuation">:</span><br>            f<span class="token punctuation">.</span>write<span class="token punctuation">(</span>url <span class="token operator">+</span> <span class="token string">"\n"</span><span class="token punctuation">)</span><br><br>write_changed_files<span class="token punctuation">(</span><span class="token string">"https://logcreative.tech/"</span><span class="token punctuation">,</span> <span class="token string">"logcreative.github.io"</span><span class="token punctuation">)</span></code></pre>
+<p>后续还会考虑使用 <a href="https://github.com/TencentCloud/tencentcloud-sdk-python">SDK</a> 进行自动化操作。</p>
+<p>目前来看，虽然 EdgeOne 相比于老的 CDN 仍然会有很多功能不完备的部分，但据宣传会使用更多的安全功能，并且可以更方便地全球网络加速，看来 EdgeOne CDN 有望打破之前 logcreative.tech 只能作为国内站的格局。</p>
+<h3>总结</h3>
+<p>本次初步迁移大约耗时5个小时，中间可能会感受到速度上的降级但是不会有明显的中断服务情形，使用“双重备份”的方式顺利地将服务器数据迁移到新的服务器上。</p>
+<p>由于服务器开销还是比较厉害的，所以在博客这一栏的每个页面顶端都加了腾讯云的广告，感兴趣的话可以点击进入了解一下对于个人而言相对划算的轻量服务器配置，你的每次点击登录都会带给这个网站以一定的资金支持，非常感谢！</p>
+
+</div>
+
+    <footer>
+        <div class="widthlimit">
+            <p>版权所有 © Log Creative 2012-2024，保留所有权利。</p>
+            <p>除有开源协议声明的，未经许可，不可用于商业用途。</p>
+            <p>Powered by <a href="https://www.11ty.dev/" target="_blank">Eleventy</a>&nbsp;|&nbsp;<a href="https://beian.miit.gov.cn" target="_blank">沪ICP备2021032524号</a></p>
+        </div>
+    </footer>
+</body>
+</html>
