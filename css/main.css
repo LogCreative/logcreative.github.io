@@ -23,7 +23,7 @@ a:hover{
     padding: 0px;
 }
 #navigation .widthlimit {
-    width: min(900px, 100% - 4rem);
+    width: min(900px, 100%);
     margin-inline: auto;
 }
 @media (max-width: 900px) {
