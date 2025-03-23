@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <title>在 Blackwell 架构上编译大模型相关框架</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link href="https://unpkg.com/prismjs@1.20.0/themes/prism.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/main.css"><link rel="stylesheet" href="/css/lcard.css"></head>
+<body>
+    <div id="navigation">
+        <div class="widthlimit">
+        <a href="/"><img src="/assets/images/LC.gif" height="64px"></a>
+        <ul><li>
+                    <a href="/">主页</a>
+                </li><li>
+                    <a href="/blogs">博客</a>
+                </li><li>
+                    <a href="/archive">存储库</a>
+                </li><li>
+                    <a href="/notes">课程记录</a>
+                </li><li>
+                    <a href="/about">关于</a>
+                </li></ul>
+        </div>
+    </div>
+
+    
+<div id="main" class="widthlimit">
+
+    <h1>在 Blackwell 架构上编译大模型相关框架</h1>
+
+    <h2>RTX 5070 Ti 显卡刚刚上市，但是相关框架尚未适配，如何安装最新显卡驱动，cuda，pytorch, triton, flash-attention 等。（持续更新）</h2>
+
+    <h2>2025-03-23</h2>
+
+    <a href="https://cloud.tencent.com/act/cps/redirect?redirect=6150&cps_key=3b86b83ec1516f560c5dc351fe35065b&from=console"><img src="/assets/images/rhino-design-1200x90x2.png" alt="【腾讯云】2核2G云服务器新老同享 99元/年，续费同价，云服务器3年机/5年机限时抢购，低至 2.5折" style="max-width:100%;cursor:pointer;"></img></a>
+
+    <h3>新系列显卡</h3>
+<p>由于我自大学以来都是使用的轻薄本，一台是 Surface Pro 5，一台是 MacBook M1 Pro，它们都没有独立显卡，而家中的 GTX 1050 Ti 也是很久以前只有 4GB 显存的普通显卡，在这个人工智能的时代，这种硬件配置是不怎么够的：大模型的科研学习需要独立显卡进行训练推理，玩游戏也需要高性能显卡基于更先进的光追技术提供惊艳的画面。因此很久以来，我都希望有一张独享的英伟达高性能显卡。在 40 系显卡上市两年之后，50 系显卡终于被端上来了，虽然各路评测都认为这代在游戏方面的提升差强人意，但是由于老黄在<s>拼好帧</s> DLSS 4 这种基于 Transformers 的结构发展使得这代显卡在 AI 上的性能明显有了更多的偏向性。于是，顶着溢价，入手了京东自营的带有 16 GB 显存、CUDA 数 8960 的魔鹰 5070 Ti（属于是 buff 拉满了，但是考虑到最近 ROPS 光栅单元风波，还是买正牌货相对保险一些）。</p>
+<p>虽然 Blackwell 自专业计算显卡 H100 就有了，但是一直以来都没有在消费级上铺开，所以对于新显卡，各种大模型相关框架的适配都尚不成熟，也就不能直接即装即用，这对 AI 方面不是很友好的。幸运的是，部分框架已经有了可以测试的版本，通过手动的源代码编译至少可以跑起来代码，由于最近还没有相关的资料，所以分享出来以供参考，过一段时间估计也就不用这么麻烦了。</p>
+<h3>环境配置</h3>
+<p>对于 AI 研究而言，使用 Linux 操作系统无疑是最好的选择，但是为了不打扰我打游戏，按照<a href="https://www.digitaltrends.com/computing/how-to-dual-boot-linux-and-windows/#dt-heading-how-to-install-linux">教程</a>安装了 Windows 11-Ubuntu 24.10 双系统，在 Ubuntu 系统上通过 <a href="https://github.com/fatedier/frp?tab=readme-ov-file#access-your-computer-in-a-lan-network-via-ssh">frp</a> 工具实现了远程 SSH 内网连接（这一块是通过 <code>systemctl</code> 管理服务来实现自启动的，感兴趣可以参见 <a href="https://zhuanlan.zhihu.com/p/521448626">这篇博文</a>）。</p>
+<h3>显卡驱动</h3>
+<p>开始进入正题，首先第一个障碍就是显卡驱动。由于该型号的显卡太新了，暂时还无法通过 Ubuntu 自带的软件与更新获取到显卡驱动，所以需要手动地添加软件更新源安装驱动。</p>
+<pre class="language-bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> build-essential<br><span class="token function">sudo</span> add-apt-repository ppa:graphics-drivers/ppa<br><span class="token function">sudo</span> <span class="token function">apt</span> update</code></pre>
+<p>然后，需要关闭与图形显示相关的桌面环境，进入内置终端界面安装（这步很重要，否则显卡驱动安装过程会卡死，然后就得重装系统了）。也就是使用 <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>F3</kbd> 进入 tty3。登录之后，关闭桌面：</p>
+<pre class="language-bash"><code class="language-bash"><span class="token function">sudo</span> systemctl stop gdm3  <span class="token comment"># gnome</span></code></pre>
+<p>然后开始安装驱动，在安装界面中暂时使用 MIT 驱动，专有驱动经过验证暂时无法被 <code>nvidia-smi</code> 指令检测到：</p>
+<pre class="language-bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> nvidia-driver-570</code></pre>
+<p>等待安装完毕后，重启系统：</p>
+<pre class="language-bash"><code class="language-bash"><span class="token function">reboot</span></code></pre>
+<p>之后通过 <code>nvidia-smi</code> 命令验证，如果检测到显卡就说明安装成功了。</p>
+<pre><code>Sun Mar 23 22:15:50 2025
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 570.124.06             Driver Version: 570.124.06     CUDA Version: 12.8     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA GeForce RTX 5070 Ti     Off |   00000000:01:00.0  On |                  N/A |
+|  0%   27C    P5             38W /  300W |     130MiB /  16303MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+</code></pre>
+<h3>CUDA</h3>
+<p>根据这篇重要的<a href="https://forums.developer.nvidia.com/t/software-migration-guide-for-nvidia-blackwell-rtx-gpus-a-guide-to-cuda-12-8-pytorch-tensorrt-and-llama-cpp/321330">官方说明</a>，现在 50 系显卡只能使用 CUDA 12.8，所以按照<a href="https://developer.nvidia.com/cuda-downloads/?target_os=Linux&amp;target_arch=x86_64&amp;Distribution=Ubuntu&amp;target_version=24.04&amp;target_type=deb_local">官方安装说明</a>下载安装，安装的重要命令如下可供参考：</p>
+<pre class="language-bash"><code class="language-bash"><span class="token function">wget</span> https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2404/x86_64/cuda-ubuntu2404.pin<br><span class="token function">sudo</span> <span class="token function">mv</span> cuda-ubuntu2404.pin /etc/apt/preferences.d/cuda-repository-pin-600<br><span class="token function">wget</span> https://developer.download.nvidia.com/compute/cuda/12.8.1/local_installers/cuda-repo-ubuntu2404-12-8-local_12.8.1-570.124.06-1_amd64.deb<br><span class="token function">sudo</span> dpkg <span class="token parameter variable">-i</span> cuda-repo-ubuntu2404-12-8-local_12.8.1-570.124.06-1_amd64.deb<br><span class="token function">sudo</span> <span class="token function">cp</span> /var/cuda-repo-ubuntu2404-12-8-local/cuda-*-keyring.gpg /usr/share/keyrings/<br><span class="token function">sudo</span> <span class="token function">apt-get</span> update<br><span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token parameter variable">-y</span> <span class="token function">install</span> cuda-toolkit-12-8</code></pre>
+<p>保险起见，安装完成后，将 CUDA 加入路径中（可以临时修改，也可以通过修改 <code>~/.bashrc</code> 永久修改）：</p>
+<pre class="language-bash"><code class="language-bash"><span class="token builtin class-name">export</span> <span class="token assign-left variable"><span class="token environment constant">PATH</span></span><span class="token operator">=</span><span class="token string">"/usr/local/cuda-12.8/bin:<span class="token environment constant">$PATH</span>"</span><br><span class="token builtin class-name">export</span> <span class="token assign-left variable">CUDA_HOME</span><span class="token operator">=</span><span class="token string">"/usr/local/cuda-12.8"</span><br><span class="token builtin class-name">export</span> <span class="token assign-left variable">LIBRARY_PATH</span><span class="token operator">=</span><span class="token string">"/usr/local/cuda-12.8/lib64:<span class="token variable">$LIBRARY_PATH</span>"</span><br><span class="token builtin class-name">export</span> <span class="token assign-left variable">LD_LIBRARY_PATH</span><span class="token operator">=</span><span class="token string">"/usr/local/cuda-12.8/lib64/stubs:<span class="token variable">$LD_LIBRARY_PATH</span>"</span></code></pre>
+<p>新建终端，或者 <code>source ~/.bashrc</code> 生效。</p>
+<h3>Anaconda</h3>
+<p>为了隔离不同的 Python 环境（系统自带的 Python 环境由于保护原因，一般不能直接通过 <code>pip</code> 安装），建议安装 <a href="https://www.anaconda.com/download/success">anaconda</a> 进行环境管理（实际上 conda 也可以安装 CUDA，如果你需要安装多个版本的 CUDA 的话，参见 <a href="https://docs.nvidia.com/cuda/cuda-installation-guide-linux/#conda-installation">CUDA 安装文档</a>），以下截取至 <a href="https://www.anaconda.com/docs/getting-started/anaconda/install#macos-linux-installation">Anaconda 安装说明</a>：</p>
+<pre class="language-bash"><code class="language-bash"><span class="token function">curl</span> <span class="token parameter variable">-O</span> https://repo.anaconda.com/archive/Anaconda3-2024.10-1-Linux-x86_64.sh<br><span class="token function">bash</span> ~/Anaconda3-2024.10-1-Linux-x86_64.sh<br><span class="token comment"># 以下说明使用了默认安装位置</span><br><span class="token builtin class-name">source</span> ~/.bashrc</code></pre>
+<p>安装结束后，通过下面的方式创建一个新环境：</p>
+<pre class="language-bash"><code class="language-bash">conda create <span class="token parameter variable">-n</span> llm <span class="token assign-left variable">python</span><span class="token operator">=</span><span class="token number">3.12</span></code></pre>
+<p>这里使用 Python 3.12 版本是因为一些很新的包要求的 Python 版本是很高的（比如 <a href="https://github.com/langchain-ai/langchain"><code>langchain</code></a>），使用更新版本的 Python 也能够使用一些相对更新更顺手的语法。</p>
+<p>创建完毕之后，就可以进入该环境：</p>
+<pre class="language-bash"><code class="language-bash">conda activate llm</code></pre>
+<p>之后就可以在该环境下进行安装：</p>
+<pre class="language-bash"><code class="language-bash"><span class="token punctuation">(</span>llm<span class="token punctuation">)</span> $ </code></pre>
+<h3>Pytorch</h3>
+<p>按照这篇重要的<a href="https://forums.developer.nvidia.com/t/software-migration-guide-for-nvidia-blackwell-rtx-gpus-a-guide-to-cuda-12-8-pytorch-tensorrt-and-llama-cpp/321330">官方说明</a>的说法，实际上已经可以直接使用最新的预编译二进制的 Pytorch 进行安装了：<code>pip install --pre torch --index-url https://download.pytorch.org/whl/nightly/cu128</code>，如果你只需要运行非量化的大模型，那么安装这个也就足够。</p>
+<p>否则，考虑到 <code>triton</code> 以及后续的 <code>vllm</code> 都会依赖于 Pytorch 2.6.0 版本，根据 <a href="https://github.com/triton-lang/triton?tab=readme-ov-file#enabling-blackwell-support"><code>triton</code> 的官方说明</a>，为了对老版本使用 CUDA 12.8，需要对 Pytorch 这个版本进行源码编译安装。</p>
+<p>在开始源码编译之前，首先安装一些编译必需品：</p>
+<pre class="language-bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> cmake <span class="token function">git</span> ninja</code></pre>
+<p>然后拉取代码进行预备工作：</p>
+<pre class="language-bash"><code class="language-bash"><span class="token comment"># 拉取 pytorch 2.6.0-rc9 版本，只拉取该版本而不拉取全部</span><br><span class="token function">git</span> clone https://github.com/pytorch/pytorch <span class="token parameter variable">-b</span> v2.6.0-rc9 <span class="token parameter variable">--depth</span> <span class="token number">1</span><br><span class="token builtin class-name">cd</span> pytorch<br><span class="token function">git</span> submodule <span class="token function">sync</span><br><span class="token function">git</span> submodule update <span class="token parameter variable">--init</span> <span class="token parameter variable">--recursive</span> <span class="token parameter variable">-j</span> <span class="token number">8</span><br><br><span class="token comment"># 安装 pytorch 的其他依赖包</span><br>pip <span class="token function">install</span> <span class="token parameter variable">-r</span> requirements.txt<br>pip <span class="token function">install</span> mkl-static mkl-include wheel</code></pre>
+<p>虽然之前已经安装了 <code>build-essential</code> 包含了 <code>gcc</code> 编译器，但是 Ubuntu 24.04 默认安装的版本是 <code>gcc-14</code>，根据这个尚未被解决的 Issue <a href="https://github.com/pytorch/pytorch/issues/129358">pytorch/pytorch#129358</a>，Pytorch 目前因为依赖的 <code>fbgemm</code> 第三方库版本过老会出现编译报错（即使更新了该库的版本，经过尝试也无法在即将安装的老 Pytorch 编译成功），所以你需要安装一个降级的 gcc 版本，并让 CMAKE 使用该版本的 gcc（Pytorch 文档中提到的 <code>CC</code> 环境变量设置是不够的，还需要设置 <code>CXX</code>），截取自<a href="https://github.com/pytorch/pytorch/issues/129358#issuecomment-2735364303">这里</a>：</p>
+<pre class="language-bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> gcc-13 g++-13<br><span class="token builtin class-name">export</span> <span class="token assign-left variable">CC</span><span class="token operator">=</span>/usr/bin/gcc-13<br><span class="token builtin class-name">export</span> <span class="token assign-left variable">CXX</span><span class="token operator">=</span>/usr/bin/g++-13</code></pre>
+<p>之后可能还需要对硬编码的 gcc 程序进行更新，将<a href="https://github.com/pytorch/pytorch/blob/8bece886552e58b75a066226c1c7da7975d68ba6/setup.py#L791-L793">这里</a>改为：</p>
+<pre class="language-python"><code class="language-python"><span class="token keyword">for</span> command <span class="token keyword">in</span> all_commands<span class="token punctuation">:</span><br>    <span class="token keyword">if</span> command<span class="token punctuation">[</span><span class="token string">"command"</span><span class="token punctuation">]</span><span class="token punctuation">.</span>startswith<span class="token punctuation">(</span><span class="token string">"gcc-13 "</span><span class="token punctuation">)</span><span class="token punctuation">:</span><br>        command<span class="token punctuation">[</span><span class="token string">"command"</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">"g++-13 "</span> <span class="token operator">+</span> command<span class="token punctuation">[</span><span class="token string">"command"</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">:</span><span class="token punctuation">]</span></code></pre>
+<p>添加环境变量，开始编译：</p>
+<pre class="language-bash"><code class="language-bash"><span class="token comment"># 开始编译安装</span><br><span class="token builtin class-name">export</span> <span class="token assign-left variable">CUDA_HOME</span><span class="token operator">=</span>/usr/local/cuda-12.8<br><span class="token builtin class-name">export</span> <span class="token assign-left variable">CUDA_PATH</span><span class="token operator">=</span><span class="token variable">$CUDA_HOME</span><br><span class="token builtin class-name">export</span> <span class="token assign-left variable">TORCH_CUDA_ARCH_LIST</span><span class="token operator">=</span>Blackwell<br>python setup.py develop<br><br><span class="token comment"># 可选地导出 wheel 二进制供备份使用</span><br>python setup.py bdist_wheel<br><span class="token function">ls</span> dist <span class="token comment"># 二进制文件在这</span></code></pre>
+<p>编译完成后，应该就可以检测到了：</p>
+<pre class="language-bash"><code class="language-bash">$ pip list <span class="token operator">|</span> <span class="token function">grep</span> torch    <span class="token comment"># 不清楚为什么显示 2.7.0 版本</span><br>torch                             <span class="token number">2.7</span>.0.dev20250308+cu128</code></pre>
+<blockquote>
+<p>应该还需要编译安装 <code>torchvision</code> 和 <code>torchaudio</code> 相关包，敬请期待。</p>
+</blockquote>
+<h3>triton</h3>
+<p>由于 <a href="https://pypi.org/project/autoawq/"><code>autoawq</code></a>、<a href="https://pypi.org/project/flash-attn/"><code>flash-attention</code></a>、<a href="https://pypi.org/project/deepspeed/"><code>deepspeed</code></a> 都可能需要依赖于 <code>triton</code> 包，所以这里首先安装 <code>triton</code>。</p>
+<p>继续 <a href="https://github.com/triton-lang/triton?tab=readme-ov-file#enabling-blackwell-support"><code>triton</code> 的官方说明</a>，首先克隆存储库：</p>
+<pre class="language-bash"><code class="language-bash"><span class="token function">git</span> clone https://github.com/triton-lang/triton.git <span class="token parameter variable">--depth</span> <span class="token number">1</span><br><span class="token builtin class-name">cd</span> triton</code></pre>
+<p>由于目前可能会出现 CUDA 库链接错误的问题，需要设置下面的环境变量（考虑到后续也有可能出现类似的运行时问题，建议加入全局 <code>~/.bashrc</code> 中）：</p>
+<pre class="language-bash"><code class="language-bash"><span class="token builtin class-name">export</span> <span class="token assign-left variable">TRITON_LIBCUDA_PATH</span><span class="token operator">=</span>/usr/local/cuda-12/lib64/stubs</code></pre>
+<p>之后就可以继续编译了：</p>
+<pre class="language-bash"><code class="language-bash">pip <span class="token function">install</span> pybind11<br>pip <span class="token function">install</span> <span class="token parameter variable">-e</span> python</code></pre>
+<p>编译安装完毕后，可以验证是否安装成功：</p>
+<pre class="language-bash"><code class="language-bash">$ pip list <span class="token operator">|</span> <span class="token function">grep</span> triton<br>pytorch-triton                    <span class="token number">3.2</span>.0+git4b3bb1f8</code></pre>
+<h3>Flash Attention</h3>
+<p>考虑到很多大模型都可以使用 <a href="https://github.com/Dao-AILab/flash-attention">flash attention</a> 来提速优化，这里也对 flash attention 进行安装，根据 <code>flash-attention</code> 安装说明，根据 CPU 核心数、内存设定好一个保守的并行数量（因为内存过小时，过高的并行数会让该安装过程卡死）安装即可：</p>
+<pre class="language-bash"><code class="language-bash"><span class="token assign-left variable">MAX_JOBS</span><span class="token operator">=</span><span class="token number">4</span> pip <span class="token function">install</span> flash-attn --no-build-isolation</code></pre>
+<p>由于 Blackwell 暂时不支持 flash attention 3，所以之后使用时一般只使用 flash-attention 2。如果遇到了 <a href="https://github.com/Dao-AILab/flash-attention/issues/1312">Dao-AILab/flash-attention#1312</a> 中的 Operation Error: /usr/bin/ld: cannot find -lcuda 错误，就意味着之前的 <code>TRITON_LIBCUDA_PATH</code> 没有设置好。</p>
+<h3>AutoAWQ</h3>
+<p>Triton 安装完毕后，安装该包相对容易：</p>
+<pre class="language-bash"><code class="language-bash">pip <span class="token function">install</span> autoawq</code></pre>
+<p>之后就可以运行 AWQ 量化大模型。</p>
+<h3>Transformers</h3>
+<p>至此，你应该能够使用这些前置依赖来高效地运行本地大模型了！通过安装 Huggingface 的 <a href="https://github.com/huggingface/transformers">transformers</a>，你大概能够在 5070 Ti 上跑通 DeepSeek-Distill-Qwen-14B-AWQ：</p>
+<pre class="language-python"><code class="language-python"><span class="token keyword">from</span> transformers <span class="token keyword">import</span> AutoModelForCausalLM<span class="token punctuation">,</span> AutoTokenizer<span class="token punctuation">,</span> TextStreamer<br><span class="token keyword">import</span> torch<br><br>model_name <span class="token operator">=</span> <span class="token string">"casperhansen/deepseek-r1-distill-qwen-14b-awq"</span><br>prompt <span class="token operator">=</span> <span class="token string">"你好"</span><br><br>model <span class="token operator">=</span> AutoModelForCausalLM<span class="token punctuation">.</span>from_pretrained<span class="token punctuation">(</span><br>    model_name<span class="token punctuation">,</span><br>    torch_dtype<span class="token operator">=</span>torch<span class="token punctuation">.</span>float16<span class="token punctuation">,</span><br>    device_map<span class="token operator">=</span><span class="token string">"cuda"</span><span class="token punctuation">,</span><br>    attn_implementation<span class="token operator">=</span><span class="token string">"flash_attention_2"</span><span class="token punctuation">,</span><br><span class="token punctuation">)</span><br>tokenizer <span class="token operator">=</span> AutoTokenizer<span class="token punctuation">.</span>from_pretrained<span class="token punctuation">(</span><br>    model_name<span class="token punctuation">,</span><br><span class="token punctuation">)</span><br><br>streamer <span class="token operator">=</span> TextStreamer<span class="token punctuation">(</span>tokenizer<span class="token operator">=</span>tokenizer<span class="token punctuation">)</span><br>text <span class="token operator">=</span> prompt <span class="token operator">+</span> <span class="token string">"&lt;think>"</span><br>inputs <span class="token operator">=</span> tokenizer<span class="token punctuation">(</span><span class="token punctuation">[</span>text<span class="token punctuation">]</span><span class="token punctuation">,</span> return_tensors<span class="token operator">=</span><span class="token string">"pt"</span><span class="token punctuation">)</span><span class="token punctuation">.</span>to<span class="token punctuation">(</span>model<span class="token punctuation">.</span>device<span class="token punctuation">)</span><br>outputs <span class="token operator">=</span> model<span class="token punctuation">.</span>generate<span class="token punctuation">(</span><br>    <span class="token operator">**</span>inputs<span class="token punctuation">,</span><br>    max_new_tokens<span class="token operator">=</span><span class="token number">1024</span><span class="token punctuation">,</span><br>    streamer<span class="token operator">=</span>streamer<span class="token punctuation">,</span><br>    do_sample<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">,</span><br><span class="token punctuation">)</span></code></pre>
+<p>由于国内访问 Huggingface 较为缓慢，所以可以考虑使用<a href="https://hf-mirror.com/">镜像地址</a>运行该脚本：</p>
+<pre class="language-bash"><code class="language-bash"><span class="token assign-left variable">HF_ENDPOINT</span><span class="token operator">=</span>https://hf-mirror.com python start_llm.py</code></pre>
+<p>最后可以输出：</p>
+<pre><code>&lt;｜begin▁of▁sentence｜&gt;你好&lt;think&gt;
+
+&lt;/think&gt;
+
+你好！很高兴见到你，有什么我可以帮忙的吗？无论是学习、工作还是生活中的问题，都可以告诉我哦！😊&lt;｜end▁of▁sentence｜&gt;
+</code></pre>
+<p>通过 <code>watch nvidia-smi</code> 监测占用如下：</p>
+<pre><code>Sun Mar 23 23:50:15 2025
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 570.124.06             Driver Version: 570.124.06     CUDA Version: 12.8     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA GeForce RTX 5070 Ti     Off |   00000000:01:00.0  On |                  N/A |
+| 30%   53C    P1            300W /  300W |   10102MiB /  16303MiB |     99%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|    0   N/A  N/A           10730      C   python                                 9964MiB |
++-----------------------------------------------------------------------------------------+
+</code></pre>
+<blockquote>
+<p>使用 vllm 部署模型会更加高效方便，敬请期待。</p>
+</blockquote>
+
+</div>
+
+    <footer>
+        <div class="widthlimit">
+            <p>版权所有 © Log Creative 2012-2024，保留所有权利。</p>
+            <p>除有开源协议声明的，未经许可，不可用于商业用途。</p>
+            <p>Powered by <a href="https://www.11ty.dev/" target="_blank">Eleventy</a>&nbsp;|&nbsp;<a href="https://beian.miit.gov.cn" target="_blank">沪ICP备2021032524号</a></p>
+        </div>
+    </footer>
+</body>
+</html>
