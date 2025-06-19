@@ -18,7 +18,7 @@ function showCharacter(e) {
     chara_rarity = this.id.split('-')[1]
     this.classList.add("rarity" + chara_rarity)
     character_obj_img = document.getElementById("zzzcard_detail_img")
-    character_obj_img.setAttribute("src", imgdir + "/card-" + this.id + ".png")
+    character_obj_img.setAttribute("src", imgdir + "/card-" + this.id + ".jpg")
 }
 
 characters.forEach(character => {
