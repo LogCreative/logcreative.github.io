@@ -1,0 +1,15 @@
+<h2>StarRailCard-web</h2>
+<p>A static web page generator for StarRailCard based on <a href="https://github.com/DEViantUA/StarRailCard">StarRailCard</a>.</p>
+<img width="669" alt="preview" src="https://github.com/LogCreative/StarRailCard/assets/61653082/731cd519-0d3c-4a6d-a63e-f04c91263ade">
+<h2>Usage</h2>
+<p>Install Python 3.11 and above.</p>
+<p>Install the dependencies:</p>
+<pre class="language-bash"><code class="language-bash">pip <span class="token function">install</span> <span class="token parameter variable">-r</span> requirements.txt</code></pre>
+<p>And run the script, pass the uid as the argument:</p>
+<pre class="language-bash"><code class="language-bash">python main.py <span class="token parameter variable">-u</span> <span class="token number">109814396</span></code></pre>
+<p>If you want to change the language, for example, to Chinese (Simplified) with the correct font being used, then use:</p>
+<pre class="language-bash"><code class="language-bash">python main.py <span class="token parameter variable">-u</span> <span class="token number">109814396</span> <span class="token parameter variable">-l</span> cn <span class="token parameter variable">-f</span> <span class="token string">"/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc"</span></code></pre>
+<p>where <code>/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc</code> font should be installed on your computer manually.</p>
+<p>You could get more help by</p>
+<pre class="language-bash"><code class="language-bash">python main.py <span class="token parameter variable">-h</span></code></pre>
+<p>After the generation, you could open <code>railcard.html</code> directly to preview the result. You could directly deploy those files to your website. Click the avatar to display the detail of different characters. And <code>profile.jpg</code> is also generated for your own use. You could add your customized style to make it look better.</p>
