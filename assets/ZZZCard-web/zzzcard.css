@@ -1,0 +1,57 @@
+#zzzcard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+#zzzcard #zzzcard_headbar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0 15px 0;
+    width: 80%;
+    flex-wrap: wrap;
+}
+#zzzcard #zzzcard_headbar .imgdiv {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+}
+#zzzcard #zzzcard_headbar .imgdiv:hover {
+    cursor: pointer;
+}
+#zzzcard #zzzcard_headbar img {
+    width: 40px;
+    transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    background-image: url("/assets/ZZZCard-web/ZZZCard/bg.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 5px;
+    border: 2px solid rgb(51, 53, 52);
+}
+#zzzcard #zzzcard_headbar .rarity5{
+    /* srank icon in the left-top corner background */
+    /* background-image: url("/assets/ZZZCard-web/ZZZCard/srank.png");
+    background-size: 10px 10px;
+    background-position: left top;
+    background-repeat: no-repeat; */
+}
+#zzzcard #zzzcard_headbar .rarity5,
+#zzzcard #zzzcard_headbar .rarity4{
+    width: 48px;
+    /* yellow border */
+    border: 2px solid rgb(250, 223, 75);
+}
+#zzzcard #zzzcard_detail {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+#zzzcard #zzzcard_detail_img {
+    max-width: 100%;
+}
