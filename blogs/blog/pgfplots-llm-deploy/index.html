@@ -41,8 +41,8 @@
 
     <h3>缘起：智能编辑</h3>
 <p><a href="https://github.com/LogCreative/PGFPlotsEdt">PGFPlotsEdt</a> 是一款 \(\rm\LaTeX\) PGFPlots 代码式统计绘图在线绘制工具，旨以模块化的图形式菜单引导用户快速调配出统计图代码，并通过快速编译机制尽快得到预览统计图以供调试。</p>
-<p>对于图形式菜单而言，受限于有限的功能适配（<a href="https://mirrors.sjtug.sjtu.edu.cn/CTAN/graphics/pgf/contrib/pgfplots/doc/pgfplots.pdf">PGFPlots 文档</a> 有 500+ 页，PGFPlotsEdt 图形菜单只能囊括部分功能），可以得到的代码空间是有限的，而对于开发者而言不断地将相关功能通过图形菜单提供出来是一项相当繁琐的工作，难以很快地完成并且过于完整会让界面变得臃肿；因此，允许用户通过“手动编辑”按钮直接对代码做更为灵活的修改，但是用户为了达到更加灵活的需求又需要不断查询宏包文档，这让编写定制化的统计图代码再次变得较为困难。</p>
-<p>幸运的是，大模型（LLM）技术的不断进步为代码生成提供了新的解决方案。代码的文字属性和严谨定义成为了用户与大模型交互的良好媒介，强大的大模型已经可以产生足够准确的代码满足用户需求并通过编译，因此 PGFPlotsEdt 在 <a href="https://github.com/LogCreative/PGFPlotsEdt/releases/tag/3.5">3.5 版本</a>（2024-05-05）推出“智能编辑”功能，用户可以通过使用自然语言提示引导大模型对代码进行修改以满足相关需求；随着一个版本的迭代，现在的“智能编辑”功能结合了检索增强生成（RAG）技术通过引用相关文档内容引导大模型产生更为准确的 PGFPlots 代码。</p>
+<p>尽管图形化菜单为用户提供了便捷的操作方式，但受限于功能适配的复杂性（<a href="https://mirrors.sjtug.sjtu.edu.cn/CTAN/graphics/pgf/contrib/pgfplots/doc/pgfplots.pdf">PGFPlots 文档</a> 长达 500 多页，PGFPlotsEdt 的菜单仅覆盖了其中一部分功能），可通过菜单生成的代码空间相对有限。对于开发者而言，持续将更多功能集成到菜单中不仅工作量巨大，还可能导致界面臃肿、影响易用性。因此，PGFPlotsEdt 也提供了“手动编辑”按钮，允许用户直接灵活地修改代码。然而，为了满足更复杂的定制需求，用户往往需要频繁查阅宏包文档，这使得编写个性化统计图代码依然存在一定门槛和难度。</p>
+<p>幸运的是，随着大模型（LLM）技术的持续进步，代码生成迎来了全新的解决方案。代码本身具备高度结构化和明确语义，使其成为用户与大模型高效交互的理想载体。当前主流大模型已能够生成高质量、可编译的代码，基本满足用户的实际需求。因此，PGFPlotsEdt 在 <a href="https://github.com/LogCreative/PGFPlotsEdt/releases/tag/3.5">3.5 版本</a>（2024-05-05）首次推出了“智能编辑”功能，允许用户通过自然语言提示，引导大模型自动修改和完善代码。经过多个版本的迭代升级，如今的“智能编辑”功能已融合检索增强生成（RAG）技术，能够结合相关文档内容，进一步提升大模型生成 PGFPlots 代码的准确性和实用性。</p>
 <h3>原理：RAG 工作流</h3>
 <p><a href="https://github.com/LogCreative/PGFPlotsEdt/releases/tag/4.5">PGFPlotsEdt 4.5 版本</a> 具体的 RAG 工作流大致如下：</p>
 <pre class="mermaid">graph LR
