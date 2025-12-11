@@ -12,16 +12,17 @@
 \newenvironment{cvitems}{
     \begin{justify}
     \begin{description}[
-        labelwidth=1.8cm,
-        leftmargin=2.5cm,
+        % labelwidth=1.8cm,
+        leftmargin=0.5cm,
         % labelsep=0.5cm,
+        itemindent=-0.5cm,
         parsep=0pt]
     
 }{
     \end{description}
     \end{justify}
 }
-\renewcommand\descriptionlabel[1]{\hbox to 2.3cm{\sffamily #1}}
+% \renewcommand\descriptionlabel[1]{\hbox to 2.3cm{\sffamily #1}}
 
 \newenvironment{githubs}{
     \begin{list}{\faGithubSquare}{
@@ -46,7 +47,8 @@
 \def\githublink#1{\,\href{https://github.com/LogCreative/#1}{\faGithubSquare{}~\sffamily #1}\,}
 
 \def\section#1{
-    \noindent\hskip2.5cm \textbf{\large\scshape #1} \hrulefill
+    %\noindent\hskip2.5cm
+    \noindent\textbf{\large\scshape #1} \hrulefill
 }
 
 \def\rightnote#1{
@@ -58,12 +60,26 @@
 
 \def\tip#1{{\slshape \itshape #1}~\vrule\,}
 
+% decrease the title and author space
+\makeatletter
+\renewcommand{\maketitle}{
+    \begin{center}
+        % \vspace{-2.5em} % Adjust this value to change the space above the title
+        {\LARGE \@title} \\[3ex]
+        {\small \@author} \\[3ex]
+        {\small \@date}
+    \end{center}
+    \vspace{0.1ex} % Adjust this value to change the space below the title
+}
+
+
 \title{\sffamily Log Creative}
-\author{\small\sffamily \href{https://github.com/LogCreative}{\faGithub~LogCreative}
-\href{https://logcreative.tech}{\faExternalLink*~logcreative.github.io}\hspace*{4ex}\\
-\small\sffamily
-\href{https://space.bilibili.com/31271993}{\includegraphics[height=2ex]{bilibili.png}~LogCreative}
-\href{mailto:logcreative@outlook.com}{\faEnvelope~logcreative@outlook.com}}
+\author{\small\sffamily
+\href{https://github.com/LogCreative}{\faGithub~LogCreative}~
+\href{https://logcreative.tech/about/parts/resume}{\faExternalLink*~logcreative.tech}\hspace*{1.1cm}~~\\
+\href{https://space.bilibili.com/31271993}{\includegraphics[height=2ex]{bilibili.png}~LogCreative}~
+\href{mailto:logcreative@outlook.com}{\faEnvelope~logcreative@outlook.com}
+}
 \date{}
 \begin{document}
     \begin{minipage}{0.8\textwidth}
@@ -78,68 +94,86 @@
     % 教育经历
     \section{Education Experiences}
     \begin{cvitems}
-        \item[Graduate] \textbf{Shanghai Jiao Tong University} Master Student (2nd year) \rightnote{Shanghai, China}
+        \item \textbf{Shanghai Jiao Tong University} Master Student (2nd year) \rightnote{Shanghai, China}
         
-        Electronic Information @ School of Electronic, Information and Electrical Engineering \rightnote{Expected 2023--2026} 
+        % Electronic Information @ School of Electronic, Information and Electrical Engineering
+        Computer Technology @ School of Computer Science
+        \rightnote{Expected 2023.9--2026.6} 
+        
+        \item \textbf{Shanghai Jiao Tong University} Bachelor \rightnote{Shanghai, China}
 
-        Computer Science and Technology (CS) @ School of Electronic, Information and Electrical Engineering \rightnote{2019--2023}
+        Computer Science and Technology @ SEIEE \rightnote{2019.9--2023.6}
 
-        Mathematics @ School of Mathematical Sciences \rightnote{Transferred 2018--2019}
+        Mathematics @ School of Mathematical Sciences \rightnote{Transferred 2018.9--2019.8}
     
         %\tip{GPA} 3.71/4.3\quad \tip{CET6} 545 (Oral: B+)
         
-        %\tip{A/A+ Courses} VR, Machine Learning, Data Visualization, Mathematical Foundamental in Computer Sciences, Compiler Principles, Computer Architechture Labs
+        % \tip{A/A+ Courses} VR, Machine Learning, Data Visualization, Mathematical Foundamental in Computer Sciences, Compiler Principles, Computer Architechture Labs
     \end{cvitems}
 
     % 技能
     \section{Skills}
     \begin{cvitems}
-        \item[Programming] 
-        \begin{subcvitems}
-            \item[\faCheck] Familiar with \textsf{Python}, \textsf{C/C++}, \textsf{C\#/VB{\scriptsize .NET}}, \textsf{\LaTeX} Programming. \rightnote{2018--2023}
-            \item[\faCheckCircle] Acknowledge \textsf{HTML/CSS/JavaScript} webpage making \githublink{PGFPlotsEdt} \faStar~\textsf{56}. \rightnote{2020--2023}
-            \item[{\faCaretSquareRight[regular]}\hskip1pt] Get started with \textsf{Java} and \textsf{Rust}. \rightnote{2020}
+        % \item[Programming] 
+        % \begin{subcvitems}
+            \item \faCheck~Familiar with \textsf{Python} (\textsf{pytorch}, \textsf{transformers}, ...), \textsf{C/C++}, \textsf{C\#/VB{\scriptsize .NET}}, \textsf{\LaTeX} programming. \rightnote{2018--2025}
+            \item \faCheckCircle~Acknowledge \textsf{HTML/CSS/JavaScript}, \textsf{Vue.js} and \textsf{Next.js} frontend framework, an open-source full-stack project: \githublink{PGFPlotsEdt} \faStar~\textsf{74}, an openInula class project: \href{https://gitee.com/LogCreative/inula-docdemo}{\textsf{inula-docdemo}}. \rightnote{2020--2025}
+            \item {\faCaretSquareRight[regular]}\hskip1.5pt~Get started with \textsf{Java} and \textsf{Rust}. \rightnote{2020}
+            \item \faCheckCircle~Acknowledge \,\textsf{cmd}/\textsf{PowerShell}/\textsf{bash}/\textsf{lua}\,script languages, version control tool\,\textsf{Git}, and continous integration tool\,\textsf{GitHub Actions} for constructing workflows of various open source projects. \rightnote{2021--2025}
             % \item[\faCheck] Familiar with interface programming like FLTK in \textsf{C/C++}\githublink{GraphGenDecomp}, WinForm/WPF/XAML in \textsf{VB{\scriptsize .NET}/C\#\,} \githublink{ClassBookController} \githublink{DialogCreator}, Typesetting of \textsf{\LaTeX}\,\githublink{AutoBeamer}.\rightnote{2015--2021}
             % \item[\faCheckCircle] Acknowledge OpenCV, pandas, pytorch and networking \githublink{Networking} in \textsf{Python}.\rightnote{2019--2021}
             % \item[\faCheckCircle] Acknowledge webpage making in \textsf{HTML/CSS/JavaScript}\,\href{https://logcreative.github.io/LaTeXSparkle/}{\faGithubSquare~\sffamily\LaTeX{}Sparkle} (Blog), and use JavaScript framework \textsf{Vue.js}\githublink{PGFPlotsEdt}.\rightnote{2020--2021}
             % \item[{\faCheckCircle[regular]}] Get started with \textsf{Java}\githublink{OS-Projects} and \textsf{Rust}\githublink{CompilerPrinciple}.\rightnote{2020}
-        \end{subcvitems}
-        \item[Visualization] 
-        \begin{subcvitems}
-            \item[\faCheck] Familiar with Video Editing in \textsf{Premiere}, Special Effects in \textsf{After Effects}, 3D Modeling in \textsf{Cinema 4D}\,\href{https://www.bilibili.com/video/BV1Qb411a7FH/}{\includegraphics[height=2ex]{bilibili.png}}.\hfill\textcolor{gray}{\emph{2012--2020}}
-            \item[\faCheckCircle\hskip1pt] Acknowledge \textsf{Unity} to make 3D interactive programs. \textsf{PowerPoint} Lecturer.\rightnote{2019--2020}
-        \end{subcvitems}
-        \item[Open Source] 
-        \begin{subcvitems}
-            \item[\faCheckCircle] Acknowledge \,\textsf{cmd}/\textsf{PowerShell}/\textsf{bash}\,script languages, version control tool\,\textsf{Git}, and continous integration tool\,\textsf{GitHub Actions}.
-            \item[{\faCaretSquareRight[regular]}\hskip1pt] Member of \href{https://sjtug.org}{\textsf{SJTUG}}. Chinese \TeX{} Society \textsf{C\TeX{}-org} committer\,\href{https://github.com/CTeX-org/learnlatex.github.io}{\faGithubSquare~\sffamily learnlatex.github.io}. Give lectures about \LaTeX{} \href{https://github.com/sjtug/sjtulib-latex-talk}{\faGithubSquare~\sffamily sjtulib-latex-talk} \faStar~\textsf{61}.
-            \item[{\faCaretSquareRight[regular]}\hskip1.15pt] Participate in \textsf{VS Code} Chinese Group Sharing. Finish 2021 Microsoft Open-Source Study Group Projects \githublink{mnist-calculator} \githublink{custom-tensor-op}\githublink{qlib-CNN}.\rightnote{2021} 
-        \end{subcvitems}
-    \end{cvitems}
-
-    % 竞赛经历
-    \section{Honors}
-
-    \begin{cvitems}
-        \item \textbf{SJTU CS Outstanding Bachelor's Thesis} \rightnote{2023}
-            \tip{Publication} Chunyu Qi, \textbf{Zilong Li}, Zhuoran Song and Xiaoyao Liang. ``ViTframe: Vision Transformer Acceleration via Informative Frame Selection for Video Recognition.'' In: \textit{IEEE International Conference on Computer Design (ICCD)}. 2023.
-        \item \textbf{National Undergraduate IOT Design Contest} $\cdot$ HarmonyOS Special Award (Top 10) \rightnote{2022}
-            \tip{Contribution} Develop a HarmonyOS App based on the technology of distributed database, to service the hybrid class with social distancing. Build a cloud platform to interconnect clients, \href{http://iot.logcreative.tech}{web}, and a hardware.
-        \item \textbf{Mathematical Contest in Modeling (MCM)} $\cdot$ Meritorious Winner \rightnote{2021}
-            \tip{Contribution} Redefine the distance of DBSCAN in sklearn library, in order to perform a better prediction in the range of wildfire. Perform geographical calculations in Mathematica.
-        % \item \textbf{National Undergraduate IOT Design Contest} $\cdot$ Second Prize \rightnote{2020}
-            % \tip{Contribution} Make a webpage to visualize canteen data and connect Nigara to HUAWEI Cloud database to make prediction based on the historical data. \githublink{SJTUCanteenDataWidget}
-        \item \textbf{SJTU Scholarship} $\cdot$ Class C \rightnote{2018--2019, 2020--2021}
+        % \end{subcvitems}
+        % \item[Visualization] 
+        % \begin{subcvitems}
+            % \item[\faCheck] Familiar with Video Editing in \textsf{Premiere}, Special Effects in \textsf{After Effects}, 3D Modeling in \textsf{Cinema 4D}\,\href{https://www.bilibili.com/video/BV1Qb411a7FH/}{\includegraphics[height=2ex]{bilibili.png}}.\hfill\textcolor{gray}{\emph{2012--2020}}
+            \item \faCheckCircle\hskip1pt~Acknowledge \textsf{Unity} to make Virtual Reality (VR) programs. Previously researched in VR full body gesture reconstruction and collision sound simulation. %\textsf{PowerPoint} Lecturer.
+            \rightnote{2019--2020, 2023--2024}
+        % \end{subcvitems}
+        % \item[Open Source] 
+        % \begin{subcvitems}
+        % \end{subcvitems}
     \end{cvitems}
 
     % 社团经历
-    \section{Communities}
+    \section{Internship \& Community}
 
     \begin{cvitems}
-        \item \textbf{SJTU Linux User Group} $\cdot$ SJTU\TeX{} Maintainer \rightnote{2021--2023}
-        \tip{Related Work} Maintainer of \LaTeX{} Beamer Template \href{https://github.com/sjtug/SJTUBeamer}{\faGithubSquare~\sffamily SJTUBeamer} \faStar~\textsf{560}.
-        \item \textbf{SJTU Art Center} $\cdot$ Leader of Tech Division \rightnote{2019--2020}
-        \tip{Related Work} Video Producer. Create multi-streaming software \href{https://github.com/SJTU-Art-Center/ACLiveConsole}{\faGithubSquare~\sffamily ACLiveConsole} \faStar~\textsf{7}~to manage NGINX visually, support art processing of bilibli danmaku, and fluent PGM animation. The software has serviced multiple events, including the commercial ones.
+        \item \textbf{Shanghai Baosight Software Co., Ltd.} Intern \rightnote{2024--Present}
+        
+        Research on LLM and Agent, focusing on LLM routing and Text-to-SQL problems. Use SFT and GRPO algorithms to finetune the LLM based on \textsf{transformers} library, and construct the agent framework based on \textsf{LangChain}/\textsf{LangGraph} to improve the automation level of many tasks.
+
+        \item \textbf{SJTU Linux User Group} $\cdot$ SJTU\TeX{} Maintainer \rightnote{2021--Present}
+        Maintainer of \LaTeX{} Beamer Template \href{https://github.com/sjtug/SJTUBeamer}{\faGithubSquare~\sffamily SJTUBeamer} \faStar~\textsf{717}, and one of the authors of \LaTeX{} lecture \href{https://github.com/sjtug/sjtulib-latex-talk}{\faGithubSquare~\sffamily sjtulib-latex-talk} \faStar~\textsf{67}, servicing the \TeX{} users across the campus.
+        \item \textbf{SJTU Art Center} $\cdot$ Leader of Tech Department \rightnote{2019--2020}
+        \tip{Related Work} Video Producer. Create multi-streaming software \href{https://github.com/SJTU-Art-Center/ACLiveConsole}{\faGithubSquare~\sffamily ACLiveConsole} \faStar~\textsf{7}~to manage nginx visually, support art processing of bilibli danmaku, and fluent PGM animation. The software has serviced 12 in-school events, including the commercial ones.
     \end{cvitems}
+
+    % 竞赛经历
+    \section{Contests}
+
+    \begin{cvitems}
+        \item \textbf{National Undergraduate IOT Design Contest} $\cdot$ HarmonyOS Special Award (10/1417) \rightnote{2022}
+            Develop a HarmonyOS App based on the technology of distributed database, to service the hybrid class with social distancing. Build a cloud platform to interconnect clients, \href{http://iot.logcreative.tech}{web}, and a hardware.
+        \item \textbf{Microsoft Research Asia Practice Space Project} \rightnote{2021}
+            \githublink{mnist-calculator} creates a hand-written calculator based on CNN, \githublink{custom-tensor-op} implements convolution layer based on \textsf{pytorch} API (Python/C++), \githublink{qlib-CNN} implements a simple convolution model to make analysis on stock market.
+        \item \textbf{Mathematical Contest in Modeling (MCM)} $\cdot$ Meritorious Winner \rightnote{2021}
+            Redefine the distance of DBSCAN in Python \textsf{sklearn} library, in order to perform a better prediction in the range of wildfire. Perform geographical calculations in Mathematica.
+    \end{cvitems}
+
+    \section{Publication}
+    \begin{cvitems}
+        \item \href{https://ieeexplore.ieee.org/abstract/document/10361019}{\textbf{ViTframe: Vision Transformer Acceleration via Informative Frame Selection for Video Recognition.}} In: \textit{IEEE International Conference on Computer Design (ICCD)}. Second author. \rightnote{2023}
+        In this paper, we propose a novel method to accelerate the inference of video recognition models like TimeSformer and MViT. We introduce a frame selection mechanism that selects informative frames based on the metric of SSIM from the video input, reducing the computational cost while maintaining accuracy loss within 1\%.
+    \end{cvitems}
+
+    % \section{Honors}
+    % \begin{cvitems}
+    %     \item \textbf{SJTU Huawei Scholarship} (10/139) \rightnote{2024}
+    %     \item \textbf{SJTU CS Outstanding Bachelor's Thesis} (20/161) \rightnote{2023}
+    % \end{cvitems}
+
+    
 
 \end{document}

@@ -1,0 +1,128 @@
+<p align="center">
+ <img src="https://github.com/DEViantUA/EnkaCard/blob/main/readmeFile/BannerCard.png?raw=true" alt="Баннер"/>
+</p>
+<hr>
+<p><img src="https://github.com/DEViantUA/EnkaCard/blob/main/readmeFile/Shablon_01.png?raw=true" width = 38% alt="Баннер"/><a href="https://pypi.org/project/enkacard/"><img src="https://github.com/DEViantUA/EnkaCard/blob/main/readmeFile/dark/Shablon_02.png?raw=true" width = 6% alt="Баннер"/></a><a href="https://discord.gg/shRUCDt4"><img src="https://github.com/DEViantUA/EnkaCard/blob/main/readmeFile/dark/Shablon_03.png?raw=true" width = 7% alt="Баннер"/></a><a href="https://github.com/DEViantUA/EnkaCard"><img src="https://github.com/DEViantUA/EnkaCard/blob/main/readmeFile/dark/Shablon_04.png?raw=truee" width = 7% alt="Баннер"/></a><a href="https://enka.network/"><img src="https://github.com/DEViantUA/EnkaCard/blob/main/readmeFile/dark/Shablon_05.png?raw=true" width = 6% alt="Баннер"/></a></p>
+<hr>
+<h2>EnkaCard</h2>
+<p>An asynchronous module and API that allows you to connect to your bot the generation of Genshin character cards from the Enka.Network website. <br><br></p>
+<ul>
+<li>5 templates to choose from.<br></li>
+<li>2 profile templates.<br></li>
+<li>Customization of all cards with background adaptation.</li>
+</ul>
+<h2>Full Documentation:</h2>
+<ul>
+<li><a href="https://deviantua.github.io/EnkaCard-Documentation/">Documentation EnkaCard</a></li>
+<li><a href="https://deviantua.github.io/EnkaCard-Documentation/async/Other/api/">API</a></li>
+<li><a href="https://discord.gg/TwuBfDbE">Little Kazuha</a> - Discord Bot, which perfectly demonstrates the work of the module. Just use the <code>/profile</code> command</li>
+</ul>
+<h2>Installation:</h2>
+<pre><code>pip install enkacard
+</code></pre>
+<h2>Launch:</h2>
+<pre class="language-python"><code class="language-python"><span class="token keyword">from</span> enkacard <span class="token keyword">import</span> encbanner<br><span class="token keyword">import</span> asyncio<br><br><span class="token keyword">async</span> <span class="token keyword">def</span> <span class="token function">card</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span><br>    <span class="token keyword">async</span> <span class="token keyword">with</span> encbanner<span class="token punctuation">.</span>ENC<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">as</span> encard<span class="token punctuation">:</span><br>        ENCpy <span class="token operator">=</span> <span class="token keyword">await</span> encard<span class="token punctuation">.</span>enc<span class="token punctuation">(</span>uids <span class="token operator">=</span> <span class="token string">"811455610"</span><span class="token punctuation">)</span><br>        <span class="token keyword">return</span> <span class="token keyword">await</span> encard<span class="token punctuation">.</span>creat<span class="token punctuation">(</span>ENCpy<span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><br><br>result <span class="token operator">=</span> asyncio<span class="token punctuation">.</span>run<span class="token punctuation">(</span>card<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <br><br><span class="token keyword">print</span><span class="token punctuation">(</span>result<span class="token punctuation">)</span></code></pre>
+<details>
+<summary>Launch Profile</summary>
+<pre class="language-python"><code class="language-python"><span class="token keyword">from</span> enkacard <span class="token keyword">import</span> encbanner<br><span class="token keyword">import</span> asyncio<br><br><span class="token keyword">async</span> <span class="token keyword">def</span> <span class="token function">card</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span><br>    <span class="token keyword">async</span> <span class="token keyword">with</span> encbanner<span class="token punctuation">.</span>ENC<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">as</span> encard<span class="token punctuation">:</span><br>        ENCpy <span class="token operator">=</span> <span class="token keyword">await</span> encard<span class="token punctuation">.</span>enc<span class="token punctuation">(</span>uids <span class="token operator">=</span> <span class="token string">"811455610"</span><span class="token punctuation">)</span><br>        <span class="token keyword">return</span> <span class="token keyword">await</span> encard<span class="token punctuation">.</span>profile<span class="token punctuation">(</span>ENCpy<span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><br><br>result <span class="token operator">=</span> asyncio<span class="token punctuation">.</span>run<span class="token punctuation">(</span>card<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <br><br><span class="token keyword">print</span><span class="token punctuation">(</span>result<span class="token punctuation">)</span></code></pre>
+</details>
+<h2>Languages Supported</h2>
+<table>
+<thead>
+<tr>
+<th>Languege</th>
+<th>Code</th>
+<th>Languege</th>
+<th>Code</th>
+<th>Languege</th>
+<th>Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>English</td>
+<td>en</td>
+<td>русский</td>
+<td>ru</td>
+<td>Chinese</td>
+<td>chs</td>
+</tr>
+<tr>
+<td>Tiếng Việt</td>
+<td>vi</td>
+<td>ไทย</td>
+<td>th</td>
+<td>Taiwan</td>
+<td>cht</td>
+</tr>
+<tr>
+<td>português</td>
+<td>pt</td>
+<td>한국어</td>
+<td>kr</td>
+<td>deutsch</td>
+<td>de</td>
+</tr>
+<tr>
+<td>日本語</td>
+<td>jp</td>
+<td>中文</td>
+<td>zh</td>
+<td>español</td>
+<td>es</td>
+</tr>
+<tr>
+<td>中文</td>
+<td>zh</td>
+<td>Indonesian</td>
+<td>id</td>
+<td>français</td>
+<td>fr</td>
+</tr>
+</tbody>
+</table>
+<h2>Sample Results:</h2>
+<details>
+<summary>Sample 1 template</summary>
+<p><a href="https://github.com/DEViantUA/EnkaCard/blob/main/readmeFile/7.png?raw=true"><img src="https://github.com/DEViantUA/EnkaCard/blob/main/readmeFile/7.png?raw=true" alt="Adaptation"></a></p>
+<p><a href="https://github.com/DEViantUA/EnkaCard/blob/main/readmeFile/6.png?raw=true"><img src="https://github.com/DEViantUA/EnkaCard/blob/main/readmeFile/6.png?raw=true" alt="Without Adaptation"></a></p>
+</details>
+<details>
+<summary>Sample 2 template</summary>
+<p><a href="https://github.com/DEViantUA/EnkaCard/blob/main/readmeFile/4.png?raw=true"><img src="https://github.com/DEViantUA/EnkaCard/blob/main/readmeFile/4.png?raw=true" alt="Adaptation"></a></p>
+</details>
+<details>
+<summary>Sample 3 template</summary>
+<p><a href="https://github.com/DEViantUA/EnkaCard/blob/main/readmeFile/5.png?raw=true"><img src="https://github.com/DEViantUA/EnkaCard/blob/main/readmeFile/5.png?raw=true" alt="Adaptation"></a></p>
+</details>
+<details>
+<summary>Sample 4 template</summary>
+<p><a href="https://github.com/DEViantUA/EnkaCard/blob/main/readmeFile/1.png?raw=true"><img src="https://github.com/DEViantUA/EnkaCard/blob/main/readmeFile/1.png?raw=true" alt="Without Adaptation MINI INFO"></a></p>
+<p><a href="https://github.com/DEViantUA/EnkaCard/blob/main/readmeFile/2.png?raw=true"><img src="https://github.com/DEViantUA/EnkaCard/blob/main/readmeFile/2.png?raw=true" alt="Without Adaptation FULL INFO"></a></p>
+<p><a href="https://github.com/DEViantUA/EnkaCard/blob/main/readmeFile/3.png?raw=true"><img src="https://github.com/DEViantUA/EnkaCard/blob/main/readmeFile/3.png?raw=true" alt="Adaptation MINI INFO"></a></p>
+</details>
+<details>
+<summary>Sample 5 template</summary>
+<p><a href="https://github.com/DEViantUA/EnkaCard/blob/main/readmeFile/10.png?raw=true"><img src="https://github.com/DEViantUA/EnkaCard/blob/main/readmeFile/10.png?raw=true" alt="Adaptation"></a></p>
+<p><a href="https://github.com/DEViantUA/EnkaCard/blob/main/readmeFile/9.png?raw=true"><img src="https://github.com/DEViantUA/EnkaCard/blob/main/readmeFile/9.png?raw=true" alt="Without Adaptation"></a></p>
+</details>
+<details>
+<summary>Sample 6 template</summary>
+<p><a href="https://github.com/DEViantUA/EnkaCard/blob/main/readmeFile/12.png?raw=true"><img src="https://github.com/DEViantUA/EnkaCard/blob/main/readmeFile/12.png?raw=true" alt="Adaptation"></a></p>
+<p><a href="https://github.com/DEViantUA/EnkaCard/blob/main/readmeFile/13.png?raw=true"><img src="https://github.com/DEViantUA/EnkaCard/blob/main/readmeFile/13.png?raw=true" alt="Without Adaptation"></a></p>
+<p><a href="https://github.com/DEViantUA/EnkaCard/blob/main/readmeFile/14.png?raw=true"><img src="https://github.com/DEViantUA/EnkaCard/blob/main/readmeFile/14.png?raw=true" alt="Display 1-4 characters"></a></p>
+</details>
+<details>
+<summary>Sample 7 template</summary>
+<p><a href="https://github.com/DEViantUA/EnkaCard/blob/main/readmeFile/15.png?raw=true"><img src="https://github.com/DEViantUA/EnkaCard/blob/main/readmeFile/15.png?raw=true" alt="Adaptation"></a></p>
+<p><a href="https://github.com/DEViantUA/EnkaCard/blob/main/readmeFile/16.png?raw=true"><img src="https://github.com/DEViantUA/EnkaCard/blob/main/readmeFile/16.png?raw=true" alt="Without Adaptation"></a></p>
+</details>
+<hr>
+<details>
+<summary>Profile sample 1 template</summary>
+<p><a href="https://github.com/DEViantUA/EnkaCard/blob/main/readmeFile/8.png?raw=true"><img src="https://github.com/DEViantUA/EnkaCard/blob/main/readmeFile/8.png?raw=true" alt="Profile"></a></p>
+</details>
+<details>
+<summary>Profile sample 2 template</summary>
+<p><a href="https://github.com/DEViantUA/EnkaCard/blob/main/readmeFile/11.png?raw=true"><img src="https://github.com/DEViantUA/EnkaCard/blob/main/readmeFile/11.png?raw=true" alt="Profile"></a></p>
+</details>

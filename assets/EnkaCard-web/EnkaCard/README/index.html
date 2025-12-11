@@ -1,0 +1,99 @@
+<p align="center">
+ <img src="https://github.com/DEViantUA/EnkaCard/blob/main/readmeFile/BannerCard3.png?raw=true" alt="Баннер"/>
+</p>
+<hr>
+<p><a href="https://raw.githubusercontent.com/DEViantUA/EnkaCard/main/readmeFile/icon_ream_me/IconReadMe_01.png"><img src="https://raw.githubusercontent.com/DEViantUA/EnkaCard/main/readmeFile/icon_ream_me/IconReadMe_01.png" width="26%" height="1" alt="Изображение 1"/></a>
+<a href="https://t.me/enkacardchat"><img src="https://raw.githubusercontent.com/DEViantUA/EnkaCard/main/readmeFile/icon_ream_me/IconReadMe_02.png" width="8%" alt="Изображение 2"/></a>
+<a href="https://github.com/DEViantUA/EnkaCard"><img src="https://raw.githubusercontent.com/DEViantUA/EnkaCard/main/readmeFile/icon_ream_me/IconReadMe_03.png" width="8%" alt="Изображение 3"/></a>
+<a href="https://enka.network/"><img src="https://raw.githubusercontent.com/DEViantUA/EnkaCard/main/readmeFile/icon_ream_me/IconReadMe_04.png" width="8%" alt="Изображение 4"/></a>
+<a href="https://pypi.org/project/enkacard/"><img src="https://raw.githubusercontent.com/DEViantUA/EnkaCard/main/readmeFile/icon_ream_me/IconReadMe_05.png" width="8%" alt="Изображение 5"/></a>
+<a href="https://www.patreon.com/deviantapi"><img src="https://raw.githubusercontent.com/DEViantUA/EnkaCard/main/readmeFile/icon_ream_me/IconReadMe_06.png" width="8%" alt="Изображение 6"/></a>
+<a href="https://akasha.cv/"><img src="https://raw.githubusercontent.com/DEViantUA/EnkaCard/main/readmeFile/icon_ream_me/IconReadMe_07.png" width="8%" alt="Изображение 6"/></a></p>
+<hr>
+<h2>EnkaCard</h2>
+<p>An asynchronous module and API that allows you to connect to your bot the generation of Genshin character cards from the Enka.Network website. <br><br>
+:white_medium_square: <a href="https://github.com/DEViantUA/EnkaCard/wiki">Documentation</a><br>
+:white_medium_square: <a href="https://t.me/mf_morax_bot">Telegram Bot</a><br>
+:white_medium_square: <a href="https://github.com/DEViantUA/EnkaCard/wiki/Resultate">Generation results</a><br>
+:white_medium_square: <a href="https://github.com/DEViantUA/StarRailCard">StarRailCard</a><br>
+:white_medium_square: <a href="https://github.com/DEViantUA/ENCard">Additional module</a><br>
+:white_medium_square: <a href="https://github.com/DEViantUA/EnkaCard">Assets</a></p>
+<h2>Installation:</h2>
+<pre><code>pip install enkacard
+</code></pre>
+<h2>Launch:</h2>
+<pre class="language-python"><code class="language-python"><span class="token keyword">from</span> enkacard <span class="token keyword">import</span> encbanner<br><span class="token keyword">import</span> asyncio<br><br><span class="token keyword">async</span> <span class="token keyword">def</span> <span class="token function">card</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span><br>    <span class="token keyword">async</span> <span class="token keyword">with</span> encbanner<span class="token punctuation">.</span>ENC<span class="token punctuation">(</span>uid <span class="token operator">=</span> <span class="token string">"811455610"</span><span class="token punctuation">)</span> <span class="token keyword">as</span> encard<span class="token punctuation">:</span><br>        <span class="token keyword">return</span> <span class="token keyword">await</span> encard<span class="token punctuation">.</span>creat<span class="token punctuation">(</span><span class="token punctuation">)</span><br><br>result <span class="token operator">=</span> asyncio<span class="token punctuation">.</span>run<span class="token punctuation">(</span>card<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <br><br><span class="token keyword">print</span><span class="token punctuation">(</span>result<span class="token punctuation">)</span></code></pre>
+<details>
+<summary>Launch Profile</summary>
+<pre class="language-python"><code class="language-python"><span class="token keyword">from</span> enkacard <span class="token keyword">import</span> encbanner<br><span class="token keyword">import</span> asyncio<br><br><span class="token keyword">async</span> <span class="token keyword">def</span> <span class="token function">card</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span><br>    <span class="token keyword">async</span> <span class="token keyword">with</span> encbanner<span class="token punctuation">.</span>ENC<span class="token punctuation">(</span>uid <span class="token operator">=</span> <span class="token string">"811455610"</span><span class="token punctuation">)</span> <span class="token keyword">as</span> encard<span class="token punctuation">:</span><br>        <span class="token keyword">return</span> <span class="token keyword">await</span> encard<span class="token punctuation">.</span>profile<span class="token punctuation">(</span>card <span class="token operator">=</span> <span class="token boolean">True</span><span class="token punctuation">)</span><br><br>result <span class="token operator">=</span> asyncio<span class="token punctuation">.</span>run<span class="token punctuation">(</span>card<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <br><br><span class="token keyword">print</span><span class="token punctuation">(</span>result<span class="token punctuation">)</span></code></pre>
+</details>
+<details>
+<summary>Update enkanetwork.py data</summary>
+<pre class="language-python"><code class="language-python"><span class="token keyword">from</span> enkacard <span class="token keyword">import</span> encbanner<br><span class="token keyword">import</span> asyncio<br><br><span class="token keyword">async</span> <span class="token keyword">def</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span><br>    <span class="token keyword">await</span> encbanner<span class="token punctuation">.</span>update<span class="token punctuation">(</span><span class="token punctuation">)</span><br><br>result <span class="token operator">=</span> asyncio<span class="token punctuation">.</span>run<span class="token punctuation">(</span>main<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <br><br><span class="token keyword">print</span><span class="token punctuation">(</span>result<span class="token punctuation">)</span></code></pre>
+<blockquote>
+<p><em><strong>Aliternative method: <a href="https://github.com/DEViantUA/EnkaCard/wiki/Tools">Tools</a></strong></em></p>
+</blockquote>
+</details>
+<h2>Languages Supported</h2>
+<table>
+<thead>
+<tr>
+<th>Languege</th>
+<th>Code</th>
+<th>Languege</th>
+<th>Code</th>
+<th>Languege</th>
+<th>Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>English</td>
+<td>en</td>
+<td>русский</td>
+<td>ru</td>
+<td>Chinese</td>
+<td>chs</td>
+</tr>
+<tr>
+<td>Tiếng Việt</td>
+<td>vi</td>
+<td>ไทย</td>
+<td>th</td>
+<td>Taiwan</td>
+<td>cht</td>
+</tr>
+<tr>
+<td>português</td>
+<td>pt</td>
+<td>한국어</td>
+<td>kr</td>
+<td>deutsch</td>
+<td>de</td>
+</tr>
+<tr>
+<td>日本語</td>
+<td>jp</td>
+<td>中文</td>
+<td>zh</td>
+<td>español</td>
+<td>es</td>
+</tr>
+<tr>
+<td>中文</td>
+<td>zh</td>
+<td>Indonesian</td>
+<td>id</td>
+<td>français</td>
+<td>fr</td>
+</tr>
+<tr>
+<td>Khaenri'ah</td>
+<td>kh</td>
+<td>Khaenri'ah</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>

@@ -7,14 +7,16 @@
 \usepackage{fontawesome5}
 \usepackage[colorlinks,urlcolor=blue!30!black]{hyperref}
 \usepackage{geometry}
-\geometry{left=1.5cm,right=1.5cm,top=1.0cm,bottom=1.0cm}
+\geometry{left=1.25cm,right=1.25cm,top=1.2cm,bottom=0.5cm}
 \newenvironment{cvitems}{
     \begin{justify}
     \begin{description}[
-        labelwidth=1.8cm,
-        leftmargin=2cm,
-        % labelsep=0.5cm,
-        parsep=0pt]
+        labelwidth=2.0cm,
+        leftmargin=2.5cm,
+        labelsep=0.5cm,
+        parsep=0pt,
+        align=right
+    ]
     
 }{
     \end{description}
@@ -32,6 +34,7 @@
     \end{list}
 }
 
+
 \newenvironment{subcvitems}{
     \begin{list}{{\faCaretSquareRight[regular]\hskip1pt}}{
         \setlength{\topsep}{0pt}
@@ -45,7 +48,7 @@
 \def\githublink#1{\,\href{https://github.com/LogCreative/#1}{\faGithubSquare{}~\sffamily #1}\,}
 
 \def\section#1{
-    \noindent\hskip2cm \textsf{\large #1} \hrulefill
+    \noindent\hskip2.5cm \textsf{\large #1} \hrulefill
 }
 
 \def\rightnote#1{
@@ -55,14 +58,27 @@
     \parfillskip=0pt \finalhyphendemerits=0 \par}
 }
 
-\def\tip#1{{\kaishu #1}\space~\vrule\space~}
+\def\tip#1{{\kaishu #1}~\vrule~}
+
+% decrease the title and author space
+\makeatletter
+\renewcommand{\maketitle}{
+    \begin{center}
+        % \vspace{-2.5em} % Adjust this value to change the space above the title
+        {\LARGE \@title} \\[3ex]
+        {\small \@author} \\[3ex]
+        {\small \@date}
+    \end{center}
+    \vspace{0.1ex} % Adjust this value to change the space below the title
+}
 
 \title{\sffamily Log Creative}
-\author{\small\sffamily \href{https://github.com/LogCreative}{\faGithub~LogCreative}
-\href{https://logcreative.tech}{\faExternalLink*~logcreative.tech}\hspace*{8.5ex}\\
-\small\sffamily
-\href{https://space.bilibili.com/31271993}{\includegraphics[height=2ex]{bilibili.png}~LogCreative}
-\href{mailto:logcreative@outlook.com}{\faEnvelope~logcreative@outlook.com}}
+\author{\small\sffamily
+\href{https://github.com/LogCreative}{\faGithub~LogCreative}~
+\href{https://logcreative.tech/about/parts/resume}{\faExternalLink*~logcreative.tech}\hspace*{1.1cm}~~\\
+\href{https://space.bilibili.com/31271993}{\includegraphics[height=2ex]{bilibili.png}~LogCreative}~
+\href{mailto:logcreative@outlook.com}{\faEnvelope~logcreative@outlook.com}
+}
 \date{}
 \begin{document}
     \begin{minipage}{0.8\textwidth}
@@ -77,13 +93,15 @@
     % 教育经历
     \section{教育经历}
     \begin{cvitems}
-        \item[研究生] \textbf{上海交通大学}~硕士研究生二年级 \rightnote{上海}
+        \item[2023.9--2026.6] \textbf{上海交通大学}~计算机学院~计算机技术 · 硕士研究生
         
-        电子信息与电气工程学院~电子信息\rightnote{预计 2023--2026}
-
-        电子信息与电气工程学院~计算机科学与技术\rightnote{2019--2023}
-
-        数学科学学院~数学与应用数学\rightnote{2018--2019}
+        目前从事大语言模型 (LLM) 与智能体 (Agent) 相关研究%，重点研究大模型路由的相关课题
+        。曾研究虚拟现实 (VR) 中基于Unity的全身姿态重建与碰撞音效精确模拟、基于微信小程序的iBeacon室内定位及导航等课题。
+        
+        \item[2018.9--2023.6] \textbf{上海交通大学}~电子信息与电气工程学院~计算机科学与技术 · 学士
+        
+        2019 年转出于数学科学学院的数学与应用数学专业。曾经在机器学习、计算机网络、计算机科学中的数学基础%、TinyML（TVM编译优化、模型量化、端侧部署等）
+        等专业课取得A/A+的课程成绩，本科课题探索基于注意力机制视频模型的推理加速。%学习 Python/C\#/C/C++ 等编程语言开发，
     
         % \tip{核心学积分} 87.25/100\quad 
         % \tip{CET6} 545 (口语: B+)
@@ -91,55 +109,150 @@
         %\tip{A/A+专业课} 虚拟现实与增强现实技术、机器学习、数据可视化与可视分析、计算机科学中的数学基础、编译原理、计算机系统结构实验。
     \end{cvitems}
 
-    % 技能
     \section{专业能力}
     \begin{cvitems}
-        \item[编程语言] 
-        \begin{subcvitems}
-            \item[\faCheck] 熟悉 \textsf{Python}, \textsf{C/C++}, \textsf{C\#/VB{\scriptsize .NET}}, \textsf{\LaTeX} 编程。\rightnote{2018--2023}
-            \item[\faCheckCircle] 了解 \textsf{HTML/CSS/JavaScript} 网页制作 \githublink{PGFPlotsEdt} \faStar~\textsf{56}。\rightnote{2020--2023}
-            \item[{\faCaretSquareRight[regular]}\hskip1pt] 入门 \textsf{Java}、\textsf{Rust} 编写小项目。\rightnote{2020}
-            % \item[\faCheck] 熟悉基于 FLTK 的 \textsf{C/C++}\githublink{GraphGenDecomp}、基于 WinForm/WPF/XAML 的 \textsf{VB{\scriptsize .NET}/C\#\,} \githublink{ClassBookController} \githublink{DialogCreator}、排版程式 \textsf{\LaTeX}\,\githublink{AutoBeamer}相关的界面编程。\rightnote{2015--2021}
-            % \item[\faCheckCircle] 了解 \textsf{Python} 数据分析、计算机视觉库、机器学习\githublink{ML}与网络编程\githublink{Networking}。\rightnote{2019--2021}
-            % \item[\faCheckCircle] 了解 \textsf{HTML/CSS/JavaScript}\,\href{https://logcreative.github.io/LaTeXSparkle/}{\faGithubSquare~\sffamily\LaTeX{}Sparkle} 和 \textsf{Vue.js}\githublink{PGFPlotsEdt}网页制作。\rightnote{2020--2021}
-            % \item[{\faCheckCircle[regular]}] 入门 \textsf{Java}\githublink{OS-Projects}、\textsf{Rust}\githublink{CompilerPrinciple}编写小项目。\rightnote{2020}
-        \end{subcvitems}
-        \item[视觉展现] 
-        \begin{subcvitems}
-            \item[\faCheck] 熟练地使用 \textsf{Premiere} 视频剪辑、\textsf{After Effects} 制作特效、\textsf{Cinema 4D} 三维建模\,\href{https://www.bilibili.com/video/BV1Qb411a7FH/}{\includegraphics[height=2ex]{bilibili.png}}。\hfill\textcolor{gray}{\emph{2012--2020}}
-            \item[\faCheckCircle\hskip1pt] 了解使用 \textsf{Unity} 编写三维交互程序。\textsf{PowerPoint} 讲师。\rightnote{2019--2020}
-        \end{subcvitems}
-        \item[开源参与] 
-        \begin{subcvitems}
-            \item[\faCheckCircle] 了解\,\textsf{cmd}/\textsf{PowerShell}/\textsf{bash}\,脚本语言，版本控制工具\,\textsf{Git}，持续集成工具\,\textsf{GitHub Actions}\,的使用。
-            \item[{\faCaretSquareRight[regular]}\hskip1pt] 校内社群 \href{https://sjtug.org}{\textsf{SJTUG}} 成员，向\TeX{}中文社区 \textsf{C\TeX{}-org} 贡献代码\,\href{https://github.com/CTeX-org/learnlatex.github.io}{\faGithubSquare~\sffamily learnlatex.github.io}，开展 \LaTeX{} 校内讲座 \href{https://github.com/sjtug/sjtulib-latex-talk}{\faGithubSquare~\sffamily sjtulib-latex-talk} \faStar~\textsf{61}。\rightnote{2022}
-            \item[{\faCaretSquareRight[regular]}\hskip1.15pt] 参与 \textsf{VS Code} 中文社区线下活动，完成 2021 年微软开源学习社群实践项目\githublink{mnist-calculator} \githublink{custom-tensor-op}\githublink{qlib-CNN}。\rightnote{2021} 
-        \end{subcvitems}
+        \item [\faCheck] 熟悉 \textsf{Python}, \textsf{C/C++}, \textsf{C\#/VB{\scriptsize .NET}}%, \textsf{\LaTeX}
+        % 编程
+        % ，了解 Windows \textsf{WinForm/WPF} 框架开发和 \textsf{Unity} 开发。
+        ，入门 \textsf{Java}、\textsf{Node.js}，具有 \textsf{LangChain}/\textsf{LangGraph} 开发经验。
+        % ，了解 shell 脚本撰写、Docker 容器化部署。
+        \item [\faCheckCircle] 了解 \textsf{HTML/CSS/JavaScript}，了解 \textsf{Vue.js}（及微信小程序：\githublink{wxapp-gesture-view} 拖放控件）、\textsf{Next.js} 等前端框架，开发过全栈应用 \githublink{PGFPlotsEdt} \faStar~\textsf{74}、华为 openInula 课程项目 \href{https://gitee.com/LogCreative/inula-docdemo}{\textsf{inula-docdemo}}。%构建过基于本地大模型的全栈应用 \githublink{PGFPlotsEdt} \faStar~\textsf{71}。
     \end{cvitems}
 
-    % 竞赛经历
-    \section{获得荣誉}
-
+    \section{实习与社团经历}
     \begin{cvitems}
-        \item \textbf{上海交通大学计算机科学与技术专业优秀学士学位论文}~系优秀奖 \rightnote{2023}
-            \tip{科研成果} Chunyu Qi, \textbf{Zilong Li}, Zhuoran Song and Xiaoyao Liang. ``ViTframe: Vision Transformer Acceleration via Informative Frame Selection for Video Recognition.'' In: \textit{IEEE International Conference on Computer Design (ICCD)}. 2023.
-        \item \textbf{全国大学生物联网竞赛}~鸿蒙特别创新奖 (10/1417) ~全国一等奖 \rightnote{2022}
-            \tip{主要贡献} 借助于 HarmonyOS 的分布式软总线特性开发鸿蒙应用，服务于线上线下混合课堂，在云服务器上搭建交互平台互联客户端、\href{http://iot.logcreative.tech}{浏览器端}、硬件端。
-        \item \textbf{美国大学生数学建模竞赛} Meritorious Winner \rightnote{2021}
-            \tip{主要贡献} 使用 \textsf{sklearn} 库对 DBSCAN 无监督学习模型的距离重定义，以更好地对森林着火点范围进行预测。使用 Mathematica 进行地理相关的计算。
-        % \item \textbf{全国大学生物联网竞赛} 全国二等奖 \rightnote{2020}
-        %     \tip{主要贡献} 使用前端技术编写餐厅就餐数据展示网页，将 Nigara 与华为云数据库连接以更好地基于历史数据进行预测。\githublink{SJTUCanteenDataWidget}
-        \item \textbf{上海交通大学优秀奖学金} C 等 \rightnote{2018--2019, 2020--2021}
+        \item[2024.9--] \textbf{上海宝信软件股份有限公司}~平台研究一所 $\cdot$ 实习生
+
+        % 参与\textbf{大语言模型}、\textbf{智能体}的研究与开发：基于 Python \textsf{transformers} 库使用 SFT 和 GRPO 对大语言模型进行微调及量化，使用 \textsf{vLLM} 库部署优化；基于 \textsf{LangChain/LangGraph} 库构建智能体框架，实现用户友好的配置语法，前端基于 \textsf{Next.js} 实现友好界面交互，提升多个场景的自动化程度。%，开发过程中使用千帆大模型，并向\href{https://github.com/baidubce/bce-qianfan-sdk/issues?q=is%3Aissue%20state%3Aclosed%20author%3ALogCreative}{千帆SDK}提出多个 Issue。
+
+        参与\textbf{大语言模型}、\textbf{智能体}的研究与开发，基于 \textsf{LangChain}/\textsf{LangGraph} 库构建\textbf{智能体开发框架}，
+        集成国内常用大模型如 Qwen 等的工具调用能力，
+        % 集成国内常用大模型如文心一言等（并向千帆SDK提出\href{https://github.com/baidubce/bce-qianfan-sdk/issues?q=is:issue%20state:closed%20author:LogCreative}{多个 Issue} 以提升对 \textsf{LangChain} 的适配性），
+        实现用户友好的低代码配置语法，可以接入 \textsf{MCP} 服务，
+        % 并基于\textsf{FastAPI}、\textsf{uvicorn} 及 
+        通过 \textsf{docker} 容器化部署提供稳定的智能体服务
+        ；
+        % 对大语言模型进行\textbf{微调}、量化、部署优化以提升智能体性能，
+        基于 \textsf{transformers} 库使用 SFT 和 GRPO 算法对大语言模型\textbf{微调}%及\textbf{量化}
+        ，使用 \textsf{vLLM} 库部署优化，以提升专用智能体性能，
+        % 通过需求实现、功能集成、用户调研、评估测试、迭代升级，
+        进行了算法、后端、前端、容器化部署\textbf{全流程开发}，
+        最终赋能 5 个场景的智能体构建：比如 PPT 智能体、洞悉智能体等。
+        
+        \item[2021.9--] \textbf{上海交通大学 Linux 用户组} $\cdot$ SJTU\TeX{} Maintainer
+        
+        % 参与基于 \LaTeX{} 文档排版引擎相关项目的维护，是 \LaTeX{} 幻灯片模板 \href{https://github.com/sjtug/SJTUBeamer}{\faGithubSquare\,\sffamily SJTUBeamer} \faStar~\textsf{670}~主要维护者之一，\LaTeX{} 讲座 \href{https://github.com/sjtug/sjtulib-latex-talk/releases/tag/2022-winter}{\faGithubSquare\,\sffamily sjtulib-latex-talk} \faStar~\textsf{67}~的主要撰写者之一。
+
+        参与基于 \LaTeX{} 的\textbf{文档排版开源项目}的维护，是 \LaTeX{} 幻灯片模板 \href{https://github.com/sjtug/SJTUBeamer}{\faGithubSquare\,\sffamily SJTUBeamer} \faStar~\textsf{717}~主要维护者之一：通过层级化和模块化的代码设计形成灵活可定制的用户编程接口，%\LaTeX{} 讲座 \href{https://github.com/sjtug/sjtulib-latex-talk/releases/tag/2022-winter}{\faGithubSquare\,\sffamily sjtulib-latex-talk} \faStar~\textsf{67}~的主要撰写者之一，
+        并通过\,\textsf{cmd}/\textsf{bash}/\textsf{lua}\,脚本语言及 GitHub Actions 部署工具构建项目流水线，服务于广大校内师生的 \LaTeX{} 使用需求。
+
+        \item[2019.2--2020.7] \textbf{上海交通大学艺术中心} $\cdot$ 技术部%部长
+        
+        %使用 Premiere 视频剪辑软件、After Effects 特效制作软件、Cinema 4D (Octane 渲染器) 三维动画软件等进行动态 Logo 制作、视频后期包装。
+        
+        % 使用 C\# 语言与\,.NET Framework 的 \textsf{WPF} 框架编写 \href{https://github.com/SJTU-Art-Center/ACLiveConsole}{\faGithubSquare\,\textsf{ACLiveConsole}} \textbf{多路直播与弹幕特效系统}：对bilibili%视频网站
+        % \textbf{弹幕主题美化}处理，作为弹幕墙展示在大屏和直播画面上，
+        % 主要挑战是通过对 UI 元素的生命周期细粒度管理来减少大量弹幕的渲染开销；接入局域网直播信号，基于\textsf{WPF}动画系统对多个源进\textbf{导播画面合成}，集成 Surface Dial 硬件控制合成字幕进度，服务于12场校内晚会直播。
+
+        使用 C\# 语言与\,.NET Framework 的 \textsf{WPF} 框架编写 \href{https://github.com/SJTU-Art-Center/ACLiveConsole}{\faGithubSquare\,\textsf{ACLiveConsole}} \textbf{多路直播与弹幕特效系统}：对视频网站弹幕进行主题美化处理，基于 nginx 集成局域网直播信号，服务于 12 场校内晚会直播。
     \end{cvitems}
 
-    % 社团经历
-    \section{社团经历}
-
+    \section{竞赛经历}
     \begin{cvitems}
-        \item \textbf{上海交通大学 Linux 用户组} $\cdot$ SJTU\TeX{} Maintainer \rightnote{2021--2023}
-        \tip{相关工作} \LaTeX{} 幻灯片模板 \href{https://github.com/sjtug/SJTUBeamer}{\faGithubSquare~\sffamily SJTUBeamer} \faStar~\textsf{560}~主要维护者之一。
-        \item \textbf{上海交通大学艺术中心} $\cdot$ 技术部部长 \rightnote{2019--2020}
-        \tip{相关工作} 视频制作者。编写多路直播管理软件 \href{https://github.com/SJTU-Art-Center/ACLiveConsole}{\faGithubSquare~\sffamily ACLiveConsole} \faStar~\textsf{7}~界面化管理 Nginx，支持对 bilibili 弹幕进行艺术处理与多路视频的导播平滑切换，服务于多场校级晚会与商业活动。
+        % \item[2023.10--2024.2] \textbf{\textsf{VR全身姿态重建、碰撞音效精确模拟}} \tip{研究项目} 基于 Unity 3D 的 IK 系统，通过消费级VR设备的头盔和手部位置推断出全身大致姿态，提升VR临场感体验；基于 Unity 3D 的音效系统，动态地在角色与场景碰撞位置产生碰撞声源和摩擦声源，提升VR沉浸感体验。
+        % \item[2021.12] \href{https://github.com/Dreemurr-T/DeepIllumination/tree/master/blender}{\faGithubSquare{} \textbf{\textsf{DeepIllumination}}} \tip{课程项目} 基于深度学习模型根据反照率、法线、深度、直接光照图像进行全局光照渲染，客户端使用 blender 插件实现，服务端基于 Python Flask 部署并可以进行迭代优化。
+        % \item[2019.9--2020.7] \href{https://github.com/SJTU-Art-Center/ACLiveConsole/wiki/%E4%BD%BF%E7%94%A8%E4%BB%A3%E7%A0%81%E5%88%B6%E4%BD%9C%E5%BC%B9%E5%B9%95%E5%8A%A8%E7%94%BB}{\faGithubSquare{} \textbf{\textsf{ACLiveConsole}}} \tip{社团项目} 多路直播与弹幕特效系统，使用 C\# 语言与\,.NET Framework 的 WPF 框架编写。可以接入视频网站弹幕并进行主题美化处理，作为弹幕墙展示在大屏和直播画面上，提升直播体验的交互性。
+
+        \item[2022.8] \textbf{全国大学生物联网竞赛}~鸿蒙特别创新奖 (10/1417)，全国一等奖
+        
+            %\tip{主要贡献}
+            借助于 HarmonyOS 的分布式软总线特性开发\textbf{鸿蒙应用}，在%腾讯
+            云服务器上搭建交互平台互联客户端、\href{http://iot.logcreative.tech}{管理端}、硬件端，实现课堂分布式原子功能，服务于线上线下混合课堂。
+
+        \item[2021.7] \textbf{微软开源学习社群实践项目}~独立完成
+        
+            % \tip{主要贡献} 
+            参与\textbf{微软开源项目}实践活动。\githublink{mnist-calculator} 使用 Python 完成一个基于%端侧 
+            CNN 的手写笔触计算器客户端%（基于 C\# WinForm/Python tkinter）
+            ，\githublink{custom-tensor-op} 基于 Pytorch API（Python/C++）实现卷积层的前向与后向计算。%\githublink{qlib-CNN} 实现一个简单的卷积模型，进行量化交易分析。
+
+        \item[2021.4] \textbf{美国大学生数学建模竞赛} Meritorious Winner
+        
+            %\tip{主要贡献}
+            作为组长参与竞赛，根据问题\textbf{建立数学模型}，使用 \textsf{pandas} 库处理数据，使用 \textsf{sklearn} 库对森林着火点范围通过距离重定义的 DBSCAN 聚类算法进行预测，并使用 \textsf{matplotlib} 库可视化结果。
+
+            % 使用 sklearn 库对 DBSCAN 无监督学习模型的距离重定义，以更好地对森林着火点范围进行预测，使用 Mathematica 进行地理相关的计算。%（校内预赛曾参与滴滴出行公开数据相关赛题，通过使用回归模型和排队论对用户等待情况进行建模。）
     \end{cvitems}
+
+    \section{学术成果}
+    \begin{cvitems}
+        % 专利
+        % \item[2025.7] \textsf{}
+
+        \item[2023.10] \href{https://ieeexplore.ieee.org/abstract/document/10361019}{\faChalkboardTeacher{} \textbf{\textsf{ViTframe: Vision Transformer Acceleration via Informative Frame Selection for Video Recognition}}} In: \textit{2023 IEEE International Conference on Computer Design (ICCD)}. 第二作者。
+        
+        \tip{本科课题} 通过设计针对视频帧序列的SSIM指标生成算法、帧筛选算法减少时空冗余性，在准确率下降不超过1\%的前提下，提升 TimeSformer、MViT 等基于注意力机制的\textbf{视频模型推理速度}。
+        
+        % Chunyu Qi, \textbf{Zilong Li}, Zhuoran Song and Xiaoyao Liang. In: \textit{IEEE International Conference on Computer Design (ICCD)}. 2023.
+    \end{cvitems}
+
+    % \section{获得荣誉}
+    % \begin{cvitems}
+    %     \item[2024.12] \textbf{2024年度上海交通大学华为奖学金} (10/139)
+    %     \item[2023.6] \href{https://www.cs.sjtu.edu.cn/NewNoticeDetail.aspx?id=530}{\textbf{2023届上海交通大学计算机科学与技术专业优秀学士学位论文}} (20/161)
+    %     % \item[2021.4] \textbf{美国大学生数学建模竞赛} Meritorious Winner
+    % \end{cvitems}
+
+    % % 技能
+    % \section{专业能力}
+    % \begin{cvitems}
+    %     \item[编程语言] 
+    %     \begin{subcvitems}
+    %         \item[\faCheck] 熟悉 \textsf{Python}, \textsf{C/C++}, \textsf{C\#/VB{\scriptsize .NET}}, \textsf{\LaTeX} 编程。\rightnote{2018--2023}
+    %         \item[\faCheckCircle] 了解 \textsf{HTML/CSS/JavaScript} 网页制作 \githublink{PGFPlotsEdt} \faStar~\textsf{65}。\rightnote{2020--2023}
+    %         \item[{\faCaretSquareRight[regular]}\hskip1pt] 入门 \textsf{Java}、\textsf{Rust} 编写小项目。\rightnote{2020}
+    %         % \item[\faCheck] 熟悉基于 FLTK 的 \textsf{C/C++}\githublink{GraphGenDecomp}、基于 WinForm/WPF/XAML 的 \textsf{VB{\scriptsize .NET}/C\#\,} \githublink{ClassBookController} \githublink{DialogCreator}、排版程式 \textsf{\LaTeX}\,\githublink{AutoBeamer}相关的界面编程。\rightnote{2015--2021}
+    %         % \item[\faCheckCircle] 了解 \textsf{Python} 数据分析、计算机视觉库、机器学习\githublink{ML}与网络编程\githublink{Networking}。\rightnote{2019--2021}
+    %         % \item[\faCheckCircle] 了解 \textsf{HTML/CSS/JavaScript}\,\href{https://logcreative.github.io/LaTeXSparkle/}{\faGithubSquare~\sffamily\LaTeX{}Sparkle} 和 \textsf{Vue.js}\githublink{PGFPlotsEdt}网页制作。\rightnote{2020--2021}
+    %         % \item[{\faCheckCircle[regular]}] 入门 \textsf{Java}\githublink{OS-Projects}、\textsf{Rust}\githublink{CompilerPrinciple}编写小项目。\rightnote{2020}
+    %     \end{subcvitems}
+    %     \item[视觉展现] 
+    %     \begin{subcvitems}
+    %         \item[\faCheck] 熟练地使用 \textsf{Premiere} 视频剪辑、\textsf{After Effects} 制作特效、\textsf{Cinema 4D} 三维建模\,\href{https://www.bilibili.com/video/BV1Qb411a7FH/}{\includegraphics[height=2ex]{bilibili.png}}。\hfill\textcolor{gray}{\emph{2012--2020}}
+    %         \item[\faCheckCircle\hskip1pt] 了解使用 \textsf{Unity} 编写三维交互程序。\textsf{PowerPoint} 讲师。\rightnote{2019--2020}
+    %     \end{subcvitems}
+    %     \item[开源参与] 
+    %     \begin{subcvitems}
+    %         \item[\faCheckCircle] 了解\,\textsf{cmd}/\textsf{PowerShell}/\textsf{bash}\,脚本语言，版本控制工具\,\textsf{Git}，持续集成工具\,\textsf{GitHub Actions}\,的使用。
+    %         \item[{\faCaretSquareRight[regular]}\hskip1pt] 校内社群 \href{https://sjtug.org}{\textsf{SJTUG}} 成员，%向\TeX{}中文社区 \textsf{C\TeX{}-org} 贡献代码\,\href{https://github.com/CTeX-org/learnlatex.github.io}{\faGithubSquare~\sffamily learnlatex.github.io}，
+    %         开展 \LaTeX{} 校内讲座 \href{https://github.com/sjtug/sjtulib-latex-talk}{\faGithubSquare~\sffamily sjtulib-latex-talk} \faStar~\textsf{61}。\rightnote{2022}
+    %         \item[{\faCaretSquareRight[regular]}\hskip1.15pt] 参与 \textsf{VS Code} 中文社区线下活动，完成 2021 年微软开源学习社群实践项目\githublink{mnist-calculator} \githublink{custom-tensor-op}\githublink{qlib-CNN}。\rightnote{2021} 
+    %     \end{subcvitems}
+    % \end{cvitems}
+
+    % % 竞赛经历
+    % \section{获得荣誉}
+
+    % \begin{cvitems}
+    %     \item \textbf{上海交通大学计算机科学与技术专业优秀学士学位论文}~系优秀奖 \rightnote{2023}
+    %         \tip{科研成果} Chunyu Qi, \textbf{Zilong Li}, Zhuoran Song and Xiaoyao Liang. ``ViTframe: Vision Transformer Acceleration via Informative Frame Selection for Video Recognition.'' In: \textit{IEEE International Conference on Computer Design (ICCD)}. 2023.
+    %     \item \textbf{全国大学生物联网竞赛}~鸿蒙特别创新奖 (10/1417) ~全国一等奖 \rightnote{2022}
+    %         \tip{主要贡献} 借助于 HarmonyOS 的分布式软总线特性开发鸿蒙应用，服务于线上线下混合课堂，在云服务器上搭建交互平台互联客户端、\href{http://iot.logcreative.tech}{浏览器端}、硬件端。
+    %     \item \textbf{美国大学生数学建模竞赛} Meritorious Winner \rightnote{2021}
+    %         \tip{主要贡献} 使用 \textsf{sklearn} 库对 DBSCAN 无监督学习模型的距离重定义，以更好地对森林着火点范围进行预测。使用 Mathematica 进行地理相关的计算。
+    %     % \item \textbf{全国大学生物联网竞赛} 全国二等奖 \rightnote{2020}
+    %     %     \tip{主要贡献} 使用前端技术编写餐厅就餐数据展示网页，将 Nigara 与华为云数据库连接以更好地基于历史数据进行预测。\githublink{SJTUCanteenDataWidget}
+    %     \item \textbf{上海交通大学优秀奖学金} C 等 \rightnote{2018--2019, 2020--2021}
+    % \end{cvitems}
+
+    % % 社团经历
+    % \section{社团经历}
+
+    % \begin{cvitems}
+    %     \item \textbf{上海交通大学 Linux 用户组} $\cdot$ SJTU\TeX{} Maintainer \rightnote{2021--2024}
+    %     \tip{相关工作} \LaTeX{} 幻灯片模板 \href{https://github.com/sjtug/SJTUBeamer}{\faGithubSquare~\sffamily SJTUBeamer} \faStar~\textsf{592}~主要维护者之一。
+    %     \item \textbf{上海交通大学艺术中心} $\cdot$ 技术部部长 \rightnote{2019--2020}
+    %     \tip{相关工作} 视频制作者。编写多路直播管理软件 \href{https://github.com/SJTU-Art-Center/ACLiveConsole}{\faGithubSquare~\sffamily ACLiveConsole} \faStar~\textsf{7}~界面化管理 Nginx，支持对 bilibili 弹幕进行艺术处理与多路视频的导播平滑切换，服务于多场校级晚会与商业活动。
+    % \end{cvitems}
 
 \end{document}

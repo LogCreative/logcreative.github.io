@@ -163,7 +163,7 @@ h4,
     padding: 0px 0.25em 0px 0.25em;
 }
 
-.block ul li img {
+.block ul li img, .subblock ol li img {
     vertical-align: text-bottom;
 }
 
